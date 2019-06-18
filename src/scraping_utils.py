@@ -14,7 +14,7 @@ def top_tesla_headlines_store_as_url():
                                               category='business',
                                               language='en',
                                               country='us')
-    tesla_json = top_headlines.json()
+    tesla_json = top_headlines
     articles = tesla_json["articles"]
     urls = []
     for article in articles:

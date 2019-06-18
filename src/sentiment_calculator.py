@@ -2,7 +2,7 @@ import indicoio
 import CONSTANTS
 import scraping_utils
 import requests
-indicoio.config.api_key = CONSTANTS.INDICOIO_KEY
+indicoio.config.api_key = "0AGGE0X9UYCDMkHxZWHojX0uBIaoHNZCQbfJO8hFx0g7nj9OJYEPJl2NzdBDdgtJ"
 
 data = []
 #we may have to change this into a csv, I'm not sure yet how we are going to format our files
@@ -14,7 +14,7 @@ def get_batch_sentiment_from_scraped_file(name_of_file):
 def get_individ_sentiment_from_ary_and_store_as_dataframe(ary):
     my_multdimensional_array = [[]]
     for url in ary:
-        my_multdimensional_array.append(mydict[url], indicoio.sentiment_hq(url))
+        my_multdimensional_array.append(url, indicoio.sentiment_hq(url))
     data_frame = pd.DataFrame(my_multdimensional_array, columns = ['Urls', 'sentiments'])
     return data_frame
 
