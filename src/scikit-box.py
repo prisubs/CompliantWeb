@@ -1,7 +1,5 @@
 #this is just the boilerplate code for an ensemble
-#the code that is commented out is old vectorizer code that we probably don't need
 import pandas as pd
-#from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
@@ -9,6 +7,11 @@ from sklearn import metrics
 data = []
 data_labels = []
 #eventually, we are going to want to have these two 'with' statements point to actual files/dataframes
+
+def convert_to_dataframe(file_name):
+    return pd.read_csv(file_name)
+
+'''
 with open("./pos_tweets.txt") as f:
     for iterate in f:
         data.append(iterate)
@@ -19,15 +22,18 @@ with open("./neg_tweets.txt") as f:
         data.append(iterate)
         data_labels.append('negative_sentiment')
 '''
-vectorizer = CountVectorizer(
-    analyzer = 'word',
-    lowercase = False,
-)
-features = vectorize.fit_transform(
-    data
-)
-features_nd = features.toarray()
-'''
+
+positive_headlines = pd.read_csv('/positive_sentiment.csv')
+negative_headlines = pd.read_csv('/negative_sentiment.csv')
+
+pos_data = positive_headlines.pop('Features').values
+neg_data = negative_headlines.pop('Features').values
+data.append(pos_data).append(neg_data)
+
+pos_labels = postive_headlines.pop('Labels').values
+neg_labels = negative_headlines.pop('Labels').values
+data_labels.append(pos_labels).append(neg_labels)
+
 #this call to train_test_split uses cross validation to train our model
 X_train, X_test, y_train, y_test = train_test_split(
     data,
