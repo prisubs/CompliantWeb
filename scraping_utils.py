@@ -45,8 +45,10 @@ def hashtag_scrape(hashtag, datestring):
     df = pd.DataFrame({"tweet": texts, "date": dates})
     return df
 
+
+#this is what a usual newsapi scrape looks like. if the indicoio url analysis takes a long time, we still might need this
 def financial_post_scrape():
-    main_url = "https://newsapi.org/v1/articles?source=financial-post&sortBy=top&apiKey=" + CONSTANTS.newsapikey
+    main_url = "https://newsapi.org/v2/articles?source=financial-post&sortBy=top&apiKey=" + CONSTANTS.newsapikey
     open_fp_page = requests.get(main_url).json()
 
     article = open_fp_page["articles"]
@@ -55,3 +57,17 @@ def financial_post_scrape():
         results.append(ar["title"])
     for i in range(len(results)):
         print(i+1, results[i])
+
+
+
+#this function sweeps all the top headlines and stores their urls in an array, which we can then pass in into the indicoio url analyzer
+def top_tech_headlines_scrape_and_store_as_url():
+    main_url = "https://newsapi.org/v2/top-headlines?category=technology&apiKey=" + CONSTANTS.newsapikey
+    open_tech_head = request.get(main_url).json()
+
+    articles = open_tech_head["articles"]
+    urls = []
+    for article in articles:
+        urls.append(article["url"])
+    for i in range(len(results)):
+        print(i+1, reuslts[i])
