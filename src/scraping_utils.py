@@ -71,3 +71,4 @@ def top_tech_headlines_scrape_and_store_as_url():
         urls.append(article["url"])
     for i in range(len(results)):
         print(i+1, reuslts[i])
+    return urls

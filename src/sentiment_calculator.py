@@ -10,6 +10,12 @@ def get_batch_sentiment_from_scraped_file(name_of_file):
         data = [line.strip() for line in f]
     return indicoio.sentiment(data)
 
+def get_individ_sentiment_from_ary_and_store_as_dataframe(ary):
+    mydict = {}
+    for url in ary:
+        mydict[url] = indicoio.sentiment_hq(url)
+    data_frame = pd.DataFrame(mydict)
+    return data_frame
 
 #below are just some examples of different features in indicoio
 example_of_article_sentiment = indicoio.sentiment_hq("http://www.vanityfair.com/news/2015/10/the-serious-problem-with-treating-donald-trump-seriously", url=True)
