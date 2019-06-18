@@ -4,12 +4,7 @@ import re
 import pandas as pd
 import datetime
 import tweepy
-
-consumer_key = ''
-consumer_secret = ''
-access_token = ''
-access_token_secret = ''
-
+import src.CONSTANTS
 # Returns a list of items from a particular classname
 def page_content(url, class_name):
     page = requests.get(url)
@@ -36,8 +31,8 @@ def paired_content(url, class_names):
 # Hashtag needs to be in format #hashtag
 # Returns dataframe of tweets and dates
 def hashtag_scrape(hashtag, datestring):
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    auth = tweepy.OAuthHandler(CONSTANTS.consumer_key, CONSTANTS.consumer_secret)
+    auth.set_access_token(CONSTANTS.access_token, CONSTANTS.access_token_secret)
     api = tweepy.API(auth,wait_on_rate_limit=True)
 
     texts, dates = [], []
@@ -49,3 +44,14 @@ def hashtag_scrape(hashtag, datestring):
 
     df = pd.DataFrame({"tweet": texts, "date": dates})
     return df
+
+def financial_post_scrape():
+    main_url = "https://newsapi.org/v1/articles?source=financial-post&sortBy=top&apiKey=" + CONSTANTS.newsapikey
+    open_fp_page = requests.get(main_url).json()
+
+    article = open_fp_page["articles"]
+    results = []
+    for ar in article:
+        results.append(ar["title"])
+    for i in range(len(results)):
+        print(i+1, results[i])
