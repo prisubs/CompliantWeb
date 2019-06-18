@@ -1,4 +1,5 @@
-import scikit-box
+import scikit_box
+import requests
 import scraping_utils
 import sentiment_calculator
 ary_urls = []

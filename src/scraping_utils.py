@@ -1,10 +1,11 @@
 import requests
+from flask import request
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
 import datetime
 import tweepy
-import src.CONSTANTS
+import CONSTANTS
 # Returns a list of items from a particular classname
 def page_content(url, class_name):
     page = requests.get(url)
@@ -61,10 +62,10 @@ def financial_post_scrape():
 
 
 #this function sweeps all the top headlines and stores their urls in an array, which we can then pass in into the indicoio url analyzer
+#also, if we want we could use the client library instead, it would be easier
 def top_tech_headlines_scrape_and_store_as_url():
     main_url = "https://newsapi.org/v2/top-headlines?category=technology&apiKey=" + CONSTANTS.newsapikey
-    open_tech_head = request.get(main_url).json()
-
+    open_tech_head = requests.get(main_url).json()
     articles = open_tech_head["articles"]
     urls = []
     for article in articles:

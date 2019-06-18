@@ -18,9 +18,11 @@ def get_individ_sentiment_from_ary_and_store_as_dataframe(ary):
     return data_frame
 
 #below are just some examples of different features in indicoio
-example_of_article_sentiment = indicoio.sentiment_hq("http://www.vanityfair.com/news/2015/10/the-serious-problem-with-treating-donald-trump-seriously", url=True)
-example_of_indicoio_keywords = indicoio.keywords("http://www.vanityfair.com/news/2015/10/the-serious-problem-with-treating-donald-trump-seriously", url=True, top_n=5)
+#example_of_article_sentiment = indicoio.sentiment_hq("http://www.vanityfair.com/news/2015/10/the-serious-problem-with-treating-donald-trump-seriously", url=True)
+#example_of_indicoio_keywords = indicoio.keywords("http://www.vanityfair.com/news/2015/10/the-serious-problem-with-treating-donald-trump-seriously", url=True, top_n=5)
+'''
 if __name__ == "__main__":
     print(indicoio.sentiment('This sentence is awful. This sentence is great!', split='sentence'))
     print("sentiment of the vanity fair article is {0}".format(example_of_article_sentiment))
     print("keywords of the article are:\n{0}".format(keywords))
+'''
