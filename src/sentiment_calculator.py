@@ -11,10 +11,10 @@ def get_batch_sentiment_from_scraped_file(name_of_file):
     return indicoio.sentiment(data)
 
 def get_individ_sentiment_from_ary_and_store_as_dataframe(ary):
-    mydict = {}
+    my_multdimensional_array = [[]]
     for url in ary:
-        mydict[url] = indicoio.sentiment_hq(url)
-    data_frame = pd.DataFrame(mydict)
+        my_multdimensional_array.append(mydict[url], indicoio.sentiment_hq(url))
+    data_frame = pd.DataFrame(my_multdimensional_array, columns = ['Urls', 'sentiments'])
     return data_frame
 
 #below are just some examples of different features in indicoio
