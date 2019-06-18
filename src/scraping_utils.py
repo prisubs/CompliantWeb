@@ -1,11 +1,29 @@
-import requests
+#import requests
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
 import datetime
 import tweepy
 import CONSTANTS
+from newsapi import NewsApiClient
+
+#this is the client library, using this because of 'requests' error
+def top_tesla_headlines_store_as_url():
+    newsapi = NewsApiClient(api_key='66af3123197e43a4b55137cfddf67a2c')
+    top_headlines = newsapi.get_top_headlines(q='tesla',
+                                              category='business'
+                                              language='en'
+                                              country='us')
+    tesla_json = top_headlines.json()
+    articles = tesla_json["articles"]
+    urls = []
+    for article in articles:
+        urls.append(article["url"])
+    return urls
+
+
 # Returns a list of items from a particular classname
+'''
 def page_content(url, class_name):
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -13,7 +31,7 @@ def page_content(url, class_name):
     result = pd.Series(content)
     clean_html = lambda html: re.sub("<.*?>", "", str(html))
     return result.apply(clean_html)
-
+'''
 def write_content_to_file(url, class_name):
     fo = open(str(class_name) + str(datetime.datetime.now()) + "foo.csv", "w+")
     fo.write(page_content(url, class_name))
@@ -47,6 +65,7 @@ def hashtag_scrape(hashtag, datestring):
 
 
 #this is what a usual newsapi scrape looks like. if the indicoio url analysis takes a long time, we still might need this
+'''
 def financial_post_scrape():
     main_url = "https://newsapi.org/v2/articles?source=financial-post&sortBy=top&apiKey=" + CONSTANTS.newsapikey
     open_fp_page = requests.get(main_url).json()
@@ -57,11 +76,12 @@ def financial_post_scrape():
         results.append(ar["title"])
     for i in range(len(results)):
         print(i+1, results[i])
-
+'''
 
 
 #this function sweeps all the top headlines and stores their urls in an array, which we can then pass in into the indicoio url analyzer
 #also, if we want we could use the client library instead, it would be easier
+'''
 def top_tech_headlines_scrape_and_store_as_url():
     main_url = 'https://newsapi.org/v2/top-headlines?category=technology&apiKey=66af3123197e43a4b55137cfddf67a2c'
     open_tech_head_unformatted = requests.get(main_url)
@@ -71,5 +91,6 @@ def top_tech_headlines_scrape_and_store_as_url():
     for article in articles:
         urls.append(article["url"])
     for i in range(len(results)):
-        print(i+1, reuslts[i])
+        print(i+1, urls[i])
     return urls
+'''
