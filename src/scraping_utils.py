@@ -11,8 +11,8 @@ from newsapi import NewsApiClient
 def top_tesla_headlines_store_as_url():
     newsapi = NewsApiClient(api_key='66af3123197e43a4b55137cfddf67a2c')
     top_headlines = newsapi.get_top_headlines(q='tesla',
-                                              category='business'
-                                              language='en'
+                                              category='business',
+                                              language='en',
                                               country='us')
     tesla_json = top_headlines.json()
     articles = tesla_json["articles"]
