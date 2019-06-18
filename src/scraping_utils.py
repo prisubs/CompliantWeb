@@ -4,7 +4,7 @@ import re
 import pandas as pd
 import datetime
 import tweepy
-import CONSTANTS
+import src.CONSTANTS
 # Returns a list of items from a particular classname
 def page_content(url, class_name):
     page = requests.get(url)

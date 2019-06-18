@@ -1,6 +1,6 @@
 import indicoio
 import CONSTANTS
-import ..scraping_utils
+import scraping_utils
 indicoio.config.api_key = CONSTANTS.INDICOIO_KEY
 
 data = []
