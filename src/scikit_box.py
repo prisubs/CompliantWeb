@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
+import requests
 #the data array hold the features
 
 #eventually, we are going to want to have these two 'with' statements point to actual files/dataframes

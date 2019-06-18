@@ -1,4 +1,5 @@
 #storing all of the constants in a file for best practice
+import requests
 consumer_key = ''
 consumer_secret = ''
 access_token = ''

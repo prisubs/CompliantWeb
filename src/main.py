@@ -1,7 +1,7 @@
 import scikit_box
-import requests
 import scraping_utils
 import sentiment_calculator
+import requests
 ary_urls = []
 if __name__ == "__main__":
     ary_urls = scraping_utils.top_tech_headlines_scrape_and_store_as_url()
