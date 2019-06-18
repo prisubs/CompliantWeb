@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import pandas as pd
-
+import datetime
 import tweepy
 
 consumer_key = ''
@@ -19,6 +19,11 @@ def page_content(url, class_name):
     clean_html = lambda html: re.sub("<.*?>", "", str(html))
     return result.apply(clean_html)
 
+def write_content_to_file(url, class_name):
+    fo = open(str(class_name) + str(datetime.datetime.now()) + "foo.csv", "w+")
+    fo.write(page_content(url, class_name))
+    fo.close()
+
 # Returns a dataframe of paired HTML elements from a list of classnames
 def paired_content(url, class_names):
     df = pd.DataFrame()
@@ -34,13 +39,13 @@ def hashtag_scrape(hashtag, datestring):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth,wait_on_rate_limit=True)
-    
+
     texts, dates = [], []
     cursor = tweepy.Cursor(api.search, q = hashtag,count=100, lang="en", since= datestring).items()
 
     for tweet in cursor:
         texts.append(tweet.text)
         dates.append(tweet.created_at)
-    
+
     df = pd.DataFrame({"tweet": texts, "date": dates})
     return df
