@@ -5,7 +5,7 @@ import pandas as pd
 import datetime
 import tweepy
 import CONSTANTS
-from newsapi import NewsApiClient
+from newsapi.newsapi_client import NewsApiClient
 from tiingo import TiingoClient
 
 #setup python tiingo for querying news about a certain ticker
