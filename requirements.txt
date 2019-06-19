@@ -4,3 +4,4 @@ pandas
 tweepy
 numpy
 matplotlib
+newsapi
