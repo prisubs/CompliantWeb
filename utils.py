@@ -5,6 +5,8 @@ def load_clean(path):
 	DESIRED = ["Date", "Open", "Close", "High", "Low", "Volume", "Average", "Ticker"]
 	df = pd.read_csv(path)
 	df = df[DESIRED]
+    subby = lambda t: str(t)[9:]
+    df["Ticker"] = df["Ticker"].apply(subby)
 	return df
 
 # returns all company dataframes in the following order
