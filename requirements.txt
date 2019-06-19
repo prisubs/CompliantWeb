@@ -5,3 +5,6 @@ tweepy
 numpy
 matplotlib
 tiingo
+newsapi
+newsapi-python
+sklearn
