@@ -13,7 +13,7 @@ AAPL, AMZN, BABA, CRM, FB, GOOGL, MSFT, NFLX, TSLA, WMT = load_training_data()
 | Apple      | AAPL                            |
 | Salesforce | CRM                             |
 | Microsoft  | MSFT                            |
-| Google     | GOOGL [Class A]  GOOG [Class C] |
+| Google     | GOOGL [Class A]                 |
 | Amazon     | AMZN                            |
 | Facebook   | FB                              |
 | Netflix    | NFLX                            |
