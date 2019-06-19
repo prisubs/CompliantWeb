@@ -54,3 +54,13 @@ def take_in_data_frame_modify_data_and_labels(df):
     prediction_y = instance_of_ensemble(X_test)
     #this last print should be of a high accuracy!
     print("Accuracy of our classifier:", metrics.accuracy_score(y_test, prediction_y))
+
+
+#elastic net boilerplate:
+'''
+from sklearn.linear_model import ElasticNet
+regr = ElasticNet(random_state=0)
+regr.fit(data, data_labels)
+print(regr.coef_)
+print(regr.intercept_)
+'''
