@@ -1,17 +1,23 @@
-# CompliantBois
-| API      | Tokens                                                             |
-|----------|--------------------------------------------------------------------|
-| Indicoio | 0AGGE0X9UYCDMkHxZWHojX0uBIaoHNZCQbfJO8hFx0g7nj9OJYEPJl2NzdBDdgtJ |
-| Twitter  | [need consumer secret, oauth key, etc]                            |
-| NewsAPI  | 66af3123197e43a4b55137cfddf67a2c |
+# Setup Instructions
+```pip install pandas numpy newsapi-python tweepy re requests bs4```
 
 
+```python
+from utils import *
+
+# This will give you ten dataframes of training data. 
+AAPL, AMZN, BABA, CRM, FB, GOOGL, MSFT, NFLX, TSLA, WMT = load_training_data()
+```
+
+
+
+# Tickers
 | Company    | Ticker                          |
 |------------|---------------------------------|
 | Apple      | AAPL                            |
 | Salesforce | CRM                             |
 | Microsoft  | MSFT                            |
-| Google     | GOOGL [Class A]  GOOG [Class C] |
+| Google     | GOOGL [Class A]                 |
 | Amazon     | AMZN                            |
 | Facebook   | FB                              |
 | Netflix    | NFLX                            |
