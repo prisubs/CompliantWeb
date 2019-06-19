@@ -15,3 +15,7 @@
 | Amazon     | AMZN                            |
 | Facebook   | FB                              |
 | Netflix    | NFLX                            |
+| Tesla      | TSLA                            |
+| Alibaba    | BABA                            |
+| Walmart    | WMT                             |
+
