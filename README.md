@@ -1,12 +1,15 @@
 # CompliantBois
-| API      | Tokens                                                             |
-|----------|--------------------------------------------------------------------|
-| Indicoio | 0AGGE0X9UYCDMkHxZWHojX0uBIaoHNZCQbfJO8hFx0g7nj9OJYEPJl2NzdBDdgtJ |
-| Twitter  | [need consumer secret, oauth key, etc]                            |
-| NewsAPI  | 66af3123197e43a4b55137cfddf67a2c |
-| StockNewsAPI  | bgaxcbby3zp4evyzhz2rxwerd5sr1oexkfcakzbr |
+
+# Setup Instructions
+```pip install pandas numpy newsapi-python tweepy```
+```
+from utils import *
+AAPL, AMZN, BABA, CRM, FB, GOOGL, MSFT, NFLX, TSLA, WMT = load_training_data()
+```
 
 
+
+# Tickers
 | Company    | Ticker                          |
 |------------|---------------------------------|
 | Apple      | AAPL                            |
