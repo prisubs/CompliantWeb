@@ -1,5 +1,5 @@
 # Setup Instructions
-```pip install pandas numpy newsapi-python tweepy```
+```pip install pandas numpy newsapi-python tweepy re requests bs4```
 
 
 ```python
