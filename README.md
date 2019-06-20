@@ -9,6 +9,8 @@ from utils import *
 AAPL, AMZN, BABA, CRM, FB, GOOGL, MSFT, NFLX, TSLA, WMT = load_training_data()
 ```
 
+# Tiingo 
+a265fc4a1013923f970d16e7348195074e97fcb0
 
 
 # Tickers
