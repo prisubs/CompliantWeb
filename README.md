@@ -27,3 +27,6 @@ a265fc4a1013923f970d16e7348195074e97fcb0
 | Alibaba    | BABA                            |
 | Walmart    | WMT                             |
 
+
+![FlowChart](/FlowChart.jpg)
+Format: ![Alt Text](url)
