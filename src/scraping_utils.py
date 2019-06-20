@@ -7,6 +7,15 @@ import tweepy
 import CONSTANTS
 from newsapi.newsapi_client import NewsApiClient
 from tiingo import TiingoClient
+import datetime
+
+#some datetime experimentation to expediate "2 week" process
+'''
+u = datetime.datetime.strptime("2011-01-01", "%Y-%m-%d")
+d = datetime.timedelta(days=14)
+print(u + d)
+'''
+
 
 #setup python tiingo for querying news about a certain ticker
 TIINGO_API_KEY = CONSTANTS.TIINGO_KEY
@@ -24,12 +33,14 @@ client = TiingoClient(config)
  this initial stage we won't be wasting calls
  ALSO, there is a way to hook this up to pandas, but that might only be for ticker data from tiingo, I'm not sure yet
 '''
-def top_ticker_headlines_two_weeks_tiingo(ticker, date_start, date_end):
-    return client.get_news(tickers=[ticker], startDate = date_start, endDate = date_end, limit=10)
-
-
-
-
+def top_ticker_headlines_two_weeks_tiingo(ticker, date_start):
+    date_end = datetime.datetime.strptime(date_start, "%Y-%m-%d") + datetime.timedelta(days=14)
+    articles = client.get_news(tickers=[ticker], startDate = date_start, endDate = date_end, limit=10)
+    urls = []
+    for article in articles:
+        urls.append(article["url"])
+    print (urls)
+    return urls
 
 
 #this is the client library, using this because of 'requests' error
