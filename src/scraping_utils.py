@@ -9,7 +9,7 @@ from newsapi.newsapi_client import NewsApiClient
 from tiingo import TiingoClient
 
 #setup python tiingo for querying news about a certain ticker
-TIINGO_API_KEY = '89805dfcfd26f58c00ac1523aa9501ddf6a531dd'
+TIINGO_API_KEY = CONSTANTS.TIINGO_KEY
 config = {
     'api_key': TIINGO_API_KEY,
     'session': True
@@ -17,7 +17,7 @@ config = {
 client = TiingoClient(config)
 
 # this is just an example of how tiingo works
-articles_tiingo = client.get_news(tickers=['GOOGL', 'AAPL'], tags=['Laptops'], sources=['washingtonpost.com'], startDate='2017-01-01',endDate='2017-08-31')
+#articles_tiingo = client.get_news(tickers=['GOOGL', 'AAPL'], tags=['Laptops'], sources=['washingtonpost.com'], startDate='2017-01-01',endDate='2017-08-31')
 
 '''
  this is the actual tiingo function that we can use, I'm limiting to ten articles for now so that if this accidentally gets ran during
@@ -33,6 +33,7 @@ def top_ticker_headlines_two_weeks_tiingo(ticker, date_start, date_end):
 
 
 #this is the client library, using this because of 'requests' error
+'''
 def top_tesla_headlines_store_as_url():
     newsapi = NewsApiClient(api_key='66af3123197e43a4b55137cfddf67a2c')
     top_headlines = newsapi.get_top_headlines(q='tesla',
@@ -45,7 +46,7 @@ def top_tesla_headlines_store_as_url():
     for article in articles:
         urls.append(article["url"])
     return urls
-
+'''
 
 
 
