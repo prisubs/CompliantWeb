@@ -4,7 +4,7 @@ import sentiment_calculator
 #import requests
 ary_urls = []
 if __name__ == "__main__":
-    print(scraping_utils.top_ticker_headlines_two_weeks_tiingo('AAPL', '2017-01-01', '2017-01-14'))
+    scraping_utils.top_ticker_headlines_two_weeks_tiingo('AAPL', '2017-01-01')
 
 '''
     #first we get a list of tesla headlines and we store their urls
