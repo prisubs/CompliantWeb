@@ -51,8 +51,8 @@ def top_ticker_headlines_two_weeks_tiingo(ticker, date_start):
     ctad_pd = pd.DataFrame(combined_titles_and_descriptions, columns=["combined_titles_and_descriptions"])
     art_pd = pd.DataFrame(articles)
     url_pd = pd.DataFrame(urls)
-    frames = [ctad_pd, art_pd, url_pd]
-    result = pd.concat(frames)
+    ctad_pd = ctad_pd.join(art_pd)
+    result = ctad_pd.join(url_pd)
     return result
 
 #this is the client library, using this because of 'requests' error

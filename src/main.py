@@ -1,12 +1,15 @@
 import scikit_box
 import scraping_utils
 import sentiment_calculator
+import pandas as pd
 #import requests
 ary_urls = []
 if __name__ == "__main__":
     pd_scraping = scraping_utils.top_ticker_headlines_two_weeks_tiingo('AAPL', '2017-01-01')
+    print(pd_scraping)
     final_ary = sentiment_calculator.df_sentiment(pd_scraping)
     print(final_ary)
+    final_ary.to_csv('example.csv')
 '''
     #first we get a list of tesla headlines and we store their urls
     ary_urls = top_tesla_headlines_store_as_url()

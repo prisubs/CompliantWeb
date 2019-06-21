@@ -2,7 +2,7 @@ import indicoio
 import CONSTANTS
 import scraping_utils
 import requests
-import math
+import pandas as pd
 indicoio.config.api_key = "026012f2d0b869994cf77bf084d58a97"
 
 data = []
@@ -18,7 +18,7 @@ def df_sentiment(ary_df):
         ary.append(indicoio.sentiment(combined_titles_and_descriptions))
     sentiment_df = pd.DataFrame(ary)
     concater = [ary_df, sentiment_df]
-    result = pd.concat(concater)
+    result = ary_df.join(sentiment_df)
     return result
 
 def get_individ_sentiment_from_ary_and_store_as_dataframe(ary_df):
