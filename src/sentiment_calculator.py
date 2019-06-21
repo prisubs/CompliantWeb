@@ -5,13 +5,7 @@ import requests
 import pandas as pd
 indicoio.config.api_key = "026012f2d0b869994cf77bf084d58a97"
 
-data = []
-#we may have to change this into a csv, I'm not sure yet how we are going to format our files
-def get_batch_sentiment_from_scraped_file(name_of_file):
-    with open("batch.txt") as f:
-        data = [line.strip() for line in f]
-    return indicoio.sentiment(data)
-
+#returns sentiments when inputted a dataframe of titles combined with descriptions
 def df_sentiment(ary_df):
     ary = []
     for combined_titles_and_descriptions in ary_df['combined_titles_and_descriptions']:
@@ -20,6 +14,15 @@ def df_sentiment(ary_df):
     concater = [ary_df, sentiment_df]
     result = ary_df.join(sentiment_df, lsuffix='_left', rsuffix='_right')
     return result
+
+
+'''
+data = []
+#we may have to change this into a csv, I'm not sure yet how we are going to format our files
+def get_batch_sentiment_from_scraped_file(name_of_file):
+    with open("batch.txt") as f:
+        data = [line.strip() for line in f]
+    return indicoio.sentiment(data)
 
 def get_individ_sentiment_from_ary_and_store_as_dataframe(ary_df):
     my_multdimensional_array = [[]]
@@ -39,3 +42,4 @@ if __name__ == "__main__":
     print(indicoio.sentiment('This sentence is awful. This sentence is great!', split='sentence'))
     print("sentiment of the vanity fair article is {0}".format(example_of_article_sentiment))
     #print("keywords of the article are:\n{0}".format(keywords))
+'''

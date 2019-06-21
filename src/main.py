@@ -8,9 +8,9 @@ ary_urls = []
 # the main for this file automatically iterates through each ticker
 # and generates a 5 year csv containing the article sentiments for
 # every two week period
-
+# we need to input the ticker dataframes as well!!!
 if __name__ == "__main__":
-    ticker_ary = ['AAPL', 'CRM', 'GOOGL', 'TSLA', 'AMZN', 'SSNLF', 'MSFT', 'FB', 'NFLX', 'BABA']
+    ticker_ary = ['AAPL', 'AMZN', 'BABA', 'CRM', 'FB', 'GOOGL', 'MSFT', 'NFLX', 'TSLA', 'WMT']
     for ticker in ticker_ary:
         d = datetime.datetime.strptime('2014-06-21', "%Y-%m-%d")
         delta = datetime.timedelta(days=14)
