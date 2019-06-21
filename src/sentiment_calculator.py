@@ -15,7 +15,6 @@ def get_batch_sentiment_from_scraped_file(name_of_file):
 def df_sentiment(ary_df):
     ary = []
     for combined_titles_and_descriptions in ary_df['combined_titles_and_descriptions']:
-        print(indicoio.sentiment(combined_titles_and_descriptions))
         ary.append(indicoio.sentiment(combined_titles_and_descriptions))
     sentiment_df = pd.DataFrame(ary)
     concater = [ary_df, sentiment_df]
