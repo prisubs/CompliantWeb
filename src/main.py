@@ -21,7 +21,7 @@ if __name__ == "__main__":
             print(pd_scraping)
             final_ary = sentiment_calculator.df_sentiment(pd_scraping)
             final_ary['date'] = d.strftime("%Y-%m-%d")
-            empty_df = pd.concat(empty_df, final_ary)
+            empty_df = pd.concat([empty_df, final_ary])
             d += delta
         empty_df.to_csv(ticker + 'dataframe.csv')
 
