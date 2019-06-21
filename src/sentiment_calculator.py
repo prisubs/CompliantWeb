@@ -2,6 +2,7 @@ import indicoio
 import CONSTANTS
 import scraping_utils
 import requests
+import math
 indicoio.config.api_key = "026012f2d0b869994cf77bf084d58a97"
 
 data = []
@@ -11,12 +12,24 @@ def get_batch_sentiment_from_scraped_file(name_of_file):
         data = [line.strip() for line in f]
     return indicoio.sentiment(data)
 
-def get_individ_sentiment_from_ary_and_store_as_dataframe(ary):
+def df_sentiment(ary_df):
+    ary = []
+    for combined_titles_and_descriptions in ary_df['combined_titles_and_descriptions']:
+        ary.append(indicoio.sentiment(combined_titles_and_descriptions))
+    sentiment_df = pd.DataFrame(ary)
+    concater = [ary_df, sentiment_df]
+    result = pd.concat(concater)
+    return result
+
+def get_individ_sentiment_from_ary_and_store_as_dataframe(ary_df):
     my_multdimensional_array = [[]]
-    for url in ary:
-        my_multdimensional_array.append(url, indicoio.sentiment_hq(url))
+    for url in ary_df['url']:
+        if (url != "nan"):
+            my_multdimensional_array.append(url, indicoio.sentiment_hq(url))
     data_frame = pd.DataFrame(my_multdimensional_array, columns = ['Urls', 'sentiments'])
-    return data_frame
+    concater = [ary_df, data_frame]
+    result = pd.concat(concater)
+    return result
 
 #below are just some examples of different features in indicoio
 example_of_article_sentiment = indicoio.sentiment_hq("http://www.vanityfair.com/news/2015/10/the-serious-problem-with-treating-donald-trump-seriously", url=True)
