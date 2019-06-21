@@ -6,20 +6,22 @@ import datetime
 #import requests
 ary_urls = []
 if __name__ == "__main__":
-    d = datetime.datetime.strptime('2014-06-21', "%Y-%m-%d")
-    delta = datetime.timedelta(days=14)
-    end_date = datetime.datetime.strptime('2019-06-21', "%Y-%m-%d")
-    empty_df = pd.DataFrame()
-    while d <= end_date:
-        print(d.strftime("%Y-%m-%d"))
-        pd_scraping = scraping_utils.top_ticker_headlines_two_weeks_tiingo('AAPL', d.strftime("%Y-%m-%d"))
-        print(pd_scraping)
-        final_ary = sentiment_calculator.df_sentiment(pd_scraping)
-        final_ary['date'] = d.strftime("%Y-%m-%d")
-        print(final_ary)
-        empty_df = pd.concat(empty_df, final_ary)
-        d += delta
-    empty_df.to_csv('AAPL.csv')
+    ticker_ary = ['AAPL', 'CRM', 'GOOGL', 'TSLA', 'AMZN', 'SSNLF', 'MSFT', 'FB', 'NFLX', 'BABA']
+    for ticker in ticker_ary:
+        d = datetime.datetime.strptime('2014-06-21', "%Y-%m-%d")
+        delta = datetime.timedelta(days=14)
+        end_date = datetime.datetime.strptime('2019-06-21', "%Y-%m-%d")
+        empty_df = pd.DataFrame()
+        while d <= end_date:
+            print(d.strftime("%Y-%m-%d"))
+            pd_scraping = scraping_utils.top_ticker_headlines_two_weeks_tiingo(ticker, d.strftime("%Y-%m-%d"))
+            print(pd_scraping)
+            final_ary = sentiment_calculator.df_sentiment(pd_scraping)
+            final_ary['date'] = d.strftime("%Y-%m-%d")
+            print(final_ary)
+            empty_df = pd.concat(empty_df, final_ary)
+            d += delta
+        empty_df.to_csv(ticker + 'dataframe.csv')
 '''
     #first we get a list of tesla headlines and we store their urls
     ary_urls = top_tesla_headlines_store_as_url()
