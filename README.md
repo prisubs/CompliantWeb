@@ -28,5 +28,5 @@ a265fc4a1013923f970d16e7348195074e97fcb0
 | Walmart    | WMT                             |
 
 
-![FlowChart](/FlowChart.jpg)
+![FlowChart](/meta/FlowChart.jpg)
 Format: ![Alt Text](url)
