@@ -36,6 +36,7 @@ client = TiingoClient(config)
 def top_ticker_headlines_two_weeks_tiingo(ticker, date_start):
     date_end = datetime.datetime.strptime(date_start, "%Y-%m-%d") + datetime.timedelta(days=14)
     articles = client.get_news(tickers=[ticker], startDate = date_start, endDate = date_end, limit=10)
+    empty_df = pd.DataFrame()
     titles = []
     for article in articles:
         titles.append(article['title'])
@@ -48,12 +49,17 @@ def top_ticker_headlines_two_weeks_tiingo(ticker, date_start):
     urls = []
     for y in articles:
         urls.append(y['url'])
+    empty_df['urls'] = urls
+    empty_df['combined_titles_and_descriptions'] = combined_titles_and_descriptions
+    empty_df['json'] = articles
+    '''
     ctad_pd = pd.DataFrame(combined_titles_and_descriptions, columns=["combined_titles_and_descriptions"])
     art_pd = pd.DataFrame(articles)
     url_pd = pd.DataFrame(urls)
     ctad_pd = ctad_pd.join(art_pd)
     result = ctad_pd.join(url_pd)
-    return result
+    '''
+    return empty_df
 
 #this is the client library, using this because of 'requests' error
 '''
