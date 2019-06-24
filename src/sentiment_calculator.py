@@ -10,10 +10,13 @@ def df_sentiment(ary_df):
     ary = []
     for combined_titles_and_descriptions in ary_df['combined_titles_and_descriptions']:
         ary.append(indicoio.sentiment(combined_titles_and_descriptions))
+    '''
     sentiment_df = pd.DataFrame(ary)
     concater = [ary_df, sentiment_df]
     result = ary_df.join(sentiment_df, lsuffix='_left', rsuffix='_right')
-    return result
+    '''
+    ary_df['sentiments'] = ary
+    return ary_df
 
 
 '''
