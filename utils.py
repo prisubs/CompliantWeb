@@ -30,5 +30,5 @@ def load_training_data():
     fn = ["data/formatted/AAPL.csv", "data/formatted/AMZN.csv", "data/formatted/BABA.csv", 
     "data/formatted/CRM.csv", "data/formatted/FB.csv", "data/formatted/GOOGL.csv", "data/formatted/MSFT.csv", 
     "data/formatted/NFLX.csv", "data/formatted/TSLA.csv", "data/formatted/WMT.csv"]
-
+ 
     return load_clean(fn[0]), load_clean(fn[1]), load_clean(fn[2]), load_clean(fn[3]), load_clean(fn[4]), load_clean(fn[5]), load_clean(fn[6]), load_clean(fn[7]), load_clean(fn[8]), load_clean(fn[9])
