@@ -81,7 +81,7 @@ def top_tesla_headlines_store_as_url():
 
 
 # Returns a list of items from a particular classname
-'''
+
 def page_content(url, class_name):
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -89,7 +89,7 @@ def page_content(url, class_name):
     result = pd.Series(content)
     clean_html = lambda html: re.sub("<.*?>", "", str(html))
     return result.apply(clean_html)
-'''
+
 def write_content_to_file(url, class_name):
     fo = open(str(class_name) + str(datetime.datetime.now()) + "foo.csv", "w+")
     fo.write(page_content(url, class_name))
