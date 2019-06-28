@@ -26,8 +26,8 @@ config = {
 client = TiingoClient(config)
 
 # this is just an example of how tiingo works
-#articles_tiingo = client.get_news(tickers=['GOOGL', 'AAPL'], tags=['Laptops'], sources=['washingtonpost.com'], startDate='2017-01-01',endDate='2017-08-31')
-
+articles_tiingo = client.get_news(tickers=['CRM'], startDate='2017-01-01',endDate='2017-08-31')
+print(articles_tiingo)
 '''
  this is the actual tiingo function that we can use, I'm limiting to ten articles for now so that if this accidentally gets ran during
  this initial stage we won't be wasting calls
