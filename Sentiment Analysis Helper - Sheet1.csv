@@ -1,0 +1,28 @@
+"""Bad"" Words, with included sentiment.",,,"""Good"" Words, with included sentiment.",,
+Measured as Opposite,Measured as Neutral,Correctly,Measured as Opposite,Measured as Neutral,Correctly
+Testify (.661),Circumvent (.489),Jeopardized (.376),Outperform (.381),Critically (.526),Unmatched (.932)
+Nonperforming (.563),Foreclosed (.477),Recalculate (.330),Voided (.024),Duress (.553),Confident (.957)
+Renegotiate (.563),Dissenters (.494),Questionable (.035),Discrepancy (.098),Pleadings (.472),Rewarded (.735)
+Manipulate (.545),Participated (.494),Impeded (.173),Arbitrary (.101),Investigated (.471),Prosperity (.666)
+Downsized (.587),Suggests (.473),Exacerbate (.241),Imbalance (.127),sometime (.443),Rectification (.563)
+Refile (.563),Favoring (.462),Overstatement (.061),Overcharged (.022),Encroachment (.502),Forfeitable (.563)
+Unpredicted (.719),,Slander (.057),Manipulation (.169),Forfeits (.496),Turmoil (.674)
+Closeout (.597),,Unfounded (.274),Distressed (.257),Rejections (.550),Progresses (.652)
+Collaborates (.802),,Worst (.033),Hazard (.047),Whereabouts (.545),Antecedent (.617)
+Obligee (.563),,Illicit (.397),Unfit (.178),,Dissolutions (.563)
+Writs (.620),,Distrubing (.391),Defraud (.248),,Expropriation (.634)
+Pledgors (.563),,Prejudiced (.387),Undefined (.423),,Understate (.572)
+Idled (.563),,Apparently (.385),Malpractice (.419),,Misstate (.563)
+Friendly (.899),,Frivolous (.065),Presumes (.169),,Mutandis (.563)
+Arbitral (.563),,Reject (.036),Collapsing (.343),,delisting (.563)
+Breakthroughs (.679),,Protested (.419),Falsely (.020),,Uncovers (.782)
+Certiorari (.563),,Rejects (.056),Unsound (.021),,Grantors (.563)
+Adjournments (.563),,Grievance (.061),Damaging (.149),,Predeceases (.563)
+,,Dissenting (.374),Reassignment (.400),,
+,,Gratuitous (.056),Distracting (.074),,
+,,Misapplication (.159),Disapproved (.308),,
+,,Forego (.057),Stagnant (.053),,
+,,Bailee (.384),Unsafe (.012),,
+,,Persists (.274),,,
+,,Ignoring (.121),,,
+,,Recalculate (.330),,,
