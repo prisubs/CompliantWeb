@@ -8,3 +8,4 @@ tiingo
 newsapi
 newsapi-python
 sklearn
+flask
