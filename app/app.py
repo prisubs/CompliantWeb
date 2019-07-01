@@ -4,7 +4,10 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 class TickerQueryForm(Form):
-    tickers = ["AAPL", "AMZN", "CRM", "FB", "NFLX", "BABA", "MSFT", "GOOGL", "WMT"]
+    tickers = [("aapl", "AAPL"), ("amzn", "AMZN"),
+			   ("crm", "CRM"), ("fb", "FB"),
+			   ("nflx", "NFLX"), ("baba", "BABA"),
+			   ("msft", "MSFT"), ("googl", "GOOGL"), ("wmt", "WMT")]
     ticker = SelectField(label='ticker', choices=tickers)
     submit = SubmitField('Submit!')
 
