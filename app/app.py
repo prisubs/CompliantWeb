@@ -1,18 +1,51 @@
 from wtforms import Form, SelectField, SubmitField
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Markup
 import random
 from bokeh.models import (HoverTool, FactorRange, Plot, LinearAxis, Grid,
                           Range1d)
 from bokeh.models.glyphs import VBar
-from bokeh.plotting import figure
-from bokeh.charts import Bar
+#from bokeh.plotting import figure
+#from bokeh.plotting import Bar
 from bokeh.embed import components
 from bokeh.models.sources import ColumnDataSource
+import pandas as pd
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+import plotly.graph_objs as go
+import numpy as np
 
 
+server = Flask(__name__)
+app = dash.Dash(__name__, server=server)
 
+np.random.seed(101)
+random_x = np.random.randint(1, 21, 20)
+random_y = np.random.randint(1, 21, 20)
+app.layout = html.Div(children=[
+    html.H1('Hello World'),
 
-app = Flask(__name__)
+    dcc.Graph(
+        id='scatter',
+        figure={
+            'data': [
+                go.Scatter(
+                    x = random_x,
+                    y = random_y,
+                    mode = 'markers'
+                )
+            ],
+            'layout': go.Layout(
+                title = 'Here is My Scatter Plot',
+                xaxis = {'title': 'Here is My X-Axis'},
+                yaxis = {'title': 'Here is my Y-Axis'}
+            )
+        }
+    )
+])
+
+aapl_df = pd.read_csv("../data/6m-weekly/aapl-6m-weekly.csv", names=["Open", "High", "Low", "Close", "Adj Close", "Volume", "Start", "End", "JSON", "corpus", "vectorized", "sentiment", "sentiment_test"])
+feature_names = aapl_df.columns[-2:].values.tolist()
 
 class TickerQueryForm(Form):
     tickers = [("aapl", "AAPL"), ("amzn", "AMZN"),
@@ -21,7 +54,7 @@ class TickerQueryForm(Form):
 			   ("msft", "MSFT"), ("googl", "GOOGL"), ("wmt", "WMT")]
     ticker = SelectField(label='ticker', choices=tickers)
     submit = SubmitField('Submit!')
-
+'''
 @app.route('/', methods=['POST', 'GET'])
 def my_form_post():
 	form = TickerQueryForm(request.form)
@@ -31,6 +64,15 @@ def my_form_post():
 		return render_template('form.html', form=form)
 
 
+
+@app.route('/chart')
+def chart():
+    labels = ["January","February","March","April","May","June","July","August"]
+    values = [10,9,8,7,6,4,7,8]
+    return render_template('chart.html', values=values, labels=labels)
+'''
+
+'''
 @app.route("/<int:bars_count>/")
 def chart(bars_count):
     if bars_count <= 0:
@@ -103,7 +145,7 @@ def create_bar_chart(data, title, x_name, y_name, hover_tool=None,
     plot.xaxis.major_label_orientation = 1
     return plot
 
-
+'''
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	app.run_server()
