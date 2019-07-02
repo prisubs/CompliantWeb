@@ -11,3 +11,4 @@ sklearn
 flask
 wtforms
 gunicorn
+bokeh

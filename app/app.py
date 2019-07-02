@@ -5,7 +5,7 @@ from bokeh.models import (HoverTool, FactorRange, Plot, LinearAxis, Grid,
                           Range1d)
 from bokeh.models.glyphs import VBar
 from bokeh.plotting import figure
-from bokeh.charts import Bar
+# from bokeh.charts import Bar
 from bokeh.embed import components
 from bokeh.models.sources import ColumnDataSource
 
