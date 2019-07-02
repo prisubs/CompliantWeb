@@ -51,9 +51,19 @@ def chart(bars_count):
                            the_div=div, the_script=script)
 
 def create_hover_tool():
-    # we'll code this function in a moment
-    return None
-
+    """Generates the HTML for the Bokeh's hover data tool on our graph."""
+    hover_html = """
+      <div>
+        <span class="hover-tooltip">$x</span>
+      </div>
+      <div>
+        <span class="hover-tooltip">@bugs bugs</span>
+      </div>
+      <div>
+        <span class="hover-tooltip">$@costs{0.00}</span>
+      </div>
+    """
+    return HoverTool(tooltips=hover_html)
 
 def create_bar_chart(data, title, x_name, y_name, hover_tool=None,
                      width=1200, height=300):
