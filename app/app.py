@@ -12,6 +12,7 @@ import pandas as pd
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import numpy as np
 
@@ -24,7 +25,13 @@ random_x = np.random.randint(1, 21, 20)
 random_y = np.random.randint(1, 21, 20)
 app.layout = html.Div(children=[
     html.H1('Hello World'),
-
+    dcc.Dropdown(
+        id='yaxis',
+        options=[
+            {'label': 'Random List 1', 'value': 'random_y1'},
+            {'label': 'Random List 2', 'value': 'random_y2'}
+        ]
+    ),
     dcc.Graph(
         id='scatter',
         figure={
@@ -43,6 +50,25 @@ app.layout = html.Div(children=[
         }
     )
 ])
+
+#here is the callback
+@app.callback(
+    Output('scatter', 'figure'),
+    [Input ('yaxis', 'value')])
+def update_graphic(yaxis):
+    return {
+        'data': [go.Scatter(
+            x=random_x,
+            y=random_y[yaxis],
+            mode='markers',
+        )],
+        'layout': go.Layout(
+            title='Here is My Scatter Plot{}'.format(yaxis),
+            xaxis={'title': 'Here is My X-Axis'},
+            yaxis={'title': yaxis},
+        )
+    }
+
 
 aapl_df = pd.read_csv("../data/6m-weekly/aapl-6m-weekly.csv", names=["Open", "High", "Low", "Close", "Adj Close", "Volume", "Start", "End", "JSON", "corpus", "vectorized", "sentiment", "sentiment_test"])
 feature_names = aapl_df.columns[-2:].values.tolist()
