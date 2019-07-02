@@ -9,3 +9,5 @@ newsapi
 newsapi-python
 sklearn
 flask
+wtforms
+gunicorn
