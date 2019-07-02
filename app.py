@@ -24,11 +24,12 @@ class TickerQueryForm(Form):
 
 @app.route('/', methods=['POST', 'GET'])
 def my_form_post():
-	form = TickerQueryForm(request.form)
-	if request.method == 'POST':
-		return render_template('result.html')
-	elif request.method == 'GET':
-		return render_template('form.html', form=form)
+    return "Success!!"
+	# form = TickerQueryForm(request.form)
+	# if request.method == 'POST':
+	# 	return render_template('result.html')
+	# elif request.method == 'GET':
+	# 	return render_template('form.html', form=form)
 
 
 @app.route("/<int:bars_count>/")
