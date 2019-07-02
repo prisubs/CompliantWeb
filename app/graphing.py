@@ -9,13 +9,13 @@ import pandas as pd
 server = Flask(__name__)
 app = dash.Dash(__name__, server=server)
 
-appldata = pd.read_csv('../data/6m-weekly/aapl-6m-weekly.csv')
-features = appldata.columns
-feature_to_use = appldata[:-1] #don't want the sentiment_test column
+crimedata = pd.read_csv("../data/6m-weekly/aapl-6m-weekly.csv")
+features = crimedata.columns
+crimetypes = features[:-1] #don't want the sentiment_test column
 
 #add markdown text
 markdown_text = """
-Data used for this dashboard was taken from Yahoo Finance
+Data used for this dashboard was taken from the US Department of Justice website which can be accessed [here.](https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/tables/table-1)
 """
 
 app.layout = html.Div([
@@ -24,16 +24,16 @@ app.layout = html.Div([
 		html.Div([
 			dcc.Dropdown(
 				id='yaxis',
-				options=[{'label':i,'value':i} for i in feature_to_use],
-				value='var-type'
+				options=[{'label':i,'value':i} for i in crimetypes],
+				value='crime-type'
 			)
 		], style={'width': '40%'})
 	]),
 	html.Div([dcc.Graph(
-		id='appl-graphic',
+		id='crime-graphic',
 		figure={
 			'data': [go.Scatter(
-				x=appldata['sentiment_test'],
+				x=crimedata['sentiment_test'],
 				y=[0,0],
 				mode='markers'
 			)],
@@ -44,6 +44,90 @@ app.layout = html.Div([
 		}
 		)
 	], style={'width':'50%', 'display':'inline-block'}),
+	html.Div([dcc.Graph(
+		id='crime-stacked',
+		figure={
+			'data': [go.Bar(
+				x=crimedata['sentiment_test'],
+				y=crimedata['Open'],
+				name='Open'
+				),
+				go.Bar(
+                                x=crimedata['sentiment_test'],
+                                y=crimedata['High'],
+                                name='High'
+                                ),
+				go.Bar(
+                                x=crimedata['sentiment_test'],
+                                y=crimedata['Low'],
+                                name='Low'
+                                ),
+				go.Bar(
+                                x=crimedata['sentiment_test'],
+                                y=crimedata['Close'],
+                                name='Close'
+                                ),
+				go.Bar(
+                                x=crimedata['sentiment_test'],
+                                y=crimedata['Volume'],
+                                name='Volume'
+                                ),
+				go.Bar(
+                                x=crimedata['sentiment_test'],
+                                y=crimedata['Start'],
+                                name='Start'
+                                ),
+				go.Bar(
+                                x=crimedata['sentiment_test'],
+                                y=crimedata['End'],
+                                name='End'
+                                )
+			],
+			'layout': go.Layout(
+				title ='Crime in the United States by Volume, 1997–2016',
+				barmode='stack'
+			)
+		}
+		)
+	], style={'width':'50%', 'display':'inline-block'}),
+	html.Div([dcc.Graph(
+		id='crime-boxplot',
+		figure={
+			'data': [go.Box(
+			y=crimedata['Open'],
+			name='Open'
+			),
+			go.Box(
+                        y=crimedata['High'],
+                        name='High'
+                        ),
+			go.Box(
+                        y=crimedata['Low'],
+                        name='Low'
+                        ),
+			go.Box(
+                        y=crimedata['Close'],
+                        name='Close'
+                        ),
+			go.Box(
+                        y=crimedata['Volume'],
+                        name='Volume'
+                        ),
+			go.Box(
+                        y=crimedata['Start'],
+                        name='Start'
+                        ),
+			go.Box(
+                        y=crimedata['End'],
+                        name='End'
+                        )
+			],
+			'layout': go.Layout(
+			title='Crime in the United States by Volume, 1997–2016'
+			)
+		}
+	)
+	], style={'width':'50%', 'display':'inline-block'}),
 	html.Div([
 		dcc.Markdown(children=markdown_text)
 	])
@@ -51,13 +135,13 @@ app.layout = html.Div([
 
 #Here is the callback
 @app.callback(
-	Output('appl-graphic', 'figure'),
+	Output('crime-graphic', 'figure'),
 	[Input ('yaxis', 'value')])
-def update_graphic(yaxis_aapl):
+def update_graphic(yaxis_crime):
 	return {
 		'data': [go.Scatter(
-			x=appldata['sentiment_test'],
-			y=appldata[yaxis_aapl],
+			x=crimedata['sentiment_test'],
+			y=crimedata[yaxis_crime],
 			mode='lines+markers',
 			marker={
 				'size': 15,
@@ -66,12 +150,13 @@ def update_graphic(yaxis_aapl):
 			}
 		)],
 		'layout': go.Layout(
-			title='{} in the US by Volume, 1997-2016'.format(yaxis_aapl),
-			xaxis={'title': 'Sentiment'},
-			yaxis={'title': yaxis_appl},
+			title='{} in the US by Volume, 1997-2016'.format(yaxis_crime),
+			xaxis={'title': 'sentiment_test'},
+			yaxis={'title': yaxis_crime},
 			hovermode='closest'
 		)
 	}
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
