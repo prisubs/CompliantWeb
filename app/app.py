@@ -1,5 +1,6 @@
 from wtforms import Form, SelectField, SubmitField
 from flask import Flask, render_template, request
+import backend
 
 app = Flask(__name__)
 
@@ -15,7 +16,8 @@ class TickerQueryForm(Form):
 def my_form_post():
 	form = TickerQueryForm(request.form)
 	if request.method == 'POST':
-		return render_template('result.html')
+		t = form.ticker.data
+		return render_template('result.html', t="hello you selected {0}".format(t))
 	elif request.method == 'GET':
 		return render_template('form.html', form=form)
 
