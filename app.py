@@ -1,7 +1,7 @@
 from wtforms import Form, SelectField, SubmitField
 from flask import Flask, render_template, request
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 class TickerQueryForm(Form):
     tickers = [("aapl", "AAPL"), ("amzn", "AMZN"),
@@ -20,5 +20,5 @@ def my_form_post():
 		return render_template('form.html', form=form)
 
 
-if _name_ == "main":
+if __name__ == "_main_":
 	app.run(debug=True)
