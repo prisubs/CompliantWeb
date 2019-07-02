@@ -9,13 +9,12 @@ import pandas as pd
 server = Flask(__name__)
 app = dash.Dash(__name__, server=server)
 
-crimedata = pd.read_csv("../data/6m-weekly/aapl-6m-weekly.csv")
-features = crimedata.columns
-crimetypes = features[:-1] #don't want the sentiment_test column
-
+aapldata = pd.read_csv("../data/6m-weekly/aapl-6m-weekly.csv")
+features = aapldata.columns
+aapltypes = aapldata.drop(['Start', 'End', 'JSON', 'corpus', 'vectorized'], axis=1)
 #add markdown text
 markdown_text = """
-Data used for this dashboard was taken from the US Department of Justice website which can be accessed [here.](https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/topic-pages/tables/table-1)
+Data used for this dashboard was taken from Yahoo Finance
 """
 
 app.layout = html.Div([
@@ -24,16 +23,16 @@ app.layout = html.Div([
 		html.Div([
 			dcc.Dropdown(
 				id='yaxis',
-				options=[{'label':i,'value':i} for i in crimetypes],
-				value='crime-type'
+				options=[{'label':i,'value':i} for i in aapltypes],
+				value='aapl-type'
 			)
 		], style={'width': '40%'})
 	]),
 	html.Div([dcc.Graph(
-		id='crime-graphic',
+		id='aapl-graphic',
 		figure={
 			'data': [go.Scatter(
-				x=crimedata['sentiment_test'],
+				x=aapldata['Start'],
 				y=[0,0],
 				mode='markers'
 			)],
@@ -45,85 +44,85 @@ app.layout = html.Div([
 		)
 	], style={'width':'50%', 'display':'inline-block'}),
 	html.Div([dcc.Graph(
-		id='crime-stacked',
+		id='aapl-stacked',
 		figure={
 			'data': [go.Bar(
-				x=crimedata['sentiment_test'],
-				y=crimedata['Open'],
+				x=aapldata['Start'],
+				y=aapldata['Open'],
 				name='Open'
 				),
 				go.Bar(
-                                x=crimedata['sentiment_test'],
-                                y=crimedata['High'],
+                                x=aapldata['Start'],
+                                y=aapldata['High'],
                                 name='High'
                                 ),
 				go.Bar(
-                                x=crimedata['sentiment_test'],
-                                y=crimedata['Low'],
+                                x=aapldata['Start'],
+                                y=aapldata['Low'],
                                 name='Low'
                                 ),
 				go.Bar(
-                                x=crimedata['sentiment_test'],
-                                y=crimedata['Close'],
+                                x=aapldata['Start'],
+                                y=aapldata['Close'],
                                 name='Close'
                                 ),
 				go.Bar(
-                                x=crimedata['sentiment_test'],
-                                y=crimedata['Volume'],
+                                x=aapldata['Start'],
+                                y=aapldata['Volume'],
                                 name='Volume'
                                 ),
 				go.Bar(
-                                x=crimedata['sentiment_test'],
-                                y=crimedata['Start'],
+                                x=aapldata['Start'],
+                                y=aapldata['Start'],
                                 name='Start'
                                 ),
 				go.Bar(
-                                x=crimedata['sentiment_test'],
-                                y=crimedata['End'],
+                                x=aapldata['Start'],
+                                y=aapldata['End'],
                                 name='End'
                                 )
 			],
 			'layout': go.Layout(
-				title ='Crime in the United States by Volume, 1997–2016',
+				title ='aapl in the United States by Volume, 1997–2016',
 				barmode='stack'
 			)
 		}
 		)
 	], style={'width':'50%', 'display':'inline-block'}),
 	html.Div([dcc.Graph(
-		id='crime-boxplot',
+		id='aapl-boxplot',
 		figure={
 			'data': [go.Box(
-			y=crimedata['Open'],
+			y=aapldata['Open'],
 			name='Open'
 			),
 			go.Box(
-                        y=crimedata['High'],
+                        y=aapldata['High'],
                         name='High'
                         ),
 			go.Box(
-                        y=crimedata['Low'],
+                        y=aapldata['Low'],
                         name='Low'
                         ),
 			go.Box(
-                        y=crimedata['Close'],
+                        y=aapldata['Close'],
                         name='Close'
                         ),
 			go.Box(
-                        y=crimedata['Volume'],
+                        y=aapldata['Volume'],
                         name='Volume'
                         ),
 			go.Box(
-                        y=crimedata['Start'],
+                        y=aapldata['Start'],
                         name='Start'
                         ),
 			go.Box(
-                        y=crimedata['End'],
+                        y=aapldata['End'],
                         name='End'
                         )
 			],
 			'layout': go.Layout(
-			title='Crime in the United States by Volume, 1997–2016'
+			title='aapl in the United States by Volume, 1997–2016'
 			)
 		}
 	)
@@ -135,28 +134,30 @@ app.layout = html.Div([
 
 #Here is the callback
 @app.callback(
-	Output('crime-graphic', 'figure'),
+	Output('aapl-graphic', 'figure'),
 	[Input ('yaxis', 'value')])
-def update_graphic(yaxis_crime):
-	return {
-		'data': [go.Scatter(
-			x=crimedata['sentiment_test'],
-			y=crimedata[yaxis_crime],
-			mode='lines+markers',
-			marker={
-				'size': 15,
-				'opacity': 0.5,
-				'line': {'width':0.5, 'color':'white'}
-			}
-		)],
-		'layout': go.Layout(
-			title='{} in the US by Volume, 1997-2016'.format(yaxis_crime),
-			xaxis={'title': 'sentiment_test'},
-			yaxis={'title': yaxis_crime},
-			hovermode='closest'
-		)
-	}
-
+def update_graphic(yaxis_aapl):
+    if yaxis_aapl:
+    	return {
+    		'data': [go.Scatter(
+    			x=aapldata['Start'],
+    			y=aapldata[yaxis_aapl],
+    			mode='lines+markers',
+    			marker={
+    				'size': 15,
+    				'opacity': 0.5,
+    				'line': {'width':0.5, 'color':'white'}
+    			}
+    		)],
+    		'layout': go.Layout(
+    			title='{} in the US by Volume, 1997-2016'.format(yaxis_aapl),
+    			xaxis={'title': 'Start'},
+    			yaxis={'title': yaxis_aapl},
+    			hovermode='closest'
+    		)
+    	}
+    else:
+        return {}
 
 if __name__ == '__main__':
     app.run_server(debug=True)
