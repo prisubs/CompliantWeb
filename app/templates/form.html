@@ -11,13 +11,19 @@
 </head>
 <body>
     <h1 class="display-1">Equities Predictor</h1>
-    <p class="lead">
-        Select a ticker and a date range to view results.
-        {{form.ticker}}
-    </p>
+    <form action="" method="post">
 
-    <!-- Jinja templating -->
-    {{form.submit}}
+        <p class="lead">
+            Select a ticker and a date range to view results. <br>
+            {{form.ticker}}
+        </p>
+
+         <!-- Jinja templating -->
+        {{form.submit}}
+
+    </form>
+
+
 
 
 </body>
