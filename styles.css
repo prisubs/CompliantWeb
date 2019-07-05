@@ -1,0 +1,27 @@
+body {
+    background-color: #625489;
+}
+
+.tradingview-widget-container {
+    
+}
+
+img {
+    position: absolute;
+    margin-top: 10%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    width: 500px;
+    margin-left: 47%
+}
+
+h1 {
+    position: absolute;
+    display: block;
+    margin-top: 35%;
+    font-size: 30px;
+    margin-left: 43%;
+    color: white;
+    text-shadow: 2px 2px 8px black;
+ }
