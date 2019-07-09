@@ -1,7 +1,10 @@
 # takes in a ticker string, YYYY-MM-DD formatted datestring
 
-def runner(ticker, date):
-    df = pipeline('data/6m-weekly/{0}-6m-weekly.csv'.format(ticky), ticky)
+def predict_runner(ticker, range):
+    return # tbd
+
+def review_runner(ticker, date):
+    df = pipeline('data/6m-weekly/{0}-6m-weekly.csv'.format(ticker), ticker)
     g = lm(df, date, ticker)
     return g  # g is a formatted datestring
 
@@ -13,7 +16,6 @@ from tiingo import TiingoClient
 from sklearn.impute import SimpleImputer
 from sklearn import preprocessing
 import indicoio
-import time
 from textblob import TextBlob
 from sklearn import linear_model
 
