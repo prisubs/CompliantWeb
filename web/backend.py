@@ -1,3 +1,8 @@
+# This function returns prediction for a specific date and range in the FUTURE.
+def future_runner(ticker, day=False, week=False):
+    return
+
+
 # This function returns all analysis for a specific date in the PAST.
 def past_runner(ticker, date):
     df = pipeline(ticker, date)
@@ -5,9 +10,9 @@ def past_runner(ticker, date):
     predicted_delta, actual_delta = translate_delta(predicted_delta), translate_delta(actual_delta)
     headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
-    base_result = "predicted move: {0} \nactual move: {1} \nfound {2} good headlines: {3} \nfound {4} bad headlines: {5}"
-    result = base_result.format(predicted_delta, actual_delta, good_count, good_headlines, bad_count, bad_headlines)
-    return result
+    #base_result = "predicted move: {0} \nactual move: {1} \nfound {2} good headlines: {3} \nfound {4} bad headlines: {5}"
+    return predicted_delta, actual_delta, good_count, good_headlines, bad_count, bad_headlines
+
 
 
 # display functions
@@ -194,8 +199,8 @@ def run_model(df, model_path):
     scaler = preprocessing.StandardScaler().fit(X_test)
     X_test = scaler.transform(X_test)
     Y_predicted = model.predict(X_test)
-    
+
     return Y_predicted.tolist(), Y_test.tolist()
 
-g = past_runner("fb", "2019-06-05")
+g = past_runner("aapl", "2019-07-04")
 print(g)
