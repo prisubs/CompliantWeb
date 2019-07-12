@@ -10,8 +10,9 @@ def past_runner(ticker, date):
     predicted_delta, actual_delta = translate_delta(predicted_delta), translate_delta(actual_delta)
     headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
+    news_category = make_category(good_count, bad_count)
     #base_result = "predicted move: {0} \nactual move: {1} \nfound {2} good headlines: {3} \nfound {4} bad headlines: {5}"
-    return predicted_delta, actual_delta, good_count, good_headlines, bad_count, bad_headlines
+    return predicted_delta, actual_delta, good_count, good_headlines, bad_count, bad_headlines, news_category
 
 
 
@@ -23,6 +24,15 @@ def translate_delta(delta):
         return "DOWN"
 
 # Headline classifier functions
+def make_category(goods, bads):
+    ratio = goods/bads
+    if ratio > 0.75:
+        return "GOOD" #green
+    elif ratio > 0.5:
+        return "OKAY" #yellow
+    else:
+        return "BAD" #red
+
 def classify_headlines(headline_list):
     bad, good = [], []
     for headline in headline_list:
@@ -33,7 +43,7 @@ def classify_headlines(headline_list):
             bad.append([headline, ind_polarity])
     bad_count, good_count = len(bad), len(good)
     baddest, goodest = sorted(bad, key=lambda x: x[1], reverse=False), sorted(good, key=lambda x: x[1], reverse=True)
-    baddest, goodest = baddest[0:5], goodest[0:5]
+    baddest, goodest = baddest[0:5][0], goodest[0:5][0]
 
     return goodest, baddest, good_count, bad_count
 
