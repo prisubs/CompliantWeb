@@ -1,0 +1,24 @@
+apiVersion: {{ .Values.ingress.apiVersion }}
+kind: Ingress
+metadata:
+    name: {{ .Release.Name }}-{{ .Values.ingress.name }}-{{ .Values.tier }}
+    namespace: {{ .Release.Namespace }}
+    annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+    labels:
+        app: {{ .Values.appname }}
+spec:
+    rules:
+      - host: {{ .Values.ingress.host }}
+        http:
+            paths:
+              - path: {{ .Values.ingress.route }}
+                backend:
+                    serviceName: {{ .Release.Name }}-{{ .Values.service.name }}-{{ .Values.tier }}
+                    servicePort: {{ .Values.externalPort }}
+              - path: {{ .Values.ingress.backend.route }}
+                backend:
+                    serviceName: {{ .Release.Name }}-service-{{ .Values.backend }}
+                    servicePort: {{ .Values.externalPort }}
+
+

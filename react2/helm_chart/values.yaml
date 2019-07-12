@@ -1,0 +1,21 @@
+replicaCount: 1
+appname: bananatax
+externalPort: 80
+containerPort: 80
+
+image:
+    pullPolicy: Always
+    pullSecret: imagerepo
+
+deployment:
+    name: deploy
+    apiVersion: apps/v1
+
+service:
+    name: service
+    type: ClusterIP
+    apiVersion: v1
+
+ingress:
+    apiVersion: extensions/v1beta1
+    name: ingress

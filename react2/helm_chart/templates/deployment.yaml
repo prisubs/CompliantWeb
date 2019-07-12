@@ -1,0 +1,42 @@
+apiVersion: {{ .Values.deployment.apiVersion }}
+kind: Deployment
+metadata:
+    name: {{ .Release.Name }}-{{ .Values.deployment.name }}-{{ .Values.tier }}
+    namespace: {{ .Release.Namespace }}
+    labels:
+        app: {{ .Values.appname }}
+spec:
+    selector:
+        matchLabels:
+            app: {{ .Values.appname }}
+            tier: {{ .Values.tier }}
+            release: {{ .Release.Name }}
+    replicas: {{ .Values.replicaCount }}
+    template:
+        metadata:
+            labels:
+                app: {{ .Values.appname }}
+                tier: {{ .Values.tier }}
+                release: {{ .Release.Name }}
+        spec:
+            imagePullSecrets:
+              - name: {{ .Values.image.pullSecret }}
+            containers:
+              - name: container-{{ .Values.image.tag }}
+                image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+                imagePullPolicy: {{ .Values.image.pullPolicy }}
+                resources: {{ .Values.resources }}
+                env:
+                  - name: GET_HOSTS_FROM
+                    value: dns
+                  - name: URL
+                    value: {{ .Values.ingress.host }}
+                  - name: ROUTE
+                    value: {{ .Values.ingress.route }}
+#                  - name: HOST
+#                    value: {{ .Values.ingress.host }}{{ .Values.ingress.route }}
+                ports:
+                  - containerPort: {{ .Values.containerPort }}
+                    name: http
+                    protocol: TCP
+
