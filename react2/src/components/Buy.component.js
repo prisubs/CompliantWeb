@@ -127,11 +127,14 @@ export default class Buy extends Component {
             maxDate={new Date(2019, 6, 11)}
             minDate={new Date(2019, 0, 11)}
           />
-
+    {
+    /*
           <form>
             <div className="smalltext-signup">
               <h4> Name of Ticker </h4>
             </div>
+
+
             <FieldGroup
               id="formControlsTicker"
               label="Ticker"
@@ -141,7 +144,6 @@ export default class Buy extends Component {
               <span>
                     By using our product you agree to our terms and services
               </span>
-            </div>
             <button
               className="submit-button signup-submit-button"
               type="submit"
@@ -149,6 +151,8 @@ export default class Buy extends Component {
             >
             </button>
           </form>
+          */
+     }
         </div>
       </div>
     )

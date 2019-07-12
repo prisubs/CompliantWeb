@@ -39,6 +39,10 @@ class App extends Component<void> {
         ' { "colorTheme": "dark", "showChart": true, "locale": "en", "largeChartUrl": "", "isTransparent": false, "width": "400", "height": "730", "plotLineColorGrowing": "rgba(103, 78, 167, 1)", "plotLineColorFalling": "rgba(103, 78, 167, 1)", "gridLineColor": "rgba(242, 242, 242, 0.61)", "scaleFontColor": "rgba(238, 238, 238, 1)", "belowLineFillColorGrowing": "rgba(142, 124, 195, 0.26)", "belowLineFillColorFalling": "rgba(180, 167, 214, 0.23)", "symbolActiveColor": "rgba(142, 124, 195, 0.59)", "tabs": [ { "title": "Indices", "symbols": [ { "s": "NASDAQ:AAPL" }, { "s": "NASDAQ:AMZN" }, { "s": "NYSE:BABA" }, { "s": "NYSE:CRM" }, { "s": "NASDAQ:FB" }, { "s": "NASDAQ:GOOGL" }, { "s": "NASDAQ:MSFT" }, { "s": "NASDAQ:NFLX" }, { "s": "NASDAQ:TSLA" }, { "s": "NYSE:WMT" } ], "originalTitle": "Indices" }, { "title": "Commodities", "symbols": [ { "s": "CME_MINI:ES1!", "d": "E-Mini S&P" }, { "s": "CME:E61!", "d": "Euro" }, { "s": "COMEX:GC1!", "d": "Gold" }, { "s": "NYMEX:CL1!", "d": "Crude Oil" }, { "s": "NYMEX:NG1!", "d": "Natural Gas" }, { "s": "CBOT:ZC1!", "d": "Corn" } ], "originalTitle": "Commodities" }, { "title": "Bonds", "symbols": [ { "s": "CME:GE1!", "d": "Eurodollar" }, { "s": "CBOT:ZB1!", "d": "T-Bond" }, { "s": "CBOT:UD1!", "d": "Ultra T-Bond" }, { "s": "EUREX:GG1!", "d": "Euro Bund" }, { "s": "EUREX:II1!", "d": "Euro BTP" }, { "s": "EUREX:HR1!", "d": "Euro BOBL" } ], "originalTitle": "Bonds" }, { "title": "Forex", "symbols": [ { "s": "FX:EURUSD" }, { "s": "FX:GBPUSD" }, { "s": "FX:USDJPY" }, { "s": "FX:USDCHF" }, { "s": "FX:AUDUSD" }, { "s": "FX:USDCAD" } ], "originalTitle": "Forex" } ] }\r\n'
       //script.setAttribute("colorTheme", "dark");
       //script.setAttribute('src', 'http://mysite/my.js');
+
+
+
+
       this.setState({
         wrongPassword: true
       })
