@@ -1,3 +1,15 @@
+import pandas as pd
+import numpy as np
+import datetime
+from tiingo import TiingoClient
+from sklearn.impute import SimpleImputer
+from sklearn import preprocessing
+import indicoio
+from textblob import TextBlob
+import _pickle as cPickle
+import math
+
+
 # This function returns prediction for a specific date and range in the FUTURE.
 def future_runner(ticker, day=False, week=False):
     return
@@ -7,31 +19,58 @@ def future_runner(ticker, day=False, week=False):
 def past_runner(ticker, date):
     df = pipeline(ticker, date)
     predicted_delta, actual_delta = run_model(df, "data/logistic.pkl")
-    predicted_delta, actual_delta = translate_delta(predicted_delta), translate_delta(actual_delta)
+    rating, delta = translate_delta(predicted_delta), find_delta(df["Start"][0], df["End"][0], ticker)
     headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
     news_category = make_category(good_count, bad_count)
-    #base_result = "predicted move: {0} \nactual move: {1} \nfound {2} good headlines: {3} \nfound {4} bad headlines: {5}"
-    return predicted_delta, actual_delta, good_count, good_headlines, bad_count, bad_headlines, news_category
+    return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category
 
+
+# just for testing
+def pretty_print(a, b, c, d, e, f, g):
+    print("RATING: {0} \n{1}".format(a, b))
+    print("{0} good headlines:".format(c))
+    printlist(d)
+    print("{0} bad headlines:".format(e))
+    printlist(f)
+    print("news rating: {0}".format(g))
+    return
+
+
+def printlist(lis):
+    for l in lis:
+        print("     " + str(l))
 
 
 # display functions
+def find_delta(start, end, ticker):
+    client = TiingoClient({"api_key": "a265fc4a1013923f970d16e7348195074e97fcb0"})
+    prices = client.get_ticker_price(ticker, fmt='object', startDate=start, endDate=end, frequency='daily')
+    delta = prices[-1].close - prices[0].open
+    delta = math.ceil(delta*100)/100
+    if delta < 0:
+        return "{0} went down by {1}.".format(ticker, delta)
+    else:
+        return "{0} went up by {1}.".format(ticker, delta)
+
+
 def translate_delta(delta):
     if delta == 1:
-        return "UP"
+        return "BUY"
     else:
-        return "DOWN"
+        return "SELL"
+
 
 # Headline classifier functions
 def make_category(goods, bads):
     ratio = goods/bads
-    if ratio > 0.75:
+    if ratio > 1.25:
         return "GOOD" #green
-    elif ratio > 0.5:
+    elif ratio > 0.75:
         return "OKAY" #yellow
     else:
         return "BAD" #red
+
 
 def classify_headlines(headline_list):
     bad, good = [], []
@@ -43,7 +82,8 @@ def classify_headlines(headline_list):
             bad.append([headline, ind_polarity])
     bad_count, good_count = len(bad), len(good)
     baddest, goodest = sorted(bad, key=lambda x: x[1], reverse=False), sorted(good, key=lambda x: x[1], reverse=True)
-    baddest, goodest = baddest[0:5][0], goodest[0:5][0]
+    baddest, goodest = [b[0] for b in baddest], [g[0] for g in goodest]
+    baddest, goodest = baddest[0:5], goodest[0:5]
 
     return goodest, baddest, good_count, bad_count
 
@@ -56,15 +96,6 @@ def single_headlines(headline):
 
 # Logistic Regression functions
 # To modify the model, use notebook serialize_model.ipynb and update changes here
-import pandas as pd
-import numpy as np
-import datetime
-from tiingo import TiingoClient
-from sklearn.impute import SimpleImputer
-from sklearn import preprocessing
-import indicoio
-from textblob import TextBlob
-import _pickle as cPickle
 
 # feature functions
 def impute(X):
@@ -190,6 +221,7 @@ def pipeline(ticker, date):
 
     return df
 
+
 def multi_row_pipeline(dates, ticker):
     rows = []
     for date in dates:
@@ -212,5 +244,6 @@ def run_model(df, model_path):
 
     return Y_predicted.tolist(), Y_test.tolist()
 
-g = past_runner("aapl", "2019-07-04")
-print(g)
+
+a, b, c, d, e, f, g = past_runner("db", "2019-02-11")
+pretty_print(a, b, c, d, e, f, g)
