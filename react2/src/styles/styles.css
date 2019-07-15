@@ -12,40 +12,11 @@ h1 {
     text-shadow: 2px 2px 8px black !important;
  }
 
-.btn-primary {
-    background-color: #4A4A4A !important;
-    height: 50px !important;
-    color: white !important;
-    padding: 14px 24px !important;
-    border: 0 none !important;
-    margin-left: 200% !important;
-    float: left !important;
-}
-
-.btn-secondary {
-    background-color: #4A4A4A !important;
-    color: white !important;
-    height: 50px !important;
-    padding: 14px 24px !important;
-    border: 0 none !important;
-    margin-left: 425% !important;
-}
-
-.btn-primary:hover {
-    background-color: #626262 !important;
-}
-
 .row {
     margin-top: 5% !important;
 }
 
-.scroll {
-    white-space: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    -ms-overflow-style: -ms-autohiding-scrollbar !important;
-    background-color: #4A4A4A !important;
-}
+
 
 header {
     background: #152637 !important;
@@ -53,14 +24,6 @@ header {
 
 .example-one-header {
     border-radius: 3px !important;
-}
-
-.logo {
-    text-align: center !important;
-    font-weight: 700 !important;
-    color: #4A4A4A !important;
-    border-right: 1px solid #4A4A4A !important;
-    padding: 12px 24px 13px !important;
 }
 
 .scroll-nav-item {
@@ -72,46 +35,7 @@ header {
     border-right: 1px solid rgba(114,124,135,0.2) !important;
 }
 
-* {
-    box-sizing: border-box !important;
-}
 
-.example-one {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
-    max-width: 685px !important;
-    margin: 10vmin auto 0 !important;
-    color: #64CCE3 !important;
-    line-height: 1.5 !important;
-    font-size: 0 !important;
-}
-
-.logo, .scroll-nav-item {
-    color: white !important;
-    font-size: 14px !important;
-}
-
-.logo, .scroll-nav-item, .vertical-align-middle {
-    display: inline-block !important;
-    vertical-align: middle !important;
-}
-
-.title {
-    text-align: center !important;
-    margin: 24px 0 6px !important;
-    font-size: 12px !important;
-    text-transform: uppercase !important;
-    letter-spacing: .2em !important;
-    color: white !important;
-}
-
-.scroll::-webkit-scrollbar {
-    display: none !important;
-}
-
-.scroll-widget {
-    width: 100px !important;
-    height: 100px !important;
-}
 
 .tradingview-widget-copyright{
 	position: relative;

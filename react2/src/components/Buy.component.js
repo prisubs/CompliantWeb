@@ -127,32 +127,31 @@ export default class Buy extends Component {
             maxDate={new Date(2019, 6, 11)}
             minDate={new Date(2019, 0, 11)}
           />
-    {
-    /*
-          <form>
+          <form className = "input-field-form">
             <div className="smalltext-signup">
-              <h4> Name of Ticker </h4>
+              <h4 className="n-o-ta"> Name of Ticker </h4>
             </div>
-
-
             <FieldGroup
               id="formControlsTicker"
+              size="5"
+              maxlength="5"
               label="Ticker"
-              placeholder="AAPL"
+              placeholder="XXXX"
               className="input-field-login"
             />
-              <span>
+              <h3 className="n-o-t">
                     By using our product you agree to our terms and services
-              </span>
+              </h3>
             <button
               className="submit-button signup-submit-button"
               type="submit"
               onClick={this.onSubmit}
             >
+            Submit
             </button>
           </form>
-          */
-     }
+
+
         </div>
       </div>
     )

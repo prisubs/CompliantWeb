@@ -1,13 +1,27 @@
 .logo-ssdb {
-    height: 50px;
-    width: 50px;
-    left: 500px;
-    top: 500px;
+    width: 15%;
+    height: 10%;
+    left: -790px;
+    top: -179px;
+}
+
+* {
+    box-sizing: border-box !important;
 }
 
 
-body {
-    background-color: #FFFFFF !important;
+img {
+    position: absolute !important;
+    margin-top: 10% !important;
+    max-width: 50% !important;
+    height: auto !important;
+    display: block !important;
+    margin-left: 47% !important;
+}
+
+
+.navbar {
+    background-color: #4a4a4a !important;
 }
 
 h1 {
@@ -20,28 +34,7 @@ h1 {
     text-shadow: 2px 2px 8px black !important;
  }
 
-.btn-primary {
-    background-color: #4A4A4A !important;
-    height: 50px !important;
-    color: white !important;
-    padding: 14px 24px !important;
-    border: 0 none !important;
-    margin-left: 200% !important;
-    float: left !important;
-}
 
-.btn-secondary {
-    background-color: #4A4A4A !important;
-    color: white !important;
-    height: 50px !important;
-    padding: 14px 24px !important;
-    border: 0 none !important;
-    margin-left: 425% !important;
-}
-
-.btn-primary:hover {
-    background-color: #626262 !important;
-}
 
 .row {
     margin-top: 5% !important;
@@ -56,7 +49,7 @@ h1 {
 }
 
 header {
-    background: #152637 !important;
+    background: #131722 !important;
 }
 
 .example-one-header {
@@ -69,6 +62,22 @@ header {
     color: #4A4A4A !important;
     border-right: 1px solid #4A4A4A !important;
     padding: 12px 24px 13px !important;
+}
+
+.nav-item {
+    margin-top: 0px;
+    margin-right: 15px;
+    float:right;
+    font-size: 16pt;
+}
+
+.navbar-nav {
+    float: right;
+    color: #FFFFFF;
+}
+
+.collapse {
+    padding-left: 1400px !important;
 }
 
 .scroll-nav-item {
@@ -101,24 +110,6 @@ header {
 .logo, .scroll-nav-item, .vertical-align-middle {
     display: inline-block !important;
     vertical-align: middle !important;
-}
-
-.title {
-    text-align: center !important;
-    margin: 24px 0 6px !important;
-    font-size: 12px !important;
-    text-transform: uppercase !important;
-    letter-spacing: .2em !important;
-    color: white !important;
-}
-
-.scroll::-webkit-scrollbar {
-    display: none !important;
-}
-
-.scroll-widget {
-    width: 100px !important;
-    height: 100px !important;
 }
 
 .tradingview-widget-copyright{

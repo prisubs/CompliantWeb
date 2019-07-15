@@ -1,16 +1,13 @@
 // @flow
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import './../styles/styles.css'
 import { FieldGroup } from './'
 import { ROUTES } from './../'
+import {Helmet} from "react-helmet";
 
-function createMarkup() {
-  return {
-    __html:
-      '<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>{ "colorTheme": "dark", "showChart": true, "locale": "en", "largeChartUrl": "", "isTransparent": false, "width": "400", "height": "730", "plotLineColorGrowing": "rgba(103, 78, 167, 1)", "plotLineColorFalling": "rgba(103, 78, 167, 1)", "gridLineColor": "rgba(242, 242, 242, 0.61)", "scaleFontColor": "rgba(238, 238, 238, 1)", "belowLineFillColorGrowing": "rgba(142, 124, 195, 0.26)", "belowLineFillColorFalling": "rgba(180, 167, 214, 0.23)", "symbolActiveColor": "rgba(142, 124, 195, 0.59)", "tabs": [ { "title": "Indices", "symbols": [ { "s": "NASDAQ:AAPL" }, { "s": "NASDAQ:AMZN" }, { "s": "NYSE:BABA" }, { "s": "NYSE:CRM" }, { "s": "NASDAQ:FB" }, { "s": "NASDAQ:GOOGL" }, { "s": "NASDAQ:MSFT" }, { "s": "NASDAQ:NFLX" }, { "s": "NASDAQ:TSLA" }, { "s": "NYSE:WMT" } ], "originalTitle": "Indices" }, { "title": "Commodities", "symbols": [ { "s": "CME_MINI:ES1!", "d": "E-Mini S&P" }, { "s": "CME:E61!", "d": "Euro" }, { "s": "COMEX:GC1!", "d": "Gold" }, { "s": "NYMEX:CL1!", "d": "Crude Oil" }, { "s": "NYMEX:NG1!", "d": "Natural Gas" }, { "s": "CBOT:ZC1!", "d": "Corn" } ], "originalTitle": "Commodities" }, { "title": "Bonds", "symbols": [ { "s": "CME:GE1!", "d": "Eurodollar" }, { "s": "CBOT:ZB1!", "d": "T-Bond" }, { "s": "CBOT:UD1!", "d": "Ultra T-Bond" }, { "s": "EUREX:GG1!", "d": "Euro Bund" }, { "s": "EUREX:II1!", "d": "Euro BTP" }, { "s": "EUREX:HR1!", "d": "Euro BOBL" } ], "originalTitle": "Bonds" }, { "title": "Forex", "symbols": [ { "s": "FX:EURUSD" }, { "s": "FX:GBPUSD" }, { "s": "FX:USDJPY" }, { "s": "FX:USDCHF" }, { "s": "FX:AUDUSD" }, { "s": "FX:USDCAD" } ], "originalTitle": "Forex" } ] } </script> '
-  }
-}
+import TradingViewWidget,  { Themes, IntervalTypes, BarStyles} from 'react-tradingview-widget';
+
 
 class App extends Component<void> {
   state = {
@@ -24,7 +21,7 @@ class App extends Component<void> {
       email: inputEmail.target.value
     })
   }
-
+/*
   componentDidMount() {
     if (
       this.props.location.pathname == ROUTES.INDEX &&
@@ -34,7 +31,7 @@ class App extends Component<void> {
 
       script.src =
         'https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js'
-      script.async = true
+      script.async = false
       script.innerHTML =
         ' { "colorTheme": "dark", "showChart": true, "locale": "en", "largeChartUrl": "", "isTransparent": false, "width": "400", "height": "730", "plotLineColorGrowing": "rgba(103, 78, 167, 1)", "plotLineColorFalling": "rgba(103, 78, 167, 1)", "gridLineColor": "rgba(242, 242, 242, 0.61)", "scaleFontColor": "rgba(238, 238, 238, 1)", "belowLineFillColorGrowing": "rgba(142, 124, 195, 0.26)", "belowLineFillColorFalling": "rgba(180, 167, 214, 0.23)", "symbolActiveColor": "rgba(142, 124, 195, 0.59)", "tabs": [ { "title": "Indices", "symbols": [ { "s": "NASDAQ:AAPL" }, { "s": "NASDAQ:AMZN" }, { "s": "NYSE:BABA" }, { "s": "NYSE:CRM" }, { "s": "NASDAQ:FB" }, { "s": "NASDAQ:GOOGL" }, { "s": "NASDAQ:MSFT" }, { "s": "NASDAQ:NFLX" }, { "s": "NASDAQ:TSLA" }, { "s": "NYSE:WMT" } ], "originalTitle": "Indices" }, { "title": "Commodities", "symbols": [ { "s": "CME_MINI:ES1!", "d": "E-Mini S&P" }, { "s": "CME:E61!", "d": "Euro" }, { "s": "COMEX:GC1!", "d": "Gold" }, { "s": "NYMEX:CL1!", "d": "Crude Oil" }, { "s": "NYMEX:NG1!", "d": "Natural Gas" }, { "s": "CBOT:ZC1!", "d": "Corn" } ], "originalTitle": "Commodities" }, { "title": "Bonds", "symbols": [ { "s": "CME:GE1!", "d": "Eurodollar" }, { "s": "CBOT:ZB1!", "d": "T-Bond" }, { "s": "CBOT:UD1!", "d": "Ultra T-Bond" }, { "s": "EUREX:GG1!", "d": "Euro Bund" }, { "s": "EUREX:II1!", "d": "Euro BTP" }, { "s": "EUREX:HR1!", "d": "Euro BOBL" } ], "originalTitle": "Bonds" }, { "title": "Forex", "symbols": [ { "s": "FX:EURUSD" }, { "s": "FX:GBPUSD" }, { "s": "FX:USDJPY" }, { "s": "FX:USDCHF" }, { "s": "FX:AUDUSD" }, { "s": "FX:USDCAD" } ], "originalTitle": "Forex" } ] }\r\n'
       //script.setAttribute("colorTheme", "dark");
@@ -50,6 +47,8 @@ class App extends Component<void> {
         document.body.appendChild(script)
     }
   }
+  */
+
   /*
  componentWillUnmount() {
     this.setState({
@@ -129,6 +128,25 @@ class App extends Component<void> {
             {
               //<div dangerouslySetInnerHTML={createMarkup()}></div>
             }
+
+              <TradingViewWidget
+                symbol="NASDAQ:AAPL"
+                theme={Themes.DARK}
+                interval = {IntervalTypes.W}
+                style = {BarStyles.HOLLOW_CANDLES}
+                width =  "800"
+                height =  "730"
+                  plotLineColorGrowing =  "rgba(103, 78, 167, 1)"
+                  plotLineColorFalling =  "rgba(103, 78, 167, 1)"
+                  gridLineColor =  "rgba(242, 242, 242, 0.61)"
+                  scaleFontColor =  "rgba(238, 238, 238, 1)"
+                  belowLineFillColorGrowing =  "rgba(142, 124, 195, 0.26)"
+                  belowLineFillColorFalling =  "rgba(180, 167, 214, 0.23)"
+                 symbolActiveColor =  "rgba(142, 124, 195, 0.59)"
+                 news = {["headlines"]}
+                 studies = {["BB@tv-basicstudies"]}
+              />
+
           </div>
         </body>
       </div>
