@@ -194,9 +194,12 @@ class Navbar extends PureComponent {
         </li>
       </ul>
     )
-    return (
-      <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+
+
+
+
+{  /*    <div>
+        <nav class="navbar">
           <img
             className="logo-ssdb"
             src="images/white-logo.png"
@@ -235,9 +238,62 @@ class Navbar extends PureComponent {
 
           </div>
         </nav>
+      </div> */}
+
+
+
+
+
+    return (
+      <div className="login-navbar">
+        <a href="http://localhost:3000/">
+          <img
+            src="images/sentstockdb.png"
+            alt="banana tax logo in black"
+            className="login-imgnav"
+          />
+        </a>
+        <div className="lir-div">
+          <Link to={ROUTES.INDEX} className="login-itemr sign-in-box">
+            Sign In
+          </Link>
+
+          <Link
+            to={ROUTES.INDEX}
+            className= 'login-itemr'
+          >
+           Home
+          </Link>
+
+          <Link
+            to={ROUTES.BUY}
+            className=
+               'login-itemr'
+          >
+            Review
+          </Link>
+
+          <Link
+            to={ROUTES.BUY}
+            className=
+               'login-itemr'
+          >
+            Predict
+          </Link>
+
+          <Link
+            to={ROUTES.BUY}
+            className=
+               'login-itemr'
+          >
+            Methods
+          </Link>
+        </div>
       </div>
     )
   }
 }
 
 export default Navbar
+
+

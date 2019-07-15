@@ -109,11 +109,30 @@ class App extends Component<void> {
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"
           />
-          <img class="img-responsive" src="images/home.jpg" alt="Graphic" />
+          {//<img class="img-responsive" src="images/home.jpg" alt="Graphic" />
+          }
           <h1>Take sentiment now to predict stocks then.</h1>
 
           <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget" />
+            {
+              //<div dangerouslySetInnerHTML={createMarkup()}></div>
+            }
+            <div className="bnt-div">
+            <p className= "bold-new-take">A <b>Bold</b> New Take on Sentiment</p>
+            </div>
+              <TradingViewWidget
+                className = "trading-widget-react"
+                symbol="NASDAQ:AAPL"
+                theme={Themes.LIGHT}
+                interval = {IntervalTypes.W}
+                style = {BarStyles.HOLLOW_CANDLES}
+                width =  "1500"
+                height =  "800"
+                 news = {["headlines"]}
+                 studies = {["BB@tv-basicstudies"]}
+              />
+
             <div class="tradingview-widget-copyright">
               <a
                 href="https://www.tradingview.com"
@@ -124,28 +143,6 @@ class App extends Component<void> {
               </a>{' '}
               by TradingView
             </div>
-
-            {
-              //<div dangerouslySetInnerHTML={createMarkup()}></div>
-            }
-
-              <TradingViewWidget
-                symbol="NASDAQ:AAPL"
-                theme={Themes.DARK}
-                interval = {IntervalTypes.W}
-                style = {BarStyles.HOLLOW_CANDLES}
-                width =  "800"
-                height =  "730"
-                  plotLineColorGrowing =  "rgba(103, 78, 167, 1)"
-                  plotLineColorFalling =  "rgba(103, 78, 167, 1)"
-                  gridLineColor =  "rgba(242, 242, 242, 0.61)"
-                  scaleFontColor =  "rgba(238, 238, 238, 1)"
-                  belowLineFillColorGrowing =  "rgba(142, 124, 195, 0.26)"
-                  belowLineFillColorFalling =  "rgba(180, 167, 214, 0.23)"
-                 symbolActiveColor =  "rgba(142, 124, 195, 0.59)"
-                 news = {["headlines"]}
-                 studies = {["BB@tv-basicstudies"]}
-              />
 
           </div>
         </body>

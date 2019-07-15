@@ -1,44 +1,57 @@
 body {
-    background-color: #625489 !important;
+    background-color: #FFFFFF !important;
 }
 
-h1 {
-    position: absolute !important;
-    display: block !important;
-    margin-top: 35% !important;
-    font-size: 30px !important;
-    margin-left: 43% !important;
-    color: white !important;
-    text-shadow: 2px 2px 8px black !important;
- }
 
-.row {
+.trading-widget-react {
+    float: left !important;
+    margin-left: 0px;
+    margin-top: 30% !important;
+    top: 50% !important;
+}
+
+.img-responsive {
+    position: relative;
+    top: 50%;
+    right: 50%;
+}
+
+.blue-text {
+    top: 0% !important;
+      justify-content: center;
+    left: 50% !important;
+}
+
+
+* {
+  font-family: 'Helvetica', 'Arial';
+  margin-bottom: 0px !important;
+   }
+
+
+.tradingview-widget-container {
     margin-top: 5% !important;
 }
 
+.bold-new-take {
+   font-size: 36px;
+   font-family: 'Helvetica', 'Arial';
+   margin-top: -3% !important;
 
-
-header {
-    background: #152637 !important;
-}
-
-.example-one-header {
-    border-radius: 3px !important;
-}
-
-.scroll-nav-item {
-    padding: 12px 25px 13px !important;
-    cursor: pointer !important;
-}
-
-.scroll-nav-item:not(:last-child) {
-    border-right: 1px solid rgba(114,124,135,0.2) !important;
 }
 
 
-
-.tradingview-widget-copyright{
-	position: relative;
-    top: 735px;
-    right:  735px;
+.bold-new-take b {
+    font-family: 'Helvetica', 'Arial';
+    text-shadow: 1px .5px #0018a8;
 }
+
+.bnt-div {  height: 1%;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10%;
+}
+
