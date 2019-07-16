@@ -81,8 +81,6 @@ export default class Buy extends Component {
             </button>
             </div>
           </form>
-
-
         </div>
       </div>
     )
