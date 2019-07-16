@@ -246,15 +246,15 @@ class Navbar extends PureComponent {
 
     return (
       <div className="login-navbar">
-        <a href="http://localhost:3000/">
+        <Link to={ROUTES.INDEX}>
           <img
             src="images/sentstockdb.png"
             alt="banana tax logo in black"
             className="login-imgnav"
           />
-        </a>
+        </Link>
         <div className="lir-div">
-          <Link to={ROUTES.INDEX} className="login-itemr sign-in-box">
+          <Link to={ROUTES.INDEX} className="sign-in-box">
             Sign In
           </Link>
 
@@ -282,7 +282,7 @@ class Navbar extends PureComponent {
           </Link>
 
           <Link
-            to={ROUTES.BUY}
+            to={ROUTES.METHODS}
             className=
                'login-itemr'
           >

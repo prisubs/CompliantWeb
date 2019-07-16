@@ -5,7 +5,7 @@ import './../styles/styles.css'
 import { FieldGroup } from './'
 import { ROUTES } from './../'
 import {Helmet} from "react-helmet";
-
+import Particles from 'react-particles-js';
 import TradingViewWidget,  { Themes, IntervalTypes, BarStyles} from 'react-tradingview-widget';
 
 
@@ -146,6 +146,42 @@ class App extends Component<void> {
 
           </div>
         </body>
+        { /*
+            <Particles className = "particle-canvas"  params={{
+         "polygon" : {
+            "draw": {
+                "enable": true,
+                "stroke": {
+                    "color": {
+                    "value" : "#000000"
+                    }
+                }
+            }
+         },
+
+	    "particles": {
+	        "number": {
+	            "value": 50
+	        },
+	        "size": {
+	            "value": 3
+	        },
+	        "color": {
+               "value" : "#000000"
+           }
+	    },
+
+	    "interactivity": {
+	        "events": {
+	            "onhover": {
+	                "enable": true,
+	                "mode": "repulse"
+	            }
+	        }
+	    }
+	}} />
+	*/
+	}
       </div>
     )
   }

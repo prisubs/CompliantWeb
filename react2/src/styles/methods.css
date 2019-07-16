@@ -1,0 +1,32 @@
+.hiw-tab {
+  margin-left: 200px;
+  margin-bottom: 50px;
+  padding-top: 80px;
+  padding-bottom: 35px;
+  font-family: Avenir, "Trebuchet MS", Arial, sans-serif;
+  color: #4b4f54;
+  font-size: 30px;
+  background-color: #FFFFFF;
+}
+
+.tab-tw {
+  background-color: #ffffff;
+  height: auto;
+  box-shadow: 0 1px 12px 0 rgba(177, 177, 177, 0.5);
+  z-index: -1;
+  margin-left: 0px;
+  padding-top: 61px;
+  padding-left: 200px;
+  padding-right: 212px;
+  font-size: 17px;
+  padding-bottom: 20px;
+  color: #6b6b6b;
+}
+
+.btw-footer {
+  margin-top: 500px;
+  padding-right: 500px;
+  padding-left: 500px;
+  color: #757575;
+  text-align: center;
+}

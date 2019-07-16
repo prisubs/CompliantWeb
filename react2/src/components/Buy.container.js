@@ -1,18 +1,18 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { loadUser } from './../actions'
-import App from './App.component'
+import { getTicker } from './../actions'
+import Buy from './Buy.component'
 
 function mapStateToProps(state) {
   return {
-    ...state.login
+    ...state.tickerObject
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      loadUser
+      getTicker
     },
     dispatch
   )
@@ -21,4 +21,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(Buy)

@@ -9,14 +9,17 @@ import { Route } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
 
 import configureStore, { history } from './store/configureStore'
-import { App, Buy, NavBar } from './components'
+import { App, Buy, NavBar, Methods, OurWay } from './components'
 import registerServiceWorker from './registerServiceWorker'
 //import './styles/index.css'
 
 export const ROUTES = {
   INDEX: '/',
-  BUY: '/review'
+  BUY: '/review',
+  METHODS: '/methods',
+  OURWAY: '/ourway'
 }
+
 const store = configureStore()
 
 ReactDOM.render(
@@ -26,6 +29,10 @@ ReactDOM.render(
         <NavBar />
         <Route exact path="/" component={App} />
         <Route exact path={ROUTES.BUY} component={Buy} />
+        <Route exact path={ROUTES.METHODS} component={Methods} />
+        <Route exact path={ROUTES.OURWAY} component={OurWay} />
+        {//<Route exact path={ROUTES.HOME} component={Home} />
+        }
       </div>
     </ConnectedRouter>
   </Provider>,

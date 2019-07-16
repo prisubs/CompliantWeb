@@ -64,11 +64,34 @@
 
 
 .lir-div {
-  margin-right: 160px;
+  margin-right: -2% !important;
   margin-top: 6px; }
 
 .login-itemr {
   float: right;
+  display: inline;
+  font-size: 15px;
+  color: #4b4f54;
+  text-align: center;
+  margin-right: 20px;
+  padding-top: 13px;
+  font-family: 'Helvetica', 'Arial';
+  z-index: 100;
+  line-height: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 13px;
+  border-radius: 8px;
+  text-decoration: none; }
+
+.login-itemr-selected {
+  border-bottom: 10px solid #0018a8; }
+
+.sign-in-box {
+  border: 1px solid #979797;
+  border-radius: 2px;
+  padding-bottom: 0px;
+    float: right;
   display: inline;
   font-size: 15px;
   color: #4b4f54;
@@ -80,16 +103,8 @@
   line-height: 25px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-bottom: 10px;
-  text-decoration: none; }
-
-.login-itemr-selected {
-  border-bottom: 10px solid #0018a8; }
-
-.sign-in-box {
-  border: 1px solid #979797;
-  border-radius: 2px;
-  padding-bottom: 0px; }
+  text-decoration: none;
+  }
 
 .login-itemr:hover, .login-itemr:visited, .login-itemr:link, .login-itemr:active {
   text-decoration: none !important;
