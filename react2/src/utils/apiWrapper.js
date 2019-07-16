@@ -5,9 +5,7 @@ const REQUEST_METHODS = {
   DELETE: 'delete'
 }
 
-
 const TICKER_URL = 'ticker-get'
-
 
 /*
  * Helper function that calls the endpoint on the backend
@@ -15,7 +13,6 @@ const TICKER_URL = 'ticker-get'
  * @param {string} endpoint : url of the endpoint
  * @param {object} payload : json body of the request
  */
-
 
 function createRequestSentStock(method, endpoint, payload, token) {
   return fetch(`${'/api'}/${endpoint}`, {
@@ -30,13 +27,12 @@ function createRequestSentStock(method, endpoint, payload, token) {
   })
 }
 
-
 export function getTicker(tickerObject) {
   console.log(tickerObject)
   return createRequestSentStock(
     REQUEST_METHODS.POST,
     TICKER_URL,
-      JSON.stringify({
+    JSON.stringify({
       date: tickerObject.date,
       ticker: tickerObject.ticker
     })

@@ -245,5 +245,3 @@ def run_model(df, model_path):
     return Y_predicted.tolist(), Y_test.tolist()
 
 
-a, b, c, d, e, f, g = past_runner("db", "2019-02-11")
-pretty_print(a, b, c, d, e, f, g)
