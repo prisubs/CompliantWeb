@@ -19,10 +19,15 @@ def initial():
 def ticker_get():
     if request.method == 'POST':
         data = request.get_json()
-        response = "testing testing 1 2 3"
-        a, b, c, d, e, f, g = backy.past_runner("aapl", "2019-05-05")
+        date, ticker = clean_inputs(data["date"], data["ticker"])
+        a, b, c, d, e, f, g = backy.past_runner(ticker, date)
         backy.pretty_print(a, b, c, d, e, f, g)
         return redirect('/')
+
+def clean_inputs(date, ticker):
+    date = str(date)[0:10]
+    ticker = str(ticker)
+    return date, ticker
 
 if __name__ == '__main__':
     app.run(debug = True)
