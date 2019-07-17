@@ -13,7 +13,8 @@ export default class Buy extends Component {
   state = {
     date: new Date(),
     ticker: '',
-    rating: 'NULL'
+    rating: 'NULL',
+    arrayvar: []
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -26,7 +27,7 @@ export default class Buy extends Component {
 
   onSubmit = event => {
     event.preventDefault()
-    const { date, ticker, rating } = this.state
+    const { date, ticker, rating, arrayvar } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
     var x = this.props
@@ -41,7 +42,13 @@ export default class Buy extends Component {
         this.setState({
           rating: all_json['rating']
         })
+
+        this.setState({
+          arrayvar: [...this.state.arrayvar, all_json['good_headlines']]
+        })
+
         console.log(this.state.rating)
+        console.log(this.state.arrayvar)
       })
 
     console.log(x)
@@ -81,6 +88,22 @@ export default class Buy extends Component {
   handleRedirect = () => {}
 
   handleFailure = () => {}
+
+  createTable = () => {
+    let table = []
+
+    // Outer loop to create parent
+    for (let i = 0; i < 3; i++) {
+      let children = []
+      //Inner loop to create children
+      for (let j = 0; j < this.state.arrayvar.length; j++) {
+        children.push(<td>{this.state.arrayvar[j]}</td>)
+      }
+      //Create the parent and add the children
+      table.push(<tr>{children}</tr>)
+    }
+    return table
+  }
 
   render() {
     return (
@@ -126,6 +149,8 @@ export default class Buy extends Component {
               <span> {this.state.rating} </span>
             </div>
           </form>
+
+          <table class="table table-striped">{this.createTable()}</table>
         </div>
       </div>
     )
