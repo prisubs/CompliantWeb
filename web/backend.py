@@ -8,6 +8,7 @@ import indicoio
 from textblob import TextBlob
 import _pickle as cPickle
 import math
+import sys
 
 
 # This function returns prediction for a specific date and range in the FUTURE.
@@ -23,23 +24,23 @@ def past_runner(ticker, date):
     headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
     news_category = make_category(good_count, bad_count)
-    return rating, abs(delta), good_count, good_headlines, bad_count, bad_headlines, news_category
+    return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category
 
 
 # just for testing
 def pretty_print(a, b, c, d, e, f, g):
-    print("RATING: {0} \n{1}".format(a, b))
-    print("{0} good headlines:".format(c))
+    print("RATING: {0} \n{1}".format(a, b), file=sys.stderr)
+    print("{0} good headlines:".format(c), file=sys.stderr)
     printlist(d)
-    print("{0} bad headlines:".format(e))
+    print("{0} bad headlines:".format(e), file=sys.stderr)
     printlist(f)
-    print("news rating: {0}".format(g))
+    print("news rating: {0}".format(g), file=sys.stderr)
     return
 
 
 def printlist(lis):
     for l in lis:
-        print("     " + str(l))
+        print("     " + str(l), file=sys.stderr)
 
 
 # display functions
