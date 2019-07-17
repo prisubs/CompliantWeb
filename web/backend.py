@@ -15,6 +15,20 @@ import sys
 def future_runner(ticker, day=False, week=False):
     return
 
+'''
+[INPUT]
+ticker: 4-5 digit ticker on nyse [STRING]
+date: yyyy-mm-dd formatted datestring [STRING]
+
+[OUTPUT]
+rating: BUY or SELL [String]
+delta: "TICKER went down by AMOUNT." [String]
+good_count: amount of good headlines out of 100 [Int]
+good_headlines: sampling of five good headlines [List<String>]
+bad_count: amount of bad headlines out of 100 [Int]
+bad_headlines: sampling of five bad headlines [List<String>]
+news_category: GOOD or OKAY or BAD [String]
+'''
 
 # This function returns all analysis for a specific date in the PAST.
 def past_runner(ticker, date):

@@ -37,11 +37,6 @@ def ticker_get():
         return redirect('/')
     '''
 
-
-
-
-
-
 def clean_inputs(date, ticker):
     date = str(date)[0:10]
     ticker = str(ticker)
