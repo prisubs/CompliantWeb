@@ -12,7 +12,8 @@ import './../styles/review.css'
 export default class Buy extends Component {
   state = {
     date: new Date(),
-    ticker: ''
+    ticker: '',
+    rating: 'NULL'
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -25,10 +26,56 @@ export default class Buy extends Component {
 
   onSubmit = event => {
     event.preventDefault()
-    const { date, ticker } = this.state
+    const { date, ticker, rating } = this.state
     const tickerObject = { date: date, ticker: ticker }
-    this.props.getTicker(tickerObject, this.handleRedirect, this.handleFailure)
-    this.props.postTicker()
+    let all_json
+    var x = this.props
+      .getTicker(tickerObject, this.handleRedirect, this.handleFailure)
+      .then(responseJSON => {
+        // do stuff with responseJSON here...
+        console.log(responseJSON)
+        all_json = responseJSON
+        console.log('this is gonna be all json')
+        console.log(all_json)
+        console.log('THIS IS THE END OF ALL JSON!!!')
+        this.setState({
+          rating: all_json['rating']
+        })
+        console.log(this.state.rating)
+      })
+
+    console.log(x)
+
+    /*
+      console.error("yaaaaaaaaaaaaaaaaaaaaaaaah boi1")
+    event.preventDefault()
+    const { date, ticker, rating} = this.state
+    const tickerObject = { date: date, ticker: ticker }
+    let json_rating = [];
+    json_rating = this.props.getTicker(tickerObject, this.handleRedirect, this.handleFailure)
+    setTimeout( function(){
+
+
+            console.error("yaaaaaaaaaaaaaaaaaaaaaaaah boi2")
+    console.error(json_rating)
+    let json_rating_two;
+    json_rating.then(result => json_rating_two)
+    console.error("JSON RATING TWO")
+    while(typeof json_rating_two == 'undefined') {
+        console.error("waiting for a response")
+    }
+    console.error("final json value:")
+    console.error(json_rating_two)
+     this.setState({
+      rating: json_rating_two['rating']
+    })
+    console.log("THIS IS THE RATING BOIII")
+    console.log(this.state.rating)
+
+
+     }.bind(this), 5000);
+    */
+    //this.props.postTicker()
   }
 
   handleRedirect = () => {}
@@ -73,6 +120,10 @@ export default class Buy extends Component {
               >
                 Submit
               </button>
+              <hr />
+              <hr />
+              <span> YOU SHOULD PROBABLY </span>
+              <span> {this.state.rating} </span>
             </div>
           </form>
         </div>
