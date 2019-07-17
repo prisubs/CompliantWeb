@@ -104,7 +104,29 @@ export default class Buy extends Component {
     }
     return table
   }
-
+  createUShould = () => {
+    let ushould
+    if (this.state.rating === 'BUY') {
+      ushould = (
+        <span className="you-should-probably-green">
+          YOU SHOULD PROBABLY {this.state.rating}{' '}
+        </span>
+      )
+    } else if (this.state.rating === 'SELL') {
+      ushould = (
+        <span className="you-should-probably-red">
+          YOU SHOULD PROBABLY {this.state.rating}{' '}
+        </span>
+      )
+    } else {
+      ushould = (
+        <span className="you-should-probably">
+          YOU SHOULD PROBABLY {this.state.rating}{' '}
+        </span>
+      )
+    }
+    return ushould
+  }
   render() {
     return (
       <div className="center-review-div">
@@ -145,16 +167,7 @@ export default class Buy extends Component {
               </button>
               <hr />
               <hr />
-              <span
-                className={
-                  this.state.rating === 'BUY'
-                    ? 'you-should-probably-green'
-                    : 'you-should-probably-red'
-                }
-              >
-                {' '}
-                YOU SHOULD PROBABLY {this.state.rating}{' '}
-              </span>
+              {this.createUShould()}
             </div>
           </form>
 

@@ -110,11 +110,16 @@ body {
 .you-should-probably-green {
   font-size: 36px;
   font-family: Helvetica, sans-serif;
-  color: 'green';
+  color: green;
 }
 
 .you-should-probably-red {
   font-size: 36px;
   font-family: Helvetica, sans-serif;
-  color: 'red';
+  color: red;
+}
+
+.you-should-probably-red {
+  font-size: 36px;
+  font-family: Helvetica, sans-serif;
 }
