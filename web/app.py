@@ -15,14 +15,29 @@ def initial():
     return render_template('homepage.html')
 
 
+rating = 0
+
+
 @app.route('/ticker-get', methods = ['GET', 'POST'])  
 def ticker_get():
     if request.method == 'POST':
         data = request.get_json()
         date, ticker = clean_inputs(data["date"], data["ticker"])
         a, b, c, d, e, f, g = backy.past_runner(ticker, date)
+        global rating
+        rating = a
         backy.pretty_print(a, b, c, d, e, f, g)
         return redirect('/')
+    elif request.method == 'GET':
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", file=sys.stderr)
+        print(str(rating), file=sys.stderr)
+        return redirect('/')
+
+
+
+
+
+
 
 def clean_inputs(date, ticker):
     date = str(date)[0:10]

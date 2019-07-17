@@ -1,7 +1,3 @@
-import {
-    getTicker
-} from './login.action'
+import { getTicker, postTicker } from './login.action'
 
-export {
-  getTicker
-}
+export { getTicker, postTicker }

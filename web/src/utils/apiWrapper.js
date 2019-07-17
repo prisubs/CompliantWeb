@@ -1,8 +1,6 @@
 const REQUEST_METHODS = {
   GET: 'get',
-  POST: 'post',
-  PUT: 'put',
-  DELETE: 'delete'
+  POST: 'post'
 }
 
 const TICKER_URL = 'ticker-get'
@@ -37,4 +35,8 @@ export function getTicker(tickerObject) {
       ticker: tickerObject.ticker
     })
   )
+}
+
+export function postTicker() {
+  return createRequestSentStock(REQUEST_METHODS.GET, TICKER_URL)
 }

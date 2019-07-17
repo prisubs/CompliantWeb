@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getTicker } from './../actions'
+import { getTicker, postTicker } from './../actions'
 import Buy from './Buy.component'
 
 function mapStateToProps(state) {
@@ -12,7 +12,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getTicker
+      getTicker,
+      postTicker
     },
     dispatch
   )
