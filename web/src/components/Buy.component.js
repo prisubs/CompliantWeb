@@ -145,8 +145,16 @@ export default class Buy extends Component {
               </button>
               <hr />
               <hr />
-              <span> YOU SHOULD PROBABLY </span>
-              <span> {this.state.rating} </span>
+              <span
+                className={
+                  this.state.rating === 'BUY'
+                    ? 'you-should-probably-green'
+                    : 'you-should-probably-red'
+                }
+              >
+                {' '}
+                YOU SHOULD PROBABLY {this.state.rating}{' '}
+              </span>
             </div>
           </form>
 
