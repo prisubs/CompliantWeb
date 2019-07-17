@@ -11,9 +11,25 @@ import math
 import sys
 
 
-# This function returns prediction for a specific date and range in the FUTURE.
+'''
+[INPUT]
+ticker: 4-5 digit ticker on nyse [STRING]
+day: whether prediction is for the next day [BOOLEAN]
+week: whether prediction is for the next week [BOOLEAN]
+
+[OUTPUT]
+rating: BUY or SELL [String]
+predicted_price: our prediction on next period's price [FLOAT]
+good_count: amount of good headlines out of 100 for specified period[Int]
+bad_count: amount of bad headlines out of 100 for specified period [Int]
+aggregated_sentiment: combination of all five features to give insight into backend prediction process [FLOAT]
+'''
 def future_runner(ticker, day=False, week=False):
-    return
+    rating = ...
+    predicted_price = ...
+    good_count, bad_count = ...
+    aggregated_sentiment = ...
+    return rating, predicted_price, good_count, bad_count, aggregated_sentiment
 
 '''
 [INPUT]
@@ -29,8 +45,6 @@ bad_count: amount of bad headlines out of 100 [Int]
 bad_headlines: sampling of five bad headlines [List<String>]
 news_category: GOOD or OKAY or BAD [String]
 '''
-
-# This function returns all analysis for a specific date in the PAST.
 def past_runner(ticker, date):
     df = pipeline(ticker, date)
     predicted_delta, actual_delta = run_model(df, "data/logistic.pkl")
@@ -41,7 +55,25 @@ def past_runner(ticker, date):
     return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category
 
 
-# just for testing
+'''
+**************** UTILITY FUNCTIONS ****************
+pretty_print: takes inputs from past_runner, outputs them for testing
+printlist: pretty prints a list of strings
+find_delta: outputs a formatted string for stock movement
+translate_delta: changes label into a buy/sell rating
+make_category: transforms good/bad headline counts into a status string
+classify_headlines: returns counts and samples for a single date's headlines
+single_headlines: processes one headline
+impute: performs normalization prior to logistic regression
+good_bag/bad_bag: creates bag of words features from word lists and text corpus
+aggregate_jsons: turns a response from tiingo client into a corpus
+pickle_down: unpickles a model to be run on user query
+six_days: calculates end date of a week from a date
+remove_time: formats a string in yyyy-mm-dd style
+pipeline: transforms a single date and row into observation for feature matrix
+multi_row_pipeline: computes entire feature matrix
+run_model: runs logistic regression
+'''
 def pretty_print(a, b, c, d, e, f, g):
     print("RATING: {0} \n{1}".format(a, b), file=sys.stderr)
     print("{0} good headlines:".format(c), file=sys.stderr)
