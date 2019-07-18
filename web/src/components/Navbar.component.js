@@ -50,7 +50,7 @@ class Navbar extends PureComponent {
         <a href="http://localhost:3000/">
           <img
             src="images/white-logo.png"
-            alt="banana tax logo in black"
+            alt="priyanka install the frickin driver smh"
             className="login-imgnav"
           />
         </a>
@@ -195,10 +195,8 @@ class Navbar extends PureComponent {
       </ul>
     )
 
-
-
-
-{  /*    <div>
+    {
+      /*    <div>
         <nav class="navbar">
           <img
             className="logo-ssdb"
@@ -238,11 +236,8 @@ class Navbar extends PureComponent {
 
           </div>
         </nav>
-      </div> */}
-
-
-
-
+      </div> */
+    }
 
     return (
       <div className="login-navbar">
@@ -258,34 +253,19 @@ class Navbar extends PureComponent {
             Sign In
           </Link>
 
-          <Link
-            to={ROUTES.INDEX}
-            className= 'login-itemr'
-          >
-           Home
+          <Link to={ROUTES.INDEX} className="login-itemr">
+            Home
           </Link>
 
-          <Link
-            to={ROUTES.BUY}
-            className=
-               'login-itemr'
-          >
+          <Link to={ROUTES.BUY} className="login-itemr">
             Review
           </Link>
 
-          <Link
-            to={ROUTES.BUY}
-            className=
-               'login-itemr'
-          >
+          <Link to={ROUTES.BUY} className="login-itemr">
             Predict
           </Link>
 
-          <Link
-            to={ROUTES.METHODS}
-            className=
-               'login-itemr'
-          >
+          <Link to={ROUTES.METHODS} className="login-itemr">
             Methods
           </Link>
         </div>
@@ -295,5 +275,3 @@ class Navbar extends PureComponent {
 }
 
 export default Navbar
-
-

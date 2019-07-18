@@ -198,11 +198,10 @@ export default class Buy extends Component {
     if (goodcountlocal != 0) {
       pie = (
         <VictoryPie
-          colorScale={['cyan', 'tomato']}
-          cornerRadius={12}
+          colorScale={['green', 'tomato']}
           height={199}
           style={{
-            labels: { fill: 'black', fontSize: 10, fontWeight: 'bold' }
+            labels: { fill: 'black', fontSize: 10 }
           }}
           data={[
             { x: 'Good Headlines', y: this.state.goodcount },
@@ -265,10 +264,11 @@ export default class Buy extends Component {
     } else {
       form = (
         <div>
-          {this.createUShould()}
-
           <div class="divSquare">
-            <div className="pie-div">{pie}</div>
+            <div className="align-sq">
+              {this.createUShould()}
+              <div>{pie}</div>
+            </div>
           </div>
 
           <div class="divSquare">{this.createCountGoodBad()}</div>
@@ -276,23 +276,28 @@ export default class Buy extends Component {
           <div className="simple-clear"></div>
 
           <div class="divSquare">
-            <table class="table table-striped">{this.createTable()}</table>
+            <div className="align-sq">
+              <table class="table table-striped">{this.createTable()}</table>
+            </div>
           </div>
 
           <div class="divSquare">
-            <Thermometer
-              theme="light"
-              value={
-                100 *
-                (this.state.goodcount /
-                  (this.state.goodcount + this.state.badcount))
-              }
-              max="100"
-              steps="3"
-              format="°"
-              size="large"
-              height="300"
-            />
+            <div className="align-sq">
+              <Thermometer
+                theme="light"
+                value={
+                  100 *
+                  (this.state.goodcount /
+                    (this.state.goodcount + this.state.badcount))
+                }
+                max="100"
+                steps="3"
+                format="°"
+                size="large"
+                height="300"
+                className="thermo"
+              />
+            </div>
           </div>
         </div>
       )
