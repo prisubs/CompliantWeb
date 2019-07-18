@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getTicker, postTicker } from './../actions'
-import Buy from './Buy.component'
+import Review from './Review.component'
 
 function mapStateToProps(state) {
   return {
@@ -22,4 +22,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Buy)
+)(Review)

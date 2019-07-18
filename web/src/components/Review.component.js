@@ -11,7 +11,7 @@ import Thermometer from 'react-thermometer-component'
 // import { StripeProvider } from 'react-stripe-elements'
 import './../styles/review.css'
 
-export default class Buy extends Component {
+export default class Review extends Component {
   state = {
     date: new Date(),
     ticker: '',

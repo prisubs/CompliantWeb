@@ -73,7 +73,7 @@ class Navbar extends PureComponent {
           </Link>
 
           <Link
-            to={ROUTES.BUY}
+            to={ROUTES.REVIEW}
             className={
               this.props.location.pathname === ROUTES.INDEX
                 ? 'login-itemr login-itemr-selected'
@@ -257,11 +257,11 @@ class Navbar extends PureComponent {
             Home
           </Link>
 
-          <Link to={ROUTES.BUY} className="login-itemr">
+          <Link to={ROUTES.REVIEW} className="login-itemr">
             Review
           </Link>
 
-          <Link to={ROUTES.BUY} className="login-itemr">
+          <Link to={ROUTES.REVIEW} className="login-itemr">
             Predict
           </Link>
 
