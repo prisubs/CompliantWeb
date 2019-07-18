@@ -14,7 +14,8 @@ export default class Buy extends Component {
     date: new Date(),
     ticker: '',
     rating: 'NULL',
-    arrayvar: []
+    arrayvar: [],
+    badheadlines: []
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -27,7 +28,7 @@ export default class Buy extends Component {
 
   onSubmit = event => {
     event.preventDefault()
-    const { date, ticker, rating, arrayvar } = this.state
+    const { date, ticker, rating, arrayvar, badheadlines } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
     var x = this.props
@@ -44,11 +45,21 @@ export default class Buy extends Component {
         })
 
         this.setState({
-          arrayvar: [...this.state.arrayvar, all_json['good_headlines']]
+          arrayvar: [...this.state.arrayvar, ...all_json['good_headlines']]
+        })
+
+        this.setState({
+          badheadlines: [
+            ...this.state.badheadlines,
+            ...all_json['bad_headlines']
+          ]
         })
 
         console.log(this.state.rating)
-        console.log(this.state.arrayvar)
+        console.log('Number of good headlines is')
+        console.log(this.state.arrayvar.length)
+        console.log('Number of bad headlines is')
+        console.log(this.state.badheadlines.length)
       })
 
     console.log(x)
@@ -91,17 +102,37 @@ export default class Buy extends Component {
 
   createTable = () => {
     let table = []
-
+    table.push(
+      <thead>
+        {' '}
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Good Headlines</th>
+          <th scope="col">Bad Headlines</th>
+        </tr>
+      </thead>
+    )
     // Outer loop to create parent
-    for (let i = 0; i < 3; i++) {
+    let table_subroutine = []
+    for (
+      let i = 0;
+      i < Math.max(this.state.arrayvar.length, this.state.badheadlines.length);
+      i++
+    ) {
       let children = []
       //Inner loop to create children
-      for (let j = 0; j < this.state.arrayvar.length; j++) {
-        children.push(<td>{this.state.arrayvar[j]}</td>)
+      children.push(<th scope="row">{i}</th>)
+      if (i < this.state.arrayvar.length) {
+        children.push(<td>{this.state.arrayvar[i]}</td>)
+      }
+
+      if (i < this.state.badheadlines.length) {
+        children.push(<td>{this.state.badheadlines[i]}</td>)
       }
       //Create the parent and add the children
-      table.push(<tr>{children}</tr>)
+      table_subroutine.push(<tr>{children}</tr>)
     }
+    table.push(<tbody>{table_subroutine}</tbody>)
     return table
   }
   createUShould = () => {

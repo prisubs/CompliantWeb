@@ -17,19 +17,21 @@ def initial():
 
 ratingvar = "NULL"
 goodheadlines = "NULL"
-
+badheadlines = "NULL"
 @app.route('/ticker-get', methods = ['GET', 'POST'])  
 def ticker_get():
     if request.method == 'POST':
         data = request.get_json()
         date, ticker = clean_inputs(data["date"], data["ticker"])
-        ratingone, delta, good_count, good_headlinesone, bad_count, bad_headlines, news_category = backy.past_runner(ticker, date)
+        ratingone, delta, good_count, good_headlinesone, bad_count, bad_headlinesone, news_category = backy.past_runner(ticker, date)
         global ratingvar
         ratingvar = ratingone
         global goodheadlines
         goodheadlines = good_headlinesone
-        backy.pretty_print(ratingone, delta, good_count, good_headlinesone, bad_count, bad_headlines, news_category)
-        return jsonify(rating=ratingvar, good_headlines=goodheadlines)
+        global badheadlines
+        badheadlines = bad_headlinesone
+        backy.pretty_print(ratingone, delta, good_count, good_headlinesone, bad_count, bad_headlinesone, news_category)
+        return jsonify(rating=ratingvar, good_headlines=goodheadlines, bad_headlines = badheadlines)
 
 
 
