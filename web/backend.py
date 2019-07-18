@@ -57,6 +57,7 @@ def past_runner(ticker, date):
 
 '''
 **************** UTILITY FUNCTIONS ****************
+make_alias: turns a ticker into its full name, sector, and industry in a list
 pretty_print: takes inputs from past_runner, outputs them for testing
 printlist: pretty prints a list of strings
 find_delta: outputs a formatted string for stock movement
@@ -74,6 +75,12 @@ pipeline: transforms a single date and row into observation for feature matrix
 multi_row_pipeline: computes entire feature matrix
 run_model: runs logistic regression
 '''
+def make_alias(ticker):
+    tickers = pd.read_csv("data/ticker_translate.csv")
+    ticker = ticker.upper()
+    data = tickers.loc[tickers["Ticker"] == ticker, ["Name", "Sector", "Industry"]]
+    return data.values.tolist()[0] # name, sector, industry
+
 def pretty_print(a, b, c, d, e, f, g):
     print("RATING: {0} \n{1}".format(a, b), file=sys.stderr)
     print("{0} good headlines:".format(c), file=sys.stderr)
