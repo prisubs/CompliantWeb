@@ -166,13 +166,13 @@ export default class Review extends Component {
     } else if (this.state.rating === 'SELL') {
       ushould = (
         <span className="you-should-probably-red">
-          YOU SHOULD PROBABLY {this.state.rating}{' '}
+          You should probably {this.state.rating.toLowerCase()}{' '}
         </span>
       )
     } else {
       ushould = (
         <span className="you-should-probably">
-          YOU SHOULD PROBABLY {this.state.rating}{' '}
+          You should probably {this.state.rating.toLowerCase()}{' '}
         </span>
       )
     }
