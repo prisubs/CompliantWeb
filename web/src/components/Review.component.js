@@ -160,19 +160,21 @@ export default class Review extends Component {
     if (this.state.rating === 'BUY') {
       ushould = (
         <span className="you-should-probably-green">
-          YOU SHOULD PROBABLY {this.state.rating}{' '}
+          You should {this.state.rating.toLowerCase()}, most of the news is
+          positive{' '}
         </span>
       )
     } else if (this.state.rating === 'SELL') {
       ushould = (
         <span className="you-should-probably-red">
-          You should probably {this.state.rating.toLowerCase()}{' '}
+          You should {this.state.rating.toLowerCase()}, most of the news is
+          negative{' '}
         </span>
       )
     } else {
       ushould = (
         <span className="you-should-probably">
-          You should probably {this.state.rating.toLowerCase()}{' '}
+          {this.state.rating.toLowerCase()}{' '}
         </span>
       )
     }
@@ -198,14 +200,15 @@ export default class Review extends Component {
     if (goodcountlocal != 0) {
       pie = (
         <VictoryPie
-          colorScale={['green', 'tomato']}
-          height={199}
           style={{
-            labels: { fill: 'black', fontSize: 10 }
+            labels: { fill: 'black', fontSize: 20, fontWeight: 'bold' }
           }}
+          colorScale={['green', 'tomato']}
+          innerRadius={100}
+          height={350}
           data={[
-            { x: 'Good Headlines', y: this.state.goodcount },
-            { x: 'Bad Headlines', y: this.state.badcount }
+            { x: '+', y: this.state.goodcount },
+            { x: '-', y: this.state.badcount }
           ]}
         />
       )
@@ -263,9 +266,9 @@ export default class Review extends Component {
       )
     } else {
       form = (
-        <div>
+        <div class="div-sq-master">
           <div class="divSquare">
-            <div className="align-sq">
+            <div className="align-sq-pie">
               {this.createUShould()}
               <div>{pie}</div>
             </div>
@@ -277,7 +280,9 @@ export default class Review extends Component {
 
           <div class="divSquare">
             <div className="align-sq">
-              <table class="table table-striped">{this.createTable()}</table>
+              <table class="table table-striped table-bordered personaltable">
+                {this.createTable()}
+              </table>
             </div>
           </div>
 
@@ -291,10 +296,9 @@ export default class Review extends Component {
                     (this.state.goodcount + this.state.badcount))
                 }
                 max="100"
-                steps="3"
                 format="°"
                 size="large"
-                height="300"
+                height="450"
                 className="thermo"
               />
             </div>

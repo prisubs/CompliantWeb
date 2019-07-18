@@ -125,13 +125,13 @@ body {
 }
 
 .pie-div {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
 }
 
 .divSquare {
-  width: 48%;
-  height: 500px;
+  width: 40%;
+  height: 400px;
   margin: 4px;
   border: 0.5px solid #808080;
   border-radius: 5px;
@@ -150,7 +150,26 @@ body {
 }
 
 .align-sq {
-  margin: auto !important;
   align-items: center !important;
+  margin: auto !important;
   display: inline-block;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.align-sq-pie {
+  align-items: center !important;
+  margin: auto !important;
+  height: 100px !important;
+  display: inline-block;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.personaltable {
+  margin-top: 5px;
+}
+
+.div-sq-master {
+  margin-left: 50px;
 }
