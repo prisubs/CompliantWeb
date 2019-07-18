@@ -4,6 +4,7 @@ import { ROUTES } from './../'
 import { SecondaryNavbar } from './'
 import Calendar from 'react-calendar'
 import { FieldGroup } from './'
+import { VictoryPie } from 'victory'
 // import StripeCheckout from 'react-stripe-checkout'
 // import { CardElement } from 'react-stripe-elements'
 // import { StripeProvider } from 'react-stripe-elements'
@@ -15,7 +16,9 @@ export default class Buy extends Component {
     ticker: '',
     rating: 'NULL',
     arrayvar: [],
-    badheadlines: []
+    badheadlines: [],
+    goodcount: 0,
+    badcount: 0
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -28,7 +31,15 @@ export default class Buy extends Component {
 
   onSubmit = event => {
     event.preventDefault()
-    const { date, ticker, rating, arrayvar, badheadlines } = this.state
+    const {
+      date,
+      ticker,
+      rating,
+      arrayvar,
+      badheadlines,
+      goodcount,
+      badcount
+    } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
     var x = this.props
@@ -53,6 +64,14 @@ export default class Buy extends Component {
             ...this.state.badheadlines,
             ...all_json['bad_headlines']
           ]
+        })
+
+        this.setState({
+          goodcount: all_json['good_count']
+        })
+
+        this.setState({
+          badcount: all_json['bad_count']
         })
 
         console.log(this.state.rating)
@@ -158,7 +177,42 @@ export default class Buy extends Component {
     }
     return ushould
   }
+
+  createCountGoodBad = () => {
+    let object_gb
+
+    object_gb = (
+      <span className="you-should-probably">
+        There were {this.state.goodcount} good headlines and{' '}
+        {this.state.badcount} bad headlines.
+      </span>
+    )
+    return object_gb
+  }
+
   render() {
+    const goodcountlocal = this.state.goodcount
+    let pie
+
+    if (goodcountlocal != 0) {
+      pie = (
+        <VictoryPie
+          colorScale={['cyan', 'tomato']}
+          cornerRadius={12}
+          height={199}
+          style={{
+            labels: { fill: 'black', fontSize: 10, fontWeight: 'bold' }
+          }}
+          data={[
+            { x: 'Good Headlines', y: this.state.goodcount },
+            { x: 'Bad Headlines', y: this.state.badcount }
+          ]}
+        />
+      )
+    } else {
+      pie = <hr />
+    }
+
     return (
       <div className="center-review-div">
         <div>
@@ -199,10 +253,12 @@ export default class Buy extends Component {
               <hr />
               <hr />
               {this.createUShould()}
+              {this.createCountGoodBad()}
             </div>
           </form>
 
           <table class="table table-striped">{this.createTable()}</table>
+          <div className="pie-div">{pie}</div>
         </div>
       </div>
     )

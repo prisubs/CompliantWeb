@@ -5,6 +5,7 @@
   position: fixed;
   align-items: center;
   justify-content: center;
+  margin-top: 10%;
 }
 
 .calendar {
@@ -122,4 +123,9 @@ body {
 .you-should-probably-red {
   font-size: 36px;
   font-family: Helvetica, sans-serif;
+}
+
+.pie-div {
+  width: 500px;
+  height: 500px;
 }
