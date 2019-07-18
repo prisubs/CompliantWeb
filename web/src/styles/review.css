@@ -129,3 +129,15 @@ body {
   width: 500px;
   height: 500px;
 }
+
+.divSquare {
+  width: 48%;
+  height: 500px;
+  margin: 4px;
+  border: 1px solid black;
+  float: left;
+}
+
+.simple-clear {
+  clear: both;
+}

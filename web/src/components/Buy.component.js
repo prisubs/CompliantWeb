@@ -5,6 +5,7 @@ import { SecondaryNavbar } from './'
 import Calendar from 'react-calendar'
 import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
+import Thermometer from 'react-thermometer-component'
 // import StripeCheckout from 'react-stripe-checkout'
 // import { CardElement } from 'react-stripe-elements'
 // import { StripeProvider } from 'react-stripe-elements'
@@ -213,8 +214,10 @@ export default class Buy extends Component {
       pie = <hr />
     }
 
-    return (
-      <div className="center-review-div">
+    let form
+    const ratinglocal = this.state.rating
+    if (ratinglocal === 'NULL') {
+      form = (
         <div>
           <Calendar
             className="calendar"
@@ -223,10 +226,12 @@ export default class Buy extends Component {
             maxDate={new Date(2019, 6, 11)}
             minDate={new Date(2019, 0, 11)}
           />
+
           <form className="input-field-form">
             <div className="smalltext-signup">
               <h4 className="n-o-ta"> Name of Ticker </h4>
             </div>
+
             <FieldGroup
               id="formControlsTicker"
               size="5"
@@ -242,6 +247,7 @@ export default class Buy extends Component {
             <div className="hr-div">
               <hr className="style-eight" />
             </div>
+
             <div className="button-div">
               <button
                 className="submit-button signup-submit-button"
@@ -252,15 +258,46 @@ export default class Buy extends Component {
               </button>
               <hr />
               <hr />
-              {this.createUShould()}
-              {this.createCountGoodBad()}
             </div>
           </form>
-
-          <table class="table table-striped">{this.createTable()}</table>
-          <div className="pie-div">{pie}</div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      form = (
+        <div>
+          {this.createUShould()}
+
+          <div class="divSquare">
+            <div className="pie-div">{pie}</div>
+          </div>
+
+          <div class="divSquare">{this.createCountGoodBad()}</div>
+
+          <div className="simple-clear"></div>
+
+          <div class="divSquare">
+            <table class="table table-striped">{this.createTable()}</table>
+          </div>
+
+          <div class="divSquare">
+            <Thermometer
+              theme="light"
+              value={
+                100 *
+                (this.state.goodcount /
+                  (this.state.goodcount + this.state.badcount))
+              }
+              max="100"
+              steps="3"
+              format="°"
+              size="large"
+              height="300"
+            />
+          </div>
+        </div>
+      )
+    }
+
+    return <div className="center-review-div">{form}</div>
   }
 }
