@@ -6,7 +6,29 @@ import Calendar from 'react-calendar'
 import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
+import {
+  Page,
+  Avatar,
+  Icon,
+  Grid,
+  Card,
+  Text,
+  Table,
+  Alert,
+  Progress,
+  colors,
+  Dropdown,
+  Button,
+  StampCard,
+  StatsCard,
+  ProgressCard,
+  Badge,
+  AccountDropdown
+} from 'tabler-react'
 
+import 'tabler-react/dist/Tabler.css'
+import C3Chart from 'react-c3js'
+import './../styles/predict.css'
 // import StripeCheckout from 'react-stripe-checkout'
 // import { CardElement } from 'react-stripe-elements'
 // import { StripeProvider } from 'react-stripe-elements'

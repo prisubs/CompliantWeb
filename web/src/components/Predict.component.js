@@ -24,7 +24,6 @@ import {
 import 'tabler-react/dist/Tabler.css'
 import C3Chart from 'react-c3js'
 import './../styles/predict.css'
-import SiteWrapper from './SiteWrapper.react'
 
 export default class Predict extends Component {
   render() {
@@ -75,6 +74,23 @@ export default class Predict extends Component {
               <Card.Body>
                 <C3Chart
                   style={{ height: '12rem' }}
+                  donut={{
+                    label: {
+                      show: false
+                    }
+                  }}
+                  tooltip={{
+                    format: {
+                      name: function(name, ratio, id, index) {
+                        return ''
+                      },
+                      value: function(value, ratio, id, index) {
+                        return Math.trunc(ratio * 100)
+                          .toString()
+                          .concat('%')
+                      }
+                    }
+                  }}
                   data={{
                     columns: [
                       // each columns data
