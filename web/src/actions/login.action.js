@@ -1,4 +1,3 @@
-import * as actionTypes from './actionTypes'
 import { Api } from './../utils'
 
 export function getTicker(tickerObject, handleRedirect, handleFailure) {
