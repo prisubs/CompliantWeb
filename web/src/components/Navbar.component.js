@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { ROUTES } from './../'
 import './../styles/navbar.css'
+import { Flag, Icon } from 'tabler-react'
 
 class Navbar extends PureComponent {
   render() {
@@ -268,6 +269,7 @@ class Navbar extends PureComponent {
           <Link to={ROUTES.METHODS} className="login-itemr">
             Methods
           </Link>
+          <Icon flag name="de" />
         </div>
       </div>
     )
