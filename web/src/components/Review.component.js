@@ -6,6 +6,7 @@ import Calendar from 'react-calendar'
 import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
+
 // import StripeCheckout from 'react-stripe-checkout'
 // import { CardElement } from 'react-stripe-elements'
 // import { StripeProvider } from 'react-stripe-elements'
@@ -32,6 +33,7 @@ export default class Review extends Component {
 
   onSubmit = event => {
     event.preventDefault()
+    console.log('SUBMIT TAKING TOO LONG')
     const {
       date,
       ticker,

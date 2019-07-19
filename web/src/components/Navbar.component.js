@@ -261,7 +261,7 @@ class Navbar extends PureComponent {
             Review
           </Link>
 
-          <Link to={ROUTES.REVIEW} className="login-itemr">
+          <Link to={ROUTES.PREDICT} className="login-itemr">
             Predict
           </Link>
 

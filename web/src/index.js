@@ -9,7 +9,7 @@ import { Route } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
 
 import configureStore, { history } from './store/configureStore'
-import { App, Review, NavBar, Methods, OurWay } from './components'
+import { App, Review, NavBar, Methods, Predict } from './components'
 import registerServiceWorker from './registerServiceWorker'
 //import './styles/index.css'
 
@@ -17,7 +17,7 @@ export const ROUTES = {
   INDEX: '/',
   REVIEW: '/review',
   METHODS: '/methods',
-  OURWAY: '/ourway'
+  PREDICT: '/predict'
 }
 
 const store = configureStore()
@@ -30,7 +30,7 @@ ReactDOM.render(
         <Route exact path="/" component={App} />
         <Route exact path={ROUTES.REVIEW} component={Review} />
         <Route exact path={ROUTES.METHODS} component={Methods} />
-        <Route exact path={ROUTES.OURWAY} component={OurWay} />
+        <Route exact path={ROUTES.PREDICT} component={Predict} />
         {
           //<Route exact path={ROUTES.HOME} component={Home} />
         }
