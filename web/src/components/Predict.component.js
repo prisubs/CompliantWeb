@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react'
+import * as d3 from 'd3'
 import { Component } from 'react'
 import {
   Page,
@@ -73,10 +74,34 @@ export default class Predict extends Component {
               </Card.Header>
               <Card.Body>
                 <C3Chart
+                  data={{
+                    columns: [
+                      // each columns data
+                      ['Positive', 63],
+                      ['Negative', 37]
+                    ],
+                    type: 'donut', // default type of chart
+                    colors: {
+                      Positive: colors['green'],
+                      Negative: colors['red']
+                    },
+                    names: {
+                      // name of each serie
+                      Positive: 'Positive Articles',
+                      Negative: 'Negative Articles'
+                    },
+                    labels: {
+                      Positive: 'Positive Articles',
+                      Negative: 'Negative Articles'
+                    }
+                  }}
                   style={{ height: '12rem' }}
                   donut={{
                     label: {
-                      show: false
+                      show: true,
+                      format: function(value, ratio, id, name, label) {
+                        return 'Category: '.concat(id)
+                      }
                     }
                   }}
                   tooltip={{
@@ -89,23 +114,6 @@ export default class Predict extends Component {
                           .toString()
                           .concat('%')
                       }
-                    }
-                  }}
-                  data={{
-                    columns: [
-                      // each columns data
-                      ['data1', 63],
-                      ['data2', 37]
-                    ],
-                    type: 'donut', // default type of chart
-                    colors: {
-                      data1: colors['green'],
-                      data2: colors['red']
-                    },
-                    names: {
-                      // name of each serie
-                      data1: 'Positive Articles',
-                      data2: 'Negative Articles'
                     }
                   }}
                   legend={{

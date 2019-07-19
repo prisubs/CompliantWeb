@@ -289,6 +289,7 @@ export default class Review extends Component {
         </div>
       )
     } else {
+      /*
       form = (
         <div class="div-sq-master">
           <div class="divSquare">
@@ -327,6 +328,192 @@ export default class Review extends Component {
               />
             </div>
           </div>
+        </div>
+      ) */
+      form = (
+        <div className="account-div">
+          <Grid.Row cards={true}>
+            <Grid.Col width={6} sm={4} lg={2}>
+              <StatsCard
+                layout={1}
+                movement={6}
+                total={this.state.rating}
+                label="Based on our criteria"
+              />
+            </Grid.Col>
+            <Grid.Col width={6} sm={4} lg={2}>
+              <StatsCard
+                layout={1}
+                movement={-3}
+                total="17"
+                label="Closed Today"
+              />
+            </Grid.Col>
+            <Grid.Col width={6} sm={4} lg={2}>
+              <StatsCard
+                layout={1}
+                movement={9}
+                total="7"
+                label="New Replies"
+              />
+            </Grid.Col>
+            <Grid.Col width={6} sm={4} lg={2}>
+              <StatsCard
+                layout={1}
+                movement={3}
+                total="27.3k"
+                label="Followers"
+              />
+            </Grid.Col>
+            <Grid.Col width={6} sm={4} lg={2}>
+              <StatsCard
+                layout={1}
+                movement={-2}
+                total="$95"
+                label="Daily earnings"
+              />
+            </Grid.Col>
+            <Grid.Col width={6} sm={4} lg={2}>
+              <StatsCard
+                layout={1}
+                movement={-1}
+                total="621"
+                label="Products"
+              />
+            </Grid.Col>
+          </Grid.Row>
+
+          <Grid.Row cards={true} className="pies-and-big-numbers">
+            <Grid.Col sm={6}>
+              <Card>
+                <Card.Header>
+                  <Card.Title>Article Ratio </Card.Title>
+                </Card.Header>
+                <Card.Body>
+                  <C3Chart
+                    className="donut"
+                    data={{
+                      columns: [
+                        // each columns data
+                        ['Positive', this.state.goodcount],
+                        ['Negative', this.state.badcount]
+                      ],
+                      type: 'donut', // default type of chart
+                      colors: {
+                        Positive: colors['green'],
+                        Negative: colors['red']
+                      },
+                      names: {
+                        // name of each serie
+                        Positive: 'Positive Articles',
+                        Negative: 'Negative Articles'
+                      },
+                      labels: {
+                        Positive: 'Positive Articles',
+                        Negative: 'Negative Articles'
+                      }
+                    }}
+                    style={{ height: '12rem' }}
+                    donut={{
+                      label: {
+                        show: true,
+                        format: function(value, ratio, id, name, label) {
+                          return 'Category: '.concat(id)
+                        }
+                      }
+                    }}
+                    tooltip={{
+                      format: {
+                        name: function(name, ratio, id, index) {
+                          return ''
+                        },
+                        value: function(value, ratio, id, index) {
+                          return Math.trunc(ratio * 100)
+                            .toString()
+                            .concat('%')
+                        }
+                      }
+                    }}
+                    legend={{
+                      show: false //hide legend
+                    }}
+                    padding={{
+                      bottom: 0,
+                      top: 0
+                    }}
+                  />
+                </Card.Body>
+              </Card>
+            </Grid.Col>
+            <Grid.Col sm={6}>
+              <Card>
+                <Card.Header>
+                  <Card.Title>Sentiment Ratio</Card.Title>
+                </Card.Header>
+                <Card.Body>
+                  <C3Chart
+                    style={{ height: '12rem' }}
+                    data={{
+                      columns: [
+                        // each columns data
+                        ['data1', 63],
+                        ['data2', 44],
+                        ['data3', 12],
+                        ['data4', 14]
+                      ],
+                      type: 'pie', // default type of chart
+                      colors: {
+                        data1: colors['blue-darker'],
+                        data2: colors['blue'],
+                        data3: colors['blue-light'],
+                        data4: colors['blue-lighter']
+                      },
+                      names: {
+                        // name of each serie
+                        data1: 'A',
+                        data2: 'B',
+                        data3: 'C',
+                        data4: 'D'
+                      }
+                    }}
+                    legend={{
+                      show: false //hide legend
+                    }}
+                    padding={{
+                      bottom: 0,
+                      top: 0
+                    }}
+                  />
+                </Card.Body>
+              </Card>
+            </Grid.Col>
+
+            <Grid.Col sm={6} className="big-numbers">
+              <ProgressCard
+                header="Number of Positive Articles"
+                content={this.state.badcount}
+                progressColor="green"
+                progressWidth={
+                  100 *
+                  (this.state.goodcount /
+                    (this.state.goodcount + this.state.badcount))
+                }
+              />
+
+              <Grid.Col sm={6} className="big-numbers">
+                <ProgressCard
+                  header="Number of Negative Articles"
+                  content={this.state.goodcount}
+                  progressColor="red"
+                  progressWidth={
+                    100 *
+                    (this.state.badcount /
+                      (this.state.goodcount + this.state.badcount))
+                  }
+                />
+              </Grid.Col>
+            </Grid.Col>
+          </Grid.Row>
         </div>
       )
     }
