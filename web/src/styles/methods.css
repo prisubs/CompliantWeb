@@ -1,12 +1,12 @@
 .hiw-tab {
   margin-left: 200px;
   margin-bottom: 50px;
-  padding-top: 80px;
+  padding-top: 95px;
   padding-bottom: 35px;
-  font-family: Avenir, "Trebuchet MS", Arial, sans-serif;
+  font-family: Avenir, 'Trebuchet MS', Arial, sans-serif;
   color: #4b4f54;
   font-size: 30px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .tab-tw {
@@ -29,4 +29,5 @@
   padding-left: 500px;
   color: #757575;
   text-align: center;
+  font-weight: normal !important;
 }

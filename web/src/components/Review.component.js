@@ -25,7 +25,7 @@ import {
   Badge,
   AccountDropdown
 } from 'tabler-react'
-
+import * as d3 from 'd3'
 import 'tabler-react/dist/Tabler.css'
 import C3Chart from 'react-c3js'
 import './../styles/predict.css'
@@ -391,6 +391,28 @@ export default class Review extends Component {
                 </Card.Header>
                 <Card.Body>
                   <C3Chart
+                    /*
+                onrendered = { function() {
+                        d3.selectAll(".c3-chart-arc text").each(function(v) {
+                        var label = d3.select(this);
+                        var pos = label.attr("transform").match(/-?\d+(\.\d+)?/g);
+
+
+                        if (pos[0] < 0) {
+                            pos[0] = pos[0] - 40
+                        }
+                        if (pos[0] >= 0) {
+                            pos[0] = pos[0] + 100
+                        }
+                        //pos[1] = pos[1] - 40
+                        label.attr("transform", "translate("+ pos[0]  +","+ pos[1] +")");
+                        })
+                 }
+                }
+
+
+    */
+
                     className="donut"
                     data={{
                       columns: [
@@ -490,6 +512,19 @@ export default class Review extends Component {
 
             <Grid.Col sm={6} className="big-numbers">
               <ProgressCard
+                header="Number of Negative Articles"
+                content={this.state.goodcount}
+                progressColor="red"
+                progressWidth={
+                  100 *
+                  (this.state.badcount /
+                    (this.state.goodcount + this.state.badcount))
+                }
+              />
+            </Grid.Col>
+
+            <Grid.Col sm={6} className="big-numbers">
+              <ProgressCard
                 header="Number of Positive Articles"
                 content={this.state.badcount}
                 progressColor="green"
@@ -499,19 +534,6 @@ export default class Review extends Component {
                     (this.state.goodcount + this.state.badcount))
                 }
               />
-
-              <Grid.Col sm={6} className="big-numbers">
-                <ProgressCard
-                  header="Number of Negative Articles"
-                  content={this.state.goodcount}
-                  progressColor="red"
-                  progressWidth={
-                    100 *
-                    (this.state.badcount /
-                      (this.state.goodcount + this.state.badcount))
-                  }
-                />
-              </Grid.Col>
             </Grid.Col>
           </Grid.Row>
         </div>

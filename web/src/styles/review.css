@@ -196,6 +196,16 @@ body {
   margin-top: 10px;
 }
 
-.donut {
-  font-family: 'Times New Roman' !important;
+.c3-label {
+  font-size: 36px !important;
+}
+
+.c3 text {
+  font-size: 18px !important;
+  font-family: Helvetica, Arial, sans-serif !important;
+  margin-left: 100px !important;
+  margin-right: 100px !important;
+  fill: #505050 !important;
+  font-weight: bold;
+  font-style: oblique;
 }

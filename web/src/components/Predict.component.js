@@ -74,6 +74,33 @@ export default class Predict extends Component {
               </Card.Header>
               <Card.Body>
                 <C3Chart
+                  onrendered={function() {
+                    d3.selectAll('.c3-chart-arc text').each(function(v) {
+                      var label = d3.select(this)
+                      var pos = label.attr('transform').match(/-?\d+(\.\d+)?/g)
+
+                      // pos[0] is x, pos[1] is y. Do some position changes and update value
+                      /*
+                        if (pos[0] < -20) {
+                            pos[0] = pos[0] - 40
+                        } else {
+                            pos[0] = pos[0] + 30
+                        }
+                        pos[1] = pos[1] + 0
+                        */
+                      if (pos[0] < 0) {
+                        pos[0] = pos[0] - 40
+                      }
+                      if (pos[0] >= 0) {
+                        pos[0] = pos[0] + 100
+                      }
+                      //pos[1] = pos[1] - 40
+                      label.attr(
+                        'transform',
+                        'translate(' + pos[0] + ',' + pos[1] + ')'
+                      )
+                    })
+                  }}
                   data={{
                     columns: [
                       // each columns data
@@ -178,6 +205,7 @@ export default class Predict extends Component {
               progressWidth={28}
             />
           </Grid.Col>
+
           <Grid.Col sm={6} className="big-numbers">
             <ProgressCard
               header="Today profit"
