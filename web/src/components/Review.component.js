@@ -42,7 +42,8 @@ export default class Review extends Component {
     arrayvar: [],
     badheadlines: [],
     goodcount: 0,
-    badcount: 0
+    badcount: 0,
+    submitted: false
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -55,6 +56,9 @@ export default class Review extends Component {
 
   onSubmit = event => {
     event.preventDefault()
+    this.setState({
+      submitted: true
+    })
     console.log('SUBMIT TAKING TOO LONG')
     const {
       date,
@@ -63,7 +67,8 @@ export default class Review extends Component {
       arrayvar,
       badheadlines,
       goodcount,
-      badcount
+      badcount,
+      submitted
     } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
@@ -240,6 +245,28 @@ export default class Review extends Component {
       pie = <hr />
     }
 
+    const thissubmitted = this.state.submitted
+    let button
+    if (!thissubmitted) {
+      button = (
+        <Button
+          color="teal"
+          icon="check"
+          size="lg"
+          type="button"
+          onClick={this.onSubmit}
+        >
+          Submit
+        </Button>
+      )
+    } else {
+      button = (
+        <Button loading color="teal" size="lg">
+          Submit
+        </Button>
+      )
+    }
+
     let form
     const ratinglocal = this.state.rating
     if (ratinglocal === 'NULL') {
@@ -275,13 +302,17 @@ export default class Review extends Component {
             </div>
 
             <div className="button-div">
-              <button
-                className="submit-button signup-submit-button"
-                type="submit"
+              {/*
+              <button loading
+                className={this.submitted ? "submit-button signup-submit-button btn-loading btn btn-primary" : "submit-button signup-submit-button btn btn-primary"}
+                 type="button"
                 onClick={this.onSubmit}
               >
                 Submit
               </button>
+              */}
+              {button}
+
               <hr />
               <hr />
             </div>
@@ -336,18 +367,13 @@ export default class Review extends Component {
             <Grid.Col width={6} sm={4} lg={2}>
               <StatsCard
                 layout={1}
-                movement={6}
+                movement={-1}
                 total={this.state.rating}
                 label="Based on our criteria"
               />
             </Grid.Col>
             <Grid.Col width={6} sm={4} lg={2}>
-              <StatsCard
-                layout={1}
-                movement={-3}
-                total="17"
-                label="Closed Today"
-              />
+              <StatsCard layout={1} total={this.state.ticker} label="Ticker" />
             </Grid.Col>
             <Grid.Col width={6} sm={4} lg={2}>
               <StatsCard

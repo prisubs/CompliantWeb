@@ -1,36 +1,37 @@
 .logo-ssdb {
-    width: 15%;
-    height: 10%;
-    left: -790px;
-    top: -179px;
+  width: 15%;
+  height: 10%;
+  left: -790px;
+  top: -179px;
 }
-
 
 .navbar {
-    background-color: #4a4a4a !important;
+  background-color: #4a4a4a !important;
 }
 
+.german-flag {
+  margin-right: 2px;
+}
 
 .nav-item {
-    margin-top: 0px;
-    margin-right: 15px;
-    float:right;
-    font-size: 16pt;
+  margin-top: 0px;
+  margin-right: 15px;
+  float: right;
+  font-size: 16pt;
 }
 
 .navbar-nav {
-    float: right;
-    color: #FFFFFF;
+  float: right;
+  color: #ffffff;
 }
 
 .collapse {
-    padding-left: 1400px !important;
+  padding-left: 1400px !important;
 }
 
-
 * {
-    box-sizing: border-box !important;
-      font-family: 'Helvetica', 'Arial';
+  box-sizing: border-box !important;
+  font-family: 'Helvetica', 'Arial';
 }
 
 .text-master-container {
@@ -44,8 +45,8 @@
   margin: 30px auto 100px;
   padding: 20px;
   font-family: 'Helvetica';
-  font-size: 15px; }
-
+  font-size: 15px;
+}
 
 /* Navbar links */
 .imgnav {
@@ -53,19 +54,21 @@
   margin-left: 10px;
   margin-top: 4px;
   max-height: 40px;
-  width: 400; }
+  width: 400;
+}
 
 .login-imgnav {
   float: left;
   margin-left: 11px;
   margin-top: 11px;
   width: 250px;
-  max-height: 150px; }
-
+  max-height: 150px;
+}
 
 .lir-div {
   margin-right: -2% !important;
-  margin-top: 6px; }
+  margin-top: 6px;
+}
 
 .login-itemr {
   float: right;
@@ -82,16 +85,18 @@
   padding-right: 10px;
   padding-bottom: 13px;
   border-radius: 8px;
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 .login-itemr-selected {
-  border-bottom: 10px solid #0018a8; }
+  border-bottom: 10px solid #0018a8;
+}
 
 .sign-in-box {
   border: 1px solid #979797;
   border-radius: 2px;
   padding-bottom: 0px;
-    float: right;
+  float: right;
   display: inline;
   font-size: 15px;
   color: #4b4f54;
@@ -104,17 +109,21 @@
   padding-left: 10px;
   padding-right: 10px;
   text-decoration: none;
-  }
+}
 
-.login-itemr:hover, .login-itemr:visited, .login-itemr:link, .login-itemr:active {
+.login-itemr:hover,
+.login-itemr:visited,
+.login-itemr:link,
+.login-itemr:active {
   text-decoration: none !important;
   -webkit-box-shadow: none !important;
-  box-shadow: none !important; }
+  box-shadow: none !important;
+}
 
 .login-itemr:active {
   background-color: #0018a8;
-  color: white; }
-
+  color: white;
+}
 
 .login-navbar {
   position: absolute;
@@ -122,9 +131,10 @@
   overflow: hidden;
   min-width: 100%;
   height: 64px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 0 2px 8px 0 rgba(190, 190, 190, 0.5);
   border-radius: 0px;
-  font-family:'Helvetica', 'Arial';
+  font-family: 'Helvetica', 'Arial';
   z-index: 100;
-  padding-right: 64px; }
+  padding-right: 64px;
+}

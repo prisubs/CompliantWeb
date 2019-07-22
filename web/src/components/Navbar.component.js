@@ -245,7 +245,7 @@ class Navbar extends PureComponent {
         <Link to={ROUTES.INDEX}>
           <img
             src="images/sentstockdb.png"
-            alt="banana tax logo in black"
+            alt="install the frickin dependency"
             className="login-imgnav"
           />
         </Link>
@@ -269,7 +269,8 @@ class Navbar extends PureComponent {
           <Link to={ROUTES.METHODS} className="login-itemr">
             Methods
           </Link>
-          <Icon flag name="de" />
+          <Icon flag name="de" className="german-flag" />
+          <Icon flag name="us" />
         </div>
       </div>
     )
