@@ -15,6 +15,7 @@ export function getTicker(tickerObject, handleRedirect, handleFailure) {
         }
       })
       .catch(error => {
+        console.log('alfreds dog is cute')
         console.log('request failed', error)
       })
 }
