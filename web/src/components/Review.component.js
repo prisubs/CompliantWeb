@@ -48,7 +48,8 @@ export default class Review extends Component {
     badheadlines: [],
     goodcount: 0,
     badcount: 0,
-    submitted: false
+    submitted: false,
+    delta: 0.0
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -73,7 +74,8 @@ export default class Review extends Component {
       badheadlines,
       goodcount,
       badcount,
-      submitted
+      submitted,
+      delta
     } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
@@ -107,6 +109,10 @@ export default class Review extends Component {
 
         this.setState({
           badcount: all_json['bad_count']
+        })
+
+        this.setState({
+          delta: all_json['delta']
         })
 
         console.log(this.state.rating)
@@ -372,7 +378,7 @@ export default class Review extends Component {
             <Grid.Col width={6} sm={4} lg={2}>
               <StatsCard
                 layout={1}
-                movement={-1}
+                movement={this.state.delta}
                 total={this.state.rating}
                 label="Based on our criteria"
               />
