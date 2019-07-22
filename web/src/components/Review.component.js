@@ -49,7 +49,8 @@ export default class Review extends Component {
     goodcount: 0,
     badcount: 0,
     submitted: false,
-    delta: 0.0
+    delta: 0.0,
+    companyMeta: []
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -75,7 +76,8 @@ export default class Review extends Component {
       goodcount,
       badcount,
       submitted,
-      delta
+      delta,
+      companyMeta
     } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
@@ -94,6 +96,10 @@ export default class Review extends Component {
 
         this.setState({
           arrayvar: [...this.state.arrayvar, ...all_json['good_headlines']]
+        })
+
+        this.setState({
+          companyMeta: [...this.state.companyMeta, ...all_json['company_meta']]
         })
 
         this.setState({
@@ -387,28 +393,28 @@ export default class Review extends Component {
               <StatsCard layout={1} total={this.state.ticker} label="Ticker" />
             </Grid.Col>
             <Grid.Col width={6} sm={4} lg={2}>
-              <StatsCard
-                layout={1}
-                movement={9}
-                total="7"
-                label="New Replies"
-              />
+              <Card>
+                <Card.Header>
+                  <Card.Title>Company:</Card.Title>
+                </Card.Header>
+                <Card.Body>{this.state.companyMeta[0]}</Card.Body>
+              </Card>
             </Grid.Col>
             <Grid.Col width={6} sm={4} lg={2}>
-              <StatsCard
-                layout={1}
-                movement={3}
-                total="27.3k"
-                label="Followers"
-              />
+              <Card>
+                <Card.Header>
+                  <Card.Title>Sector:</Card.Title>
+                </Card.Header>
+                <Card.Body>{this.state.companyMeta[1]}</Card.Body>
+              </Card>
             </Grid.Col>
             <Grid.Col width={6} sm={4} lg={2}>
-              <StatsCard
-                layout={1}
-                movement={-2}
-                total="$95"
-                label="Daily earnings"
-              />
+              <Card>
+                <Card.Header>
+                  <Card.Title>Misc. Information:</Card.Title>
+                </Card.Header>
+                <Card.Body>{this.state.companyMeta[2]}</Card.Body>
+              </Card>
             </Grid.Col>
             <Grid.Col width={6} sm={4} lg={2}>
               <StatsCard
@@ -555,21 +561,12 @@ export default class Review extends Component {
                   theme={Themes.LIGHT}
                   interval={IntervalTypes.W}
                   style={BarStyles.HOLLOW_CANDLES}
-                  width="700"
+                  width="2000"
                   height="200"
                   news={['headlines']}
                   studies={['BB@tv-basicstudies']}
                 />
               </Card>
-            </Grid.Col>
-
-            <Grid.Col sm={6} className="big-numbers">
-              <ProgressCard
-                header="Today profit"
-                content="$652"
-                progressColor="green"
-                progressWidth={84}
-              />
             </Grid.Col>
           </Grid.Row>
         </div>
