@@ -168,6 +168,10 @@ body {
 
 .personaltable {
   margin-top: 5px;
+  max-height: auto;
+  overflow: scroll !important;
+  overflow-y: scroll !important;
+  height: auto !important;
 }
 
 .div-sq-master {
@@ -208,4 +212,10 @@ body {
   fill: #505050 !important;
   font-weight: bold;
   font-style: oblique;
+}
+
+.table-div {
+  height: 192px;
+  overflow: scroll !important;
+  overflow-y: scroll !important;
 }

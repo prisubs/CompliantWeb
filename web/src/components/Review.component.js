@@ -501,42 +501,14 @@ export default class Review extends Component {
             <Grid.Col sm={6}>
               <Card>
                 <Card.Header>
-                  <Card.Title>Sentiment Ratio</Card.Title>
+                  <Card.Title>Article List</Card.Title>
                 </Card.Header>
                 <Card.Body>
-                  <C3Chart
-                    style={{ height: '12rem' }}
-                    data={{
-                      columns: [
-                        // each columns data
-                        ['data1', 63],
-                        ['data2', 44],
-                        ['data3', 12],
-                        ['data4', 14]
-                      ],
-                      type: 'pie', // default type of chart
-                      colors: {
-                        data1: colors['blue-darker'],
-                        data2: colors['blue'],
-                        data3: colors['blue-light'],
-                        data4: colors['blue-lighter']
-                      },
-                      names: {
-                        // name of each serie
-                        data1: 'A',
-                        data2: 'B',
-                        data3: 'C',
-                        data4: 'D'
-                      }
-                    }}
-                    legend={{
-                      show: false //hide legend
-                    }}
-                    padding={{
-                      bottom: 0,
-                      top: 0
-                    }}
-                  />
+                  <div className="table-div">
+                    <table class="table table-striped table-bordered personaltable">
+                      {this.createTable()}
+                    </table>
+                  </div>
                 </Card.Body>
               </Card>
             </Grid.Col>
@@ -577,7 +549,7 @@ export default class Review extends Component {
                   theme={Themes.LIGHT}
                   interval={IntervalTypes.W}
                   style={BarStyles.HOLLOW_CANDLES}
-                  width="500"
+                  width="700"
                   height="200"
                   news={['headlines']}
                   studies={['BB@tv-basicstudies']}
