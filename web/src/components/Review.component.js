@@ -33,6 +33,11 @@ import './../styles/predict.css'
 // import { CardElement } from 'react-stripe-elements'
 // import { StripeProvider } from 'react-stripe-elements'
 import './../styles/review.css'
+import TradingViewWidget, {
+  Themes,
+  IntervalTypes,
+  BarStyles
+} from 'react-tradingview-widget'
 
 export default class Review extends Component {
   state = {
@@ -559,6 +564,33 @@ export default class Review extends Component {
                   (this.state.goodcount /
                     (this.state.goodcount + this.state.badcount))
                 }
+              />
+            </Grid.Col>
+          </Grid.Row>
+
+          <Grid.Row cards={true}>
+            <Grid.Col sm={6} className="big-numbers">
+              <Card>
+                <TradingViewWidget
+                  className="trading-widget-react"
+                  symbol={'NASDAQ:'.concat(this.state.ticker)}
+                  theme={Themes.LIGHT}
+                  interval={IntervalTypes.W}
+                  style={BarStyles.HOLLOW_CANDLES}
+                  width="500"
+                  height="200"
+                  news={['headlines']}
+                  studies={['BB@tv-basicstudies']}
+                />
+              </Card>
+            </Grid.Col>
+
+            <Grid.Col sm={6} className="big-numbers">
+              <ProgressCard
+                header="Today profit"
+                content="$652"
+                progressColor="green"
+                progressWidth={84}
               />
             </Grid.Col>
           </Grid.Row>

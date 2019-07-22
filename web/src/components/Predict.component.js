@@ -25,6 +25,11 @@ import {
 import 'tabler-react/dist/Tabler.css'
 import C3Chart from 'react-c3js'
 import './../styles/predict.css'
+import TradingViewWidget, {
+  Themes,
+  IntervalTypes,
+  BarStyles
+} from 'react-tradingview-widget'
 
 export default class Predict extends Component {
   render() {
@@ -203,6 +208,31 @@ export default class Predict extends Component {
               content="62"
               progressColor="red"
               progressWidth={28}
+            />
+          </Grid.Col>
+
+          <Grid.Col sm={6} className="big-numbers">
+            <ProgressCard
+              header="Today profit"
+              content="$652"
+              progressColor="green"
+              progressWidth={84}
+            />
+          </Grid.Col>
+        </Grid.Row>
+
+        <Grid.Row cards={true}>
+          <Grid.Col sm={6} className="big-numbers">
+            <TradingViewWidget
+              className="trading-widget-react"
+              symbol={'NASDAQ:'.concat('AAPL')}
+              theme={Themes.LIGHT}
+              interval={IntervalTypes.W}
+              style={BarStyles.HOLLOW_CANDLES}
+              width="350"
+              height="300"
+              news={['headlines']}
+              studies={['BB@tv-basicstudies']}
             />
           </Grid.Col>
 
