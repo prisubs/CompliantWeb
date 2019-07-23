@@ -9,7 +9,8 @@ from textblob import TextBlob
 import _pickle as cPickle
 import math
 import sys
-
+import seaborn as sns
+import matplotlib
 
 '''
 [INPUT]
@@ -24,12 +25,15 @@ good_count: amount of good headlines out of 100 for specified period[Int]
 bad_count: amount of bad headlines out of 100 for specified period [Int]
 aggregated_sentiment: combination of all five features to give insight into backend prediction process [FLOAT]
 '''
-def future_runner(ticker, day=False, week=False):
-    rating = ...
-    predicted_price = ...
-    good_count, bad_count = ...
-    aggregated_sentiment = ...
-    return rating, predicted_price, good_count, bad_count, aggregated_sentiment
+def future_runner(ticker):
+    return ...
+
+'''
+[INPUT] ticker name
+[OUTPUT] trained model to run predictions on
+'''
+def predict_model(ticker):
+    
 
 '''
 [INPUT]
@@ -44,6 +48,7 @@ good_headlines: sampling of five good headlines [List<String>]
 bad_count: amount of bad headlines out of 100 [Int]
 bad_headlines: sampling of five bad headlines [List<String>]
 news_category: GOOD or OKAY or BAD [String]
+metadata: full company name, sector, industry [List<String>]
 '''
 def past_runner(ticker, date):
     df = pipeline(ticker, date)
@@ -58,6 +63,7 @@ def past_runner(ticker, date):
 
 '''
 **************** UTILITY FUNCTIONS ****************
+weekly_visualization: saves a png figure of sentiment by week as weekly_sentiment.png
 make_alias: turns a ticker into its full name, sector, and industry in a list
 pretty_print: takes inputs from past_runner, outputs them for testing
 printlist: pretty prints a list of strings
@@ -75,12 +81,16 @@ remove_time: formats a string in yyyy-mm-dd style
 pipeline: transforms a single date and row into observation for feature matrix
 multi_row_pipeline: computes entire feature matrix
 run_model: runs logistic regression
+****************************************************
 '''
+def weekly_visualization(ticker, start_date):
+    return ...
+
 def make_alias(ticker):
     tickers = pd.read_csv("data/ticker_translate.csv")
     ticker = ticker.upper()
     data = tickers.loc[tickers["Ticker"] == ticker, ["Name", "Sector", "Industry"]]
-    return data.values.tolist()[0] # name, sector, industry
+    return data.values.tolist()[0]  # name, sector, industry
 
 def pretty_print(a, b, c, d, e, f, g):
     print("RATING: {0} \n{1}".format(a, b), file=sys.stderr)
@@ -148,9 +158,6 @@ def single_headlines(headline):
     p = headline.sentiment.polarity
     return p
 
-
-# Logistic Regression functions
-# To modify the model, use notebook serialize_model.ipynb and update changes here
 
 # feature functions
 def impute(X):
