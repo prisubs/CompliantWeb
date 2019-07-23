@@ -50,10 +50,12 @@ body {
   align-items: center !important;
   margin: auto !important;
   text-align: center !important;
+  font-weight: normal !important;
 }
 
 .n-o-t {
   color: #000000 !important;
+  font-weight: normal !important;
   text-align: center !important;
   margin-bottom: 50px;
   margin-top: 50px;
@@ -93,7 +95,7 @@ body {
   color: #000000 !important;
   padding: 15px 25px;
   text-decoration: none;
-  margin-top: 100px;
+  margin-top: 5%;
   font-size: 20px;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
@@ -112,7 +114,7 @@ body {
 
 .button-div {
   text-align: center !important;
-  margin-top: 5% !important;
+  margin-top: 1% !important;
   justify-content: center !important;
 }
 
