@@ -6,6 +6,7 @@ import Calendar from 'react-calendar'
 import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
+
 import {
   Page,
   Avatar,
@@ -126,6 +127,8 @@ export default class Review extends Component {
         console.log(this.state.arrayvar.length)
         console.log('Number of bad headlines is')
         console.log(this.state.badheadlines.length)
+
+        console.log('TESTING OUT THIS GOOGLE STOCKS API STUFF RIGHT NOWWWWW')
       })
 
     console.log(x)
