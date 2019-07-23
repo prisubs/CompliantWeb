@@ -18,8 +18,8 @@ function createRequestSentStock(method, endpoint, payload, token) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'x-access-token': token
-      // 'Access-Control-Allow-Origin': '*' //TODO change this for production
+      'x-access-token': token,
+      'Access-Control-Allow-Origin': '*'
     },
     body: payload
   })
