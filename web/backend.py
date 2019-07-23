@@ -76,6 +76,7 @@ pipeline: transforms a single date and row into observation for feature matrix
 multi_row_pipeline: computes entire feature matrix
 run_model_logistic: runs logistic regression on test point
 run_model_linear: runs logistic regression on tomorrow
+output_graph: saves a weekly sentiment graph to "week_sent.png"
 ****************************************************
 '''
 def create_model_linear(ticker):
@@ -91,14 +92,12 @@ def create_model_linear(ticker):
     return model
 
 
-def weekly_visualization(ticker, start_date):
-    return ...  #TODO
-
 def make_alias(ticker):
     tickers = pd.read_csv("data/ticker_translate.csv")
     ticker = ticker.upper()
     data = tickers.loc[tickers["Ticker"] == ticker, ["Name", "Sector", "Industry"]]
     return data.values.tolist()[0]  # name, sector, industry
+
 
 def pretty_print(a, b, c, d, e, f, g):
     print("RATING: {0} \n{1}".format(a, b), file=sys.stderr)
@@ -174,6 +173,7 @@ def impute(X):
     X = imp.transform(X)
     return X
 
+
 def good_bag(string_vector):
     bag = pd.read_csv("data/sentiment_word_list.csv")
     good_bag = bag["good"].dropna().apply(str.lower).to_list()
@@ -224,6 +224,7 @@ def six_days(start_date):
 
 def remove_time(dt):
     return dt[0:10]
+
 
 def base_pipeline(ticker, date, dynamic=False):
     # api auth
@@ -285,10 +286,12 @@ def base_pipeline(ticker, date, dynamic=False):
     )
     return df, open_price, close_price
 
+
 def pipeline_linear(ticker, date, dyn):
     df, open_price, close_price = base_pipeline(ticker, date, dynamic=dyn)
     df["price"] = pd.Series([close_price])
     return df
+
 
 def pipeline_logistic(ticker, date):
     df, open_price, close_price = base_pipeline(ticker, date)
@@ -311,15 +314,18 @@ def multi_row_pipeline(dates, ticker, pipeline_function=pipeline_logistic):
     df = pd.concat(rows)
     return df
 
+
 def run_model_linear(df, model):
     X_test = df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek"]]
     prediction = model.predict(X_test).tolist()[0]
     fmted = "Our dynamically constructed model predicted ${0} for tomorrow's price.".format(prediction)
     return fmted
 
+
 # returns in the form PREDICTED, ACTUAL =====> two values need to be unpacked
 def run_model_logistic(df, model_path):
     model = pickle_down(model_path)
+
     X_test = df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag"]]
     Y_test = df["delta"]
 
@@ -331,3 +337,5 @@ def run_model_logistic(df, model_path):
     return Y_predicted.tolist(), Y_test.tolist()
 
 
+def output_graph(headlines):
+    return
