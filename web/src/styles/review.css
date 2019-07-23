@@ -7,6 +7,15 @@
   justify-content: center;
 }
 
+.center-review-div-one {
+  height: 100%;
+  width: 100%;
+  margin-top: 10%;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+}
+
 .calendar {
   text-align: center !important;
   margin: auto !important;

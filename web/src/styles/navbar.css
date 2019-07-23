@@ -133,6 +133,7 @@
   height: 64px;
   background-color: #ffffff;
   box-shadow: 0 2px 8px 0 rgba(190, 190, 190, 0.5);
+  //border-bottom: 1px solid black;
   border-radius: 0px;
   font-family: 'Helvetica', 'Arial';
   z-index: 100;
