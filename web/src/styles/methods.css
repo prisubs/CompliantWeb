@@ -18,9 +18,23 @@
   padding-top: 61px;
   padding-left: 200px;
   padding-right: 212px;
-  font-size: 17px;
+  font-size: 20px;
   padding-bottom: 20px;
   color: #6b6b6b;
+}
+
+.oddsratio-div {
+  margin-top: 100px;
+}
+
+.oddsratio {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.log-equation {
+  margin-top: 100px;
+  display: block;
 }
 
 .btw-footer {

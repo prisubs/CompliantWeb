@@ -32,7 +32,7 @@ def future_runner(ticker):
 [INPUT] ticker name
 [OUTPUT] trained model to run predictions on
 '''
-def predict_model(ticker):
+#def predict_model(ticker):
     
 
 '''
@@ -61,27 +61,27 @@ def past_runner(ticker, date):
     return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category, metadata
 
 
-'''
-**************** UTILITY FUNCTIONS ****************
-weekly_visualization: saves a png figure of sentiment by week as weekly_sentiment.png
-make_alias: turns a ticker into its full name, sector, and industry in a list
-pretty_print: takes inputs from past_runner, outputs them for testing
-printlist: pretty prints a list of strings
-find_delta: outputs a formatted string for stock movement
-translate_delta: changes label into a buy/sell rating
-make_category: transforms good/bad headline counts into a status string
-classify_headlines: returns counts and samples for a single date's headlines
-single_headlines: processes one headline
-impute: performs normalization prior to logistic regression
-good_bag/bad_bag: creates bag of words features from word lists and text corpus
-aggregate_jsons: turns a response from tiingo client into a corpus
-pickle_down: unpickles a model to be run on user query
-six_days: calculates end date of a week from a date
-remove_time: formats a string in yyyy-mm-dd style
-pipeline: transforms a single date and row into observation for feature matrix
-multi_row_pipeline: computes entire feature matrix
-run_model: runs logistic regression
-****************************************************
+    '''
+    **************** UTILITY FUNCTIONS ****************
+    weekly_visualization: saves a png figure of sentiment by week as weekly_sentiment.png
+    make_alias: turns a ticker into its full name, sector, and industry in a list
+    pretty_print: takes inputs from past_runner, outputs them for testing
+    printlist: pretty prints a list of strings
+    find_delta: outputs a formatted string for stock movement
+    translate_delta: changes label into a buy/sell rating
+    make_category: transforms good/bad headline counts into a status string
+    classify_headlines: returns counts and samples for a single date's headlines
+    single_headlines: processes one headline
+    impute: performs normalization prior to logistic regression
+    good_bag/bad_bag: creates bag of words features from word lists and text corpus
+    aggregate_jsons: turns a response from tiingo client into a corpus
+    pickle_down: unpickles a model to be run on user query
+    six_days: calculates end date of a week from a date
+    remove_time: formats a string in yyyy-mm-dd style
+    pipeline: transforms a single date and row into observation for feature matrix
+    multi_row_pipeline: computes entire feature matrix
+    run_model: runs logistic regression
+    ****************************************************
 '''
 def weekly_visualization(ticker, start_date):
     return ...

@@ -16,10 +16,10 @@ function createRequestSentStock(method, endpoint, payload, token) {
   return fetch(`${'/api'}/${endpoint}`, {
     method: method,
     headers: {
+      'Access-Control-Allow-Origin': '*',
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'x-access-token': token,
-      'Access-Control-Allow-Origin': '*'
+      'x-access-token': token
     },
     body: payload
   })

@@ -129,10 +129,6 @@ export default class Review extends Component {
         console.log(this.state.badheadlines.length)
 
         console.log('TESTING OUT THIS GOOGLE STOCKS API STUFF RIGHT NOWWWWW')
-        var googleStocks = require('google-stocks')
-        googleStocks(['AAPL'], function(error, data) {
-          console.log(data)
-        })
       })
 
     console.log(x)
