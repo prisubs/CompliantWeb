@@ -291,7 +291,7 @@ export default class Review extends Component {
     const ratinglocal = this.state.rating
     if (ratinglocal === 'NULL') {
       form = (
-        <div>
+        <div className="center-review-div-one">
           <Calendar
             className="calendar"
             onChange={this.onChangeDate}
@@ -318,7 +318,7 @@ export default class Review extends Component {
               By using our product you agree to our terms and services
             </h3>
             <div className="hr-div">
-              <hr className="style-eight" />
+              <hr />
             </div>
 
             <div className="button-div">
@@ -332,9 +332,6 @@ export default class Review extends Component {
               </button>
               */}
               {button}
-
-              <hr />
-              <hr />
             </div>
           </form>
         </div>
@@ -382,62 +379,67 @@ export default class Review extends Component {
         </div>
       ) */
       form = (
-        <div className="account-div">
-          <Grid.Row cards={true}>
-            <Grid.Col width={6} sm={4} lg={2}>
-              <StatsCard
-                layout={1}
-                movement={this.state.delta}
-                total={this.state.rating}
-                label="Based on our criteria"
-              />
-            </Grid.Col>
-            <Grid.Col width={6} sm={4} lg={2}>
-              <StatsCard layout={1} total={this.state.ticker} label="Ticker" />
-            </Grid.Col>
-            <Grid.Col width={6} sm={4} lg={2}>
-              <Card>
-                <Card.Header>
-                  <Card.Title>Company:</Card.Title>
-                </Card.Header>
-                <Card.Body>{this.state.companyMeta[0]}</Card.Body>
-              </Card>
-            </Grid.Col>
-            <Grid.Col width={6} sm={4} lg={2}>
-              <Card>
-                <Card.Header>
-                  <Card.Title>Sector:</Card.Title>
-                </Card.Header>
-                <Card.Body>{this.state.companyMeta[1]}</Card.Body>
-              </Card>
-            </Grid.Col>
-            <Grid.Col width={6} sm={4} lg={2}>
-              <Card>
-                <Card.Header>
-                  <Card.Title>Misc. Information:</Card.Title>
-                </Card.Header>
-                <Card.Body>{this.state.companyMeta[2]}</Card.Body>
-              </Card>
-            </Grid.Col>
-            <Grid.Col width={6} sm={4} lg={2}>
-              <StatsCard
-                layout={1}
-                movement={-1}
-                total="621"
-                label="Products"
-              />
-            </Grid.Col>
-          </Grid.Row>
+        <div className="center-review-div">
+          <div className="account-div ">
+            <Grid.Row cards={true}>
+              <Grid.Col width={6} sm={4} lg={2}>
+                <StatsCard
+                  layout={1}
+                  movement={this.state.delta}
+                  total={this.state.rating}
+                  label="Based on our criteria"
+                />
+              </Grid.Col>
+              <Grid.Col width={6} sm={4} lg={2}>
+                <StatsCard
+                  layout={1}
+                  total={this.state.ticker}
+                  label="Ticker"
+                />
+              </Grid.Col>
+              <Grid.Col width={6} sm={4} lg={2}>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>Company:</Card.Title>
+                  </Card.Header>
+                  <Card.Body>{this.state.companyMeta[0]}</Card.Body>
+                </Card>
+              </Grid.Col>
+              <Grid.Col width={6} sm={4} lg={2}>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>Sector:</Card.Title>
+                  </Card.Header>
+                  <Card.Body>{this.state.companyMeta[1]}</Card.Body>
+                </Card>
+              </Grid.Col>
+              <Grid.Col width={6} sm={4} lg={2}>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>Misc. Information:</Card.Title>
+                  </Card.Header>
+                  <Card.Body>{this.state.companyMeta[2]}</Card.Body>
+                </Card>
+              </Grid.Col>
+              <Grid.Col width={6} sm={4} lg={2}>
+                <StatsCard
+                  layout={1}
+                  movement={-1}
+                  total="621"
+                  label="Products"
+                />
+              </Grid.Col>
+            </Grid.Row>
 
-          <Grid.Row cards={true} className="pies-and-big-numbers">
-            <Grid.Col sm={6}>
-              <Card>
-                <Card.Header>
-                  <Card.Title>Article Ratio </Card.Title>
-                </Card.Header>
-                <Card.Body>
-                  <C3Chart
-                    /*
+            <Grid.Row cards={true} className="pies-and-big-numbers">
+              <Grid.Col sm={6}>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>Article Ratio </Card.Title>
+                  </Card.Header>
+                  <Card.Body>
+                    <C3Chart
+                      /*
                 onrendered = { function() {
                         d3.selectAll(".c3-chart-arc text").each(function(v) {
                         var label = d3.select(this);
@@ -459,123 +461,124 @@ export default class Review extends Component {
 
     */
 
-                    className="donut"
-                    data={{
-                      columns: [
-                        // each columns data
-                        ['Positive', this.state.goodcount],
-                        ['Negative', this.state.badcount]
-                      ],
-                      type: 'donut', // default type of chart
-                      colors: {
-                        Positive: colors['green'],
-                        Negative: colors['red']
-                      },
-                      names: {
-                        // name of each serie
-                        Positive: 'Positive Articles',
-                        Negative: 'Negative Articles'
-                      },
-                      labels: {
-                        Positive: 'Positive Articles',
-                        Negative: 'Negative Articles'
-                      }
-                    }}
-                    style={{ height: '12rem' }}
-                    donut={{
-                      label: {
-                        show: true,
-                        format: function(value, ratio, id, name, label) {
-                          return 'Category: '.concat(id)
-                        }
-                      }
-                    }}
-                    tooltip={{
-                      format: {
-                        name: function(name, ratio, id, index) {
-                          return ''
+                      className="donut"
+                      data={{
+                        columns: [
+                          // each columns data
+                          ['Positive', this.state.goodcount],
+                          ['Negative', this.state.badcount]
+                        ],
+                        type: 'donut', // default type of chart
+                        colors: {
+                          Positive: colors['green'],
+                          Negative: colors['red']
                         },
-                        value: function(value, ratio, id, index) {
-                          return Math.trunc(ratio * 100)
-                            .toString()
-                            .concat('%')
+                        names: {
+                          // name of each serie
+                          Positive: 'Positive Articles',
+                          Negative: 'Negative Articles'
+                        },
+                        labels: {
+                          Positive: 'Positive Articles',
+                          Negative: 'Negative Articles'
                         }
-                      }
-                    }}
-                    legend={{
-                      show: false //hide legend
-                    }}
-                    padding={{
-                      bottom: 0,
-                      top: 0
-                    }}
-                  />
-                </Card.Body>
-              </Card>
-            </Grid.Col>
-            <Grid.Col sm={6}>
-              <Card>
-                <Card.Header>
-                  <Card.Title>Article List</Card.Title>
-                </Card.Header>
-                <Card.Body>
-                  <div className="table-div">
-                    <table class="table table-striped table-bordered personaltable">
-                      {this.createTable()}
-                    </table>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Grid.Col>
+                      }}
+                      style={{ height: '12rem' }}
+                      donut={{
+                        label: {
+                          show: true,
+                          format: function(value, ratio, id, name, label) {
+                            return 'Category: '.concat(id)
+                          }
+                        }
+                      }}
+                      tooltip={{
+                        format: {
+                          name: function(name, ratio, id, index) {
+                            return ''
+                          },
+                          value: function(value, ratio, id, index) {
+                            return Math.trunc(ratio * 100)
+                              .toString()
+                              .concat('%')
+                          }
+                        }
+                      }}
+                      legend={{
+                        show: false //hide legend
+                      }}
+                      padding={{
+                        bottom: 0,
+                        top: 0
+                      }}
+                    />
+                  </Card.Body>
+                </Card>
+              </Grid.Col>
+              <Grid.Col sm={6}>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>Article List</Card.Title>
+                  </Card.Header>
+                  <Card.Body>
+                    <div className="table-div">
+                      <table class="table table-striped table-bordered personaltable">
+                        {this.createTable()}
+                      </table>
+                    </div>
+                  </Card.Body>
+                </Card>
+              </Grid.Col>
 
-            <Grid.Col sm={6} className="big-numbers">
-              <ProgressCard
-                header="Number of Negative Articles"
-                content={this.state.goodcount}
-                progressColor="red"
-                progressWidth={
-                  100 *
-                  (this.state.badcount /
-                    (this.state.goodcount + this.state.badcount))
-                }
-              />
-            </Grid.Col>
-
-            <Grid.Col sm={6} className="big-numbers">
-              <ProgressCard
-                header="Number of Positive Articles"
-                content={this.state.badcount}
-                progressColor="green"
-                progressWidth={
-                  100 *
-                  (this.state.goodcount /
-                    (this.state.goodcount + this.state.badcount))
-                }
-              />
-            </Grid.Col>
-          </Grid.Row>
-
-          <Grid.Row cards={true}>
-            <Grid.Col sm={6} className="big-numbers">
-              <Card>
-                <TradingViewWidget
-                  className="trading-widget-react"
-                  symbol={'NASDAQ:'.concat(this.state.ticker)}
-                  theme={Themes.LIGHT}
-                  interval={IntervalTypes.W}
-                  style={BarStyles.HOLLOW_CANDLES}
-                  width="2000"
-                  height="200"
-                  news={['headlines']}
-                  studies={['BB@tv-basicstudies']}
+              <Grid.Col sm={6} className="big-numbers">
+                <ProgressCard
+                  header="Number of Negative Articles"
+                  content={this.state.goodcount}
+                  progressColor="red"
+                  progressWidth={
+                    100 *
+                    (this.state.badcount /
+                      (this.state.goodcount + this.state.badcount))
+                  }
                 />
-              </Card>
-            </Grid.Col>
-          </Grid.Row>
+              </Grid.Col>
+
+              <Grid.Col sm={6} className="big-numbers">
+                <ProgressCard
+                  header="Number of Positive Articles"
+                  content={this.state.badcount}
+                  progressColor="green"
+                  progressWidth={
+                    100 *
+                    (this.state.goodcount /
+                      (this.state.goodcount + this.state.badcount))
+                  }
+                />
+              </Grid.Col>
+            </Grid.Row>
+
+            <Grid.Row cards={true}>
+              <Grid.Col sm={6} className="big-numbers">
+                <Card>
+                  <TradingViewWidget
+                    className="trading-widget-react"
+                    symbol={'NASDAQ:'.concat(this.state.ticker)}
+                    theme={Themes.LIGHT}
+                    interval={IntervalTypes.W}
+                    style={BarStyles.HOLLOW_CANDLES}
+                    width="2000"
+                    height="200"
+                    news={['headlines']}
+                    studies={['BB@tv-basicstudies']}
+                  />
+                </Card>
+              </Grid.Col>
+            </Grid.Row>
+          </div>
         </div>
       )
     }
 
-    return <div className="center-review-div">{form}</div>
+    return <div>{form}</div>
   }
 }
