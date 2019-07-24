@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 .account-div {
   position: absolute;
   top: 9%;
