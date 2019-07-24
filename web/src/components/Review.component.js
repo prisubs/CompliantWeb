@@ -6,8 +6,11 @@ import Calendar from 'react-calendar'
 import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
-import { Icon, Input, AutoComplete } from 'antd'
+import { Input, AutoComplete } from 'antd'
+import { Helmet } from 'react-helmet'
+
 import 'antd/dist/antd.css'
+/*
 import {
   Page,
   Avatar,
@@ -26,6 +29,9 @@ import {
   Badge,
   AccountDropdown
 } from 'tabler-react'
+*/
+import { Button } from 'tabler-react'
+import { Statistic, Card, Row, Col, Icon } from 'antd'
 import * as d3 from 'd3'
 import 'tabler-react/dist/Tabler.css'
 import C3Chart from 'react-c3js'
@@ -39,7 +45,7 @@ import TradingViewWidget, {
   IntervalTypes,
   BarStyles
 } from 'react-tradingview-widget'
-
+const TITLE = 'Review Ticker'
 const { Option, OptGroup } = AutoComplete
 const dataSource = [
   'AMD',
@@ -412,206 +418,77 @@ export default class Review extends Component {
         </div>
       ) */
       form = (
-        <div className="center-review-div">
-          <div className="account-div ">
-            <Grid.Row cards={true}>
-              <Grid.Col width={6} sm={4} lg={2}>
-                <StatsCard
-                  layout={1}
-                  movement={this.state.delta}
-                  total={this.state.rating}
-                  label="Based on our criteria"
-                />
-              </Grid.Col>
-              <Grid.Col width={6} sm={4} lg={2}>
-                <StatsCard
-                  layout={1}
-                  total={this.state.ticker}
-                  label="Ticker"
-                />
-              </Grid.Col>
-              <Grid.Col width={6} sm={4} lg={2}>
-                <Card>
-                  <Card.Header>
-                    <Card.Title>Company:</Card.Title>
-                  </Card.Header>
-                  <Card.Body>{this.state.companyMeta[0]}</Card.Body>
-                </Card>
-              </Grid.Col>
-              <Grid.Col width={6} sm={4} lg={2}>
-                <Card>
-                  <Card.Header>
-                    <Card.Title>Sector:</Card.Title>
-                  </Card.Header>
-                  <Card.Body>{this.state.companyMeta[1]}</Card.Body>
-                </Card>
-              </Grid.Col>
-              <Grid.Col width={6} sm={4} lg={2}>
-                <Card>
-                  <Card.Header>
-                    <Card.Title>Misc. Information:</Card.Title>
-                  </Card.Header>
-                  <Card.Body>{this.state.companyMeta[2]}</Card.Body>
-                </Card>
-              </Grid.Col>
-              <Grid.Col width={6} sm={4} lg={2}>
-                <StatsCard
-                  layout={1}
-                  movement={-1}
-                  total="621"
-                  label="Products"
-                />
-              </Grid.Col>
-            </Grid.Row>
+        <div className="account-div">
+          <Row gutter={16}>
+            <Col span={12}>
+              <Statistic
+                title="Article Count"
+                value={this.state.goodcount + this.state.badcount}
+              />
+            </Col>
+            <Col span={12}>
+              <Statistic title="Delta" value={this.state.delta} precision={2} />
+            </Col>
+          </Row>
 
-            <Grid.Row cards={true} className="pies-and-big-numbers">
-              <Grid.Col sm={6}>
-                <Card>
-                  <Card.Header>
-                    <Card.Title>Article Ratio </Card.Title>
-                  </Card.Header>
-                  <Card.Body>
-                    <C3Chart
-                      /*
-                onrendered = { function() {
-                        d3.selectAll(".c3-chart-arc text").each(function(v) {
-                        var label = d3.select(this);
-                        var pos = label.attr("transform").match(/-?\d+(\.\d+)?/g);
-
-
-                        if (pos[0] < 0) {
-                            pos[0] = pos[0] - 40
-                        }
-                        if (pos[0] >= 0) {
-                            pos[0] = pos[0] + 100
-                        }
-                        //pos[1] = pos[1] - 40
-                        label.attr("transform", "translate("+ pos[0]  +","+ pos[1] +")");
-                        })
-                 }
+          <Row gutter={16}>
+            <Col span={12}>
+              <Statistic
+                title="Rating"
+                value={this.state.rating}
+                prefix={
+                  this.state.rating == 'SELL' ? (
+                    <Icon type="dislike" />
+                  ) : (
+                    <Icon type="like" />
+                  )
                 }
+              />
+            </Col>
+            <Col span={12}>
+              <Statistic title="Unmerged" value={93} suffix="/ 100" />
+            </Col>
+          </Row>
 
-
-    */
-
-                      className="donut"
-                      data={{
-                        columns: [
-                          // each columns data
-                          ['Positive', this.state.goodcount],
-                          ['Negative', this.state.badcount]
-                        ],
-                        type: 'donut', // default type of chart
-                        colors: {
-                          Positive: colors['green'],
-                          Negative: colors['red']
-                        },
-                        names: {
-                          // name of each serie
-                          Positive: 'Positive Articles',
-                          Negative: 'Negative Articles'
-                        },
-                        labels: {
-                          Positive: 'Positive Articles',
-                          Negative: 'Negative Articles'
-                        }
-                      }}
-                      style={{ height: '12rem' }}
-                      donut={{
-                        label: {
-                          show: true,
-                          format: function(value, ratio, id, name, label) {
-                            return 'Category: '.concat(id)
-                          }
-                        }
-                      }}
-                      tooltip={{
-                        format: {
-                          name: function(name, ratio, id, index) {
-                            return ''
-                          },
-                          value: function(value, ratio, id, index) {
-                            return Math.trunc(ratio * 100)
-                              .toString()
-                              .concat('%')
-                          }
-                        }
-                      }}
-                      legend={{
-                        show: false //hide legend
-                      }}
-                      padding={{
-                        bottom: 0,
-                        top: 0
-                      }}
-                    />
-                  </Card.Body>
-                </Card>
-              </Grid.Col>
-              <Grid.Col sm={6}>
+          <div style={{ background: '#ECECEC', padding: '30px' }}>
+            <Row gutter={16}>
+              <Col span={12}>
                 <Card>
-                  <Card.Header>
-                    <Card.Title>Article List</Card.Title>
-                  </Card.Header>
-                  <Card.Body>
-                    <div className="table-div">
-                      <table class="table table-striped table-bordered personaltable">
-                        {this.createTable()}
-                      </table>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Grid.Col>
-
-              <Grid.Col sm={6} className="big-numbers">
-                <ProgressCard
-                  header="Number of Negative Articles"
-                  content={this.state.goodcount}
-                  progressColor="red"
-                  progressWidth={
-                    100 *
-                    (this.state.badcount /
-                      (this.state.goodcount + this.state.badcount))
-                  }
-                />
-              </Grid.Col>
-
-              <Grid.Col sm={6} className="big-numbers">
-                <ProgressCard
-                  header="Number of Positive Articles"
-                  content={this.state.badcount}
-                  progressColor="green"
-                  progressWidth={
-                    100 *
-                    (this.state.goodcount /
-                      (this.state.goodcount + this.state.badcount))
-                  }
-                />
-              </Grid.Col>
-            </Grid.Row>
-
-            <Grid.Row cards={true}>
-              <Grid.Col sm={6} className="big-numbers">
-                <Card>
-                  <TradingViewWidget
-                    className="trading-widget-react"
-                    symbol={'NASDAQ:'.concat(this.state.ticker)}
-                    theme={Themes.LIGHT}
-                    interval={IntervalTypes.W}
-                    style={BarStyles.HOLLOW_CANDLES}
-                    width="2000"
-                    height="200"
-                    news={['headlines']}
-                    studies={['BB@tv-basicstudies']}
+                  <Statistic
+                    title="Active"
+                    value={11.28}
+                    precision={2}
+                    valueStyle={{ color: '#3f8600' }}
+                    prefix={<Icon type="arrow-up" />}
+                    suffix="%"
                   />
                 </Card>
-              </Grid.Col>
-            </Grid.Row>
+              </Col>
+              <Col span={12}>
+                <Card>
+                  <Statistic
+                    title="Idle"
+                    value={9.3}
+                    precision={2}
+                    valueStyle={{ color: '#cf1322' }}
+                    prefix={<Icon type="arrow-down" />}
+                    suffix="%"
+                  />
+                </Card>
+              </Col>
+            </Row>
           </div>
         </div>
       )
     }
-
-    return <div>{form}</div>
+    return (
+      <div>
+        {' '}
+        <Helmet>
+          <title>{TITLE}</title>
+        </Helmet>
+        {form}
+      </div>
+    )
   }
 }
