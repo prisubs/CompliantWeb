@@ -13,6 +13,9 @@ import _pickle as cPickle
 import math
 import sys
 
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 '''
 [INPUT]
 ticker: 4-5 digit ticker on nyse [STRING]
@@ -337,5 +340,61 @@ def run_model_logistic(df, model_path):
     return Y_predicted.tolist(), Y_test.tolist()
 
 
-def output_graph(headlines):
+def output_graph(ticker, start_date):
+    docs, dates, prices = weekly_data_gather(ticker, start_date)
+    sentiments = weekly_doc_aggregator(docs)
+    df = fix_visualize(dates, prices, sentiments)
+    perform_visualization(df, ticker)
     return
+
+
+def fix_visualize(dates, prices, sentiments):
+    df = pd.DataFrame({"dates": dates, "prices": prices, "sent": sentiments})
+    df = df.replace(0, pd.np.nan).dropna(axis=0, how='any')
+    return df
+
+
+def perform_visualization(df, ticker):
+    dates, sentiments, prices = df["dates"], df["sent"], df["prices"]
+    fig = sns.lineplot(dates, sentiments, color='black')
+    ax2 = plt.twinx()
+    sns.lineplot(dates, prices, ax=ax2, color='green')
+    fig.set_title("sentiment of {0} from {1} to {2}".format(ticker, dates[0], dates[len(dates)-1]))
+    fig.set_xticklabels(dates)
+    for item in fig.get_xticklabels():
+        item.set_rotation(60)
+    return fig
+
+
+def weekly_data_gather(ticker, start_date):
+    r, dates, prices = [], [], []
+    client = TiingoClient({"api_key": "a265fc4a1013923f970d16e7348195074e97fcb0"})
+    dt_obj = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    query_ticker = lambda t, s, e: client.get_news(tickers=[t], startDate=d1, endDate=d2)
+    get_price = lambda t, s, e: client.get_ticker_price(ticker, fmt='object',
+                                                        startDate=s, endDate=e, frequency='daily')
+    for i in range(7):
+        d1 = dt_obj + datetime.timedelta(days=i)
+        d2 = dt_obj + datetime.timedelta(days=i + 1)
+        d1, d2 = str(d1.strftime("%Y-%m-%d")), str(d2.strftime("%Y-%m-%d"))
+        json = query_ticker(ticker, d1, d2)
+        price = get_price(ticker, d1, d2)
+        if not price:
+            price = 0
+        else:
+            price = price[0].open
+        docs = [j["description"] for j in json]
+        r.append(docs)
+        dates.append(d1)
+        prices.append(price)
+    return r, dates, prices
+
+
+def weekly_doc_aggregator(documents_by_day):
+    sentiments = []
+    for day in documents_by_day:
+        total_sentiment = 0
+        for article in day:
+            total_sentiment += TextBlob(article).sentiment.polarity
+        sentiments.append(total_sentiment)
+    return sentiments
