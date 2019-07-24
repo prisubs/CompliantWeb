@@ -6,11 +6,11 @@ import Calendar from 'react-calendar'
 import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
-
+import { Icon, Input, AutoComplete } from 'antd'
+import 'antd/dist/antd.css'
 import {
   Page,
   Avatar,
-  Icon,
   Grid,
   Card,
   Text,
@@ -40,6 +40,19 @@ import TradingViewWidget, {
   BarStyles
 } from 'react-tradingview-widget'
 
+const { Option, OptGroup } = AutoComplete
+const dataSource = [
+  'AMD',
+  'QQQ',
+  'INTC',
+  'FB',
+  'TXN',
+  'MSFT',
+  'AAPL',
+  'V',
+  'TSLA'
+]
+
 export default class Review extends Component {
   state = {
     date: new Date(),
@@ -51,15 +64,20 @@ export default class Review extends Component {
     badcount: 0,
     submitted: false,
     delta: 0.0,
-    companyMeta: []
+    companyMeta: [],
+    dataSource: []
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
-
+  /*
   onChangeTicker = inputTicker => {
     this.setState({
       ticker: inputTicker.target.value
     })
+  } */
+
+  onChange = e => {
+    this.setState({ ticker: e })
   }
 
   onSubmit = event => {
@@ -78,7 +96,8 @@ export default class Review extends Component {
       badcount,
       submitted,
       delta,
-      companyMeta
+      companyMeta,
+      dataSource
     } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
@@ -305,6 +324,20 @@ export default class Review extends Component {
               <h4 className="n-o-ta"> Name of Ticker </h4>
             </div>
 
+            <AutoComplete
+              className="certain-category-search-wrapper"
+              style={{ width: 100 }}
+              dataSource={dataSource}
+              onChange={this.onChange}
+              placeholder="XXXX"
+              filterOption={(inputValue, option) =>
+                option.props.children
+                  .toUpperCase()
+                  .indexOf(inputValue.toUpperCase()) !== -1
+              }
+            />
+
+            {/*
             <FieldGroup
               id="formControlsTicker"
               size="5"
@@ -313,7 +346,7 @@ export default class Review extends Component {
               placeholder="XXXX"
               className="input-field-login"
               onChange={this.onChangeTicker}
-            />
+            /> */}
             <h3 className="n-o-t">
               By using our product you agree to our terms and services
             </h3>
