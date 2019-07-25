@@ -64,6 +64,7 @@ export default class Methods extends Component {
           </span>
           The regression in terms of matrices is the following:
           <img className="log-equation" src="images/LogReg_mle.png" />
+          <img src="images/TameGloomyKakarikis-size_restricted.gif" />
           <h6 className="btw-footer">
             &#169; 2019 Deutsche Bank AG
             <br /> By accessing and using this page you agree to the{' '}

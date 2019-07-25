@@ -8,8 +8,6 @@ import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
 import { Input, AutoComplete } from 'antd'
 import { Helmet } from 'react-helmet'
-
-import 'antd/dist/antd.css'
 /*
 import {
   Page,
@@ -36,6 +34,7 @@ import * as d3 from 'd3'
 import 'tabler-react/dist/Tabler.css'
 import C3Chart from 'react-c3js'
 import './../styles/predict.css'
+import 'antd/dist/antd.css'
 // import StripeCheckout from 'react-stripe-checkout'
 // import { CardElement } from 'react-stripe-elements'
 // import { StripeProvider } from 'react-stripe-elements'
@@ -332,7 +331,7 @@ export default class Review extends Component {
 
             <AutoComplete
               className="certain-category-search-wrapper"
-              style={{ width: 100 }}
+              style={{ width: 150 }}
               dataSource={dataSource}
               onChange={this.onChange}
               placeholder="XXXX"
@@ -356,9 +355,7 @@ export default class Review extends Component {
             <h3 className="n-o-t">
               By using our product you agree to our terms and services
             </h3>
-            <div className="hr-div">
-              <hr />
-            </div>
+            <div className="hr-div"></div>
 
             <div className="button-div">
               {/*
@@ -419,7 +416,7 @@ export default class Review extends Component {
       ) */
       form = (
         <div className="account-div">
-          <Row gutter={16}>
+          <Row gutter={16} className="gutter-row">
             <Col span={12}>
               <Statistic
                 title="Article Count"
@@ -431,7 +428,7 @@ export default class Review extends Component {
             </Col>
           </Row>
 
-          <Row gutter={16}>
+          <Row gutter={16} className="gutter-row">
             <Col span={12}>
               <Statistic
                 title="Rating"
@@ -446,11 +443,18 @@ export default class Review extends Component {
               />
             </Col>
             <Col span={12}>
-              <Statistic title="Unmerged" value={93} suffix="/ 100" />
+              <Statistic
+                title="Good Article Ratio"
+                value={this.state.goodcount}
+                suffix={'/ '.concat(this.state.goodcount + this.state.badcount)}
+              />
             </Col>
           </Row>
 
-          <div style={{ background: '#ECECEC', padding: '30px' }}>
+          <div
+            style={{ background: '#ECECEC', padding: '30px' }}
+            className="gutter-row"
+          >
             <Row gutter={16}>
               <Col span={12}>
                 <Card>
@@ -478,6 +482,18 @@ export default class Review extends Component {
               </Col>
             </Row>
           </div>
+
+          <TradingViewWidget
+            className="trading-widget-react"
+            symbol={'NASDAQ:'.concat(this.state.ticker)}
+            theme={Themes.LIGHT}
+            interval={IntervalTypes.W}
+            style={BarStyles.HOLLOW_CANDLES}
+            width="1000"
+            height="500"
+            news={['headlines']}
+            studies={['BB@tv-basicstudies']}
+          />
         </div>
       )
     }

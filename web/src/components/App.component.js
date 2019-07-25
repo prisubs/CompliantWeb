@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom'
 import './../styles/styles.css'
 import { FieldGroup } from './'
 import { ROUTES } from './../'
-import {Helmet} from "react-helmet";
-import Particles from 'react-particles-js';
-import TradingViewWidget,  { Themes, IntervalTypes, BarStyles} from 'react-tradingview-widget';
-
+import { Helmet } from 'react-helmet'
+import Particles from 'react-particles-js'
+import TradingViewWidget, {
+  Themes,
+  IntervalTypes,
+  BarStyles
+} from 'react-tradingview-widget'
+const TITLE = 'SentStockDB'
 
 class App extends Component<void> {
   state = {
@@ -21,7 +25,7 @@ class App extends Component<void> {
       email: inputEmail.target.value
     })
   }
-/*
+  /*
   componentDidMount() {
     if (
       this.props.location.pathname == ROUTES.INDEX &&
@@ -82,6 +86,9 @@ class App extends Component<void> {
   render() {
     return (
       <div>
+        <Helmet>
+          <title>{TITLE}</title>
+        </Helmet>
         <head>
           <link
             rel="stylesheet"
@@ -109,7 +116,8 @@ class App extends Component<void> {
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"
           />
-          {//<img class="img-responsive" src="images/home.jpg" alt="Graphic" />
+          {
+            //<img class="img-responsive" src="images/home.jpg" alt="Graphic" />
           }
           <h1>Take sentiment now to predict stocks then.</h1>
 
@@ -119,19 +127,21 @@ class App extends Component<void> {
               //<div dangerouslySetInnerHTML={createMarkup()}></div>
             }
             <div className="bnt-div">
-            <p className= "bold-new-take">A <b>Bold</b> New Take on Sentiment</p>
+              <p className="bold-new-take">
+                A <b>Bold</b> New Take on Sentiment
+              </p>
             </div>
-              <TradingViewWidget
-                className = "trading-widget-react"
-                symbol="NASDAQ:AAPL"
-                theme={Themes.LIGHT}
-                interval = {IntervalTypes.W}
-                style = {BarStyles.HOLLOW_CANDLES}
-                width =  "1500"
-                height =  "800"
-                 news = {["headlines"]}
-                 studies = {["BB@tv-basicstudies"]}
-              />
+            <TradingViewWidget
+              className="trading-widget-react"
+              symbol="NASDAQ:AAPL"
+              theme={Themes.LIGHT}
+              interval={IntervalTypes.W}
+              style={BarStyles.HOLLOW_CANDLES}
+              width="1500"
+              height="800"
+              news={['headlines']}
+              studies={['BB@tv-basicstudies']}
+            />
 
             <div class="tradingview-widget-copyright">
               <a
@@ -143,10 +153,9 @@ class App extends Component<void> {
               </a>{' '}
               by TradingView
             </div>
-
           </div>
         </body>
-        { /*
+        {/*
             <Particles className = "particle-canvas"  params={{
          "polygon" : {
             "draw": {
@@ -180,8 +189,7 @@ class App extends Component<void> {
 	        }
 	    }
 	}} />
-	*/
-	}
+	*/}
       </div>
     )
   }
