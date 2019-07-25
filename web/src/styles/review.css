@@ -47,7 +47,9 @@
   align-items: center !important;
   justify-content: center !important;
   position: fixed;
-  margin-left: 50% !important;
+  margin-left: 46% !important;
+  margin-top: 6%;
+  margin-bottom: 5%;
 }
 
 .ant-auto {
@@ -173,7 +175,7 @@ body {
 
 .button-div {
   text-align: center !important;
-  margin-top: 1% !important;
+  margin-top: 3% !important;
   justify-content: center !important;
 }
 
@@ -288,4 +290,8 @@ body {
   height: 192px;
   overflow: scroll !important;
   overflow-y: scroll !important;
+}
+
+.gutter-row {
+  margin-bottom: 1% !important;
 }
