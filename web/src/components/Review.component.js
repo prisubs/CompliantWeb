@@ -447,41 +447,68 @@ export default class Review extends Component {
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1">
-                <Icon type="pie-chart" />
-                <span>Option 1</span>
+                <Icon type="search" />
+                <span>Search for Stock</span>
               </Menu.Item>
               <Menu.Item key="2">
-                <Icon type="desktop" />
-                <span>Option 2</span>
+                <Icon type="eye" />
+                <span>News</span>
               </Menu.Item>
               <SubMenu
                 key="sub1"
                 title={
                   <span>
-                    <Icon type="user" />
-                    <span>User</span>
+                    <Icon type="fire" />
+                    <span>Popular Stocks</span>
                   </span>
                 }
               >
-                <Menu.Item key="3">Tom</Menu.Item>
-                <Menu.Item key="4">Bill</Menu.Item>
-                <Menu.Item key="5">Alex</Menu.Item>
+                <Menu.Item key="3">
+                  {' '}
+                  <Icon type="apple" />
+                  <span>AAPL</span>
+                </Menu.Item>
+                <Menu.Item key="4">
+                  {' '}
+                  <Icon type="windows" />
+                  <span>MSFT</span>
+                </Menu.Item>
+                <Menu.Item key="5">
+                  {' '}
+                  <Icon type="facebook" />
+                  <span>FB</span>
+                </Menu.Item>
+                <Menu.Item key="6">
+                  {' '}
+                  <Icon type="slack" />
+                  <span>WORK</span>
+                </Menu.Item>
+                <Menu.Item key="7">
+                  {' '}
+                  <Icon type="google" />
+                  <span>GOOGL</span>
+                </Menu.Item>
+                <Menu.Item key="8">
+                  {' '}
+                  <Icon type="twitter" />
+                  <span>TWTR</span>
+                </Menu.Item>
               </SubMenu>
               <SubMenu
                 key="sub2"
                 title={
                   <span>
                     <Icon type="team" />
-                    <span>Team</span>
+                    <span>Recent Stocks</span>
                   </span>
                 }
               >
-                <Menu.Item key="6">Team 1</Menu.Item>
-                <Menu.Item key="8">Team 2</Menu.Item>
+                <Menu.Item key="6">NVDA</Menu.Item>
+                <Menu.Item key="8">TAOBAO</Menu.Item>
               </SubMenu>
               <Menu.Item key="9">
                 <Icon type="file" />
-                <span>File</span>
+                <span>EXIT</span>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -556,13 +583,16 @@ export default class Review extends Component {
                     </Col>
                     <Col span={12}>
                       <Card>
-                        <Statistic
-                          title="Idle"
-                          value={9.3}
-                          precision={2}
-                          valueStyle={{ color: '#cf1322' }}
-                          prefix={<Icon type="arrow-down" />}
-                          suffix="%"
+                        <TradingViewWidget
+                          className="trading-widget-react"
+                          symbol="NASDAQ:AAPL"
+                          theme={Themes.LIGHT}
+                          interval={IntervalTypes.W}
+                          style={BarStyles.HOLLOW_CANDLES}
+                          width="300"
+                          height="300"
+                          news={['headlines']}
+                          studies={['BB@tv-basicstudies']}
                         />
                       </Card>
                     </Col>

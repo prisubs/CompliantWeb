@@ -363,6 +363,7 @@ def perform_visualization(df, ticker):
     fig.set_xticklabels(dates)
     for item in fig.get_xticklabels():
         item.set_rotation(60)
+    plt.savefig("web/testing.png")
     return fig
 
 
