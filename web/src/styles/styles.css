@@ -1,53 +1,53 @@
 body {
-    background-color: #FFFFFF !important;
+  background-color: #ffffff !important;
 }
 
-
 .trading-widget-react {
-    float: left !important;
-    margin-left: 0px;
-    margin-top: 30% !important;
-    top: 50% !important;
-    z-index: -1000 !important;
+  float: left !important;
+  margin-left: 0px;
+  margin-top: 30% !important;
+  top: 50% !important;
+  z-index: -1000 !important;
 }
 
 .img-responsive {
-    position: relative;
-    top: 50%;
-    right: 50%;
+  position: relative;
+  top: 50%;
+  right: 50%;
 }
 
 .blue-text {
-    top: 0% !important;
-      justify-content: center;
-    left: 50% !important;
+  top: 0% !important;
+  justify-content: center;
+  left: 50% !important;
 }
-
 
 * {
   font-family: 'Helvetica', 'Arial';
   margin-bottom: 0px !important;
-   }
-
+}
 
 .tradingview-widget-container {
-    margin-top: 5% !important;
+  margin-top: 5% !important;
 }
 
 .bold-new-take {
-   font-size: 36px;
-   font-family: 'Helvetica', 'Arial';
-   margin-top: -3% !important;
-
+  font-size: 36px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  margin-top: -3% !important;
 }
-
 
 .bold-new-take b {
-    font-family: 'Helvetica', 'Arial';
-    text-shadow: 1px .5px #0018a8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  text-shadow: 1px 0.5px #0018a8;
 }
 
-.bnt-div {  height: 1%;
+.bnt-div {
+  height: 1%;
   width: 100%;
   display: flex;
   position: fixed;
@@ -57,14 +57,14 @@ body {
 }
 
 .particles {
-    z-index: 100;
+  z-index: 100;
 }
 
 .particle-canvas {
-    position:fixed !important;
-    left:0  !important;
-    top:0  !important;
-    width:100%  !important;
-    height:100% !important;
-    z-index: 1000 !important;
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1000 !important;
 }

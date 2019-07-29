@@ -8,6 +8,7 @@ import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
 import { Input, AutoComplete } from 'antd'
 import { Helmet } from 'react-helmet'
+import { Doughnut } from 'react-chartjs-2'
 /*
 import {
   Page,
@@ -29,7 +30,7 @@ import {
 } from 'tabler-react'
 */
 import { Button } from 'tabler-react'
-import { Statistic, Card, Row, Col, Icon } from 'antd'
+import { Statistic, Card, Row, Col, Icon, Menu, Layout, Breadcrumb } from 'antd'
 import * as d3 from 'd3'
 import 'tabler-react/dist/Tabler.css'
 import C3Chart from 'react-c3js'
@@ -46,6 +47,8 @@ import TradingViewWidget, {
 } from 'react-tradingview-widget'
 const TITLE = 'Review Ticker'
 const { Option, OptGroup } = AutoComplete
+const { SubMenu } = Menu
+const { Header, Content, Footer, Sider } = Layout
 const dataSource = [
   'AMD',
   'QQQ',
@@ -57,6 +60,16 @@ const dataSource = [
   'V',
   'TSLA'
 ]
+const data = {
+  labels: ['Red', 'Green', 'Yellow'],
+  datasets: [
+    {
+      data: [300, 50, 100],
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+    }
+  ]
+}
 
 export default class Review extends Component {
   state = {
@@ -70,7 +83,8 @@ export default class Review extends Component {
     submitted: false,
     delta: 0.0,
     companyMeta: [],
-    dataSource: []
+    dataSource: [],
+    collapsed: false
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -80,6 +94,10 @@ export default class Review extends Component {
       ticker: inputTicker.target.value
     })
   } */
+  onCollapse = collapsed => {
+    console.log(collapsed)
+    this.setState({ collapsed })
+  }
 
   onChange = e => {
     this.setState({ ticker: e })
@@ -102,7 +120,8 @@ export default class Review extends Component {
       submitted,
       delta,
       companyMeta,
-      dataSource
+      dataSource,
+      collapsed
     } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
@@ -193,6 +212,9 @@ export default class Review extends Component {
 
   handleFailure = () => {}
 
+  handleClick = e => {
+    console.log('click ', e)
+  }
   createTable = () => {
     let table = []
     table.push(
@@ -415,86 +437,144 @@ export default class Review extends Component {
         </div>
       ) */
       form = (
-        <div className="account-div">
-          <Row gutter={16} className="gutter-row">
-            <Col span={12}>
-              <Statistic
-                title="Article Count"
-                value={this.state.goodcount + this.state.badcount}
-              />
-            </Col>
-            <Col span={12}>
-              <Statistic title="Delta" value={this.state.delta} precision={2} />
-            </Col>
-          </Row>
-
-          <Row gutter={16} className="gutter-row">
-            <Col span={12}>
-              <Statistic
-                title="Rating"
-                value={this.state.rating}
-                prefix={
-                  this.state.rating == 'SELL' ? (
-                    <Icon type="dislike" />
-                  ) : (
-                    <Icon type="like" />
-                  )
-                }
-              />
-            </Col>
-            <Col span={12}>
-              <Statistic
-                title="Good Article Ratio"
-                value={this.state.goodcount}
-                suffix={'/ '.concat(this.state.goodcount + this.state.badcount)}
-              />
-            </Col>
-          </Row>
-
-          <div
-            style={{ background: '#ECECEC', padding: '30px' }}
-            className="gutter-row"
+        <Layout style={{ minHeight: '100vh' }}>
+          <Sider
+            className="lets-try-to-edit-antd"
+            collapsible
+            collapsed={this.state.collapsed}
+            onCollapse={this.onCollapse}
           >
-            <Row gutter={16}>
-              <Col span={12}>
-                <Card>
-                  <Statistic
-                    title="Active"
-                    value={11.28}
-                    precision={2}
-                    valueStyle={{ color: '#3f8600' }}
-                    prefix={<Icon type="arrow-up" />}
-                    suffix="%"
-                  />
-                </Card>
-              </Col>
-              <Col span={12}>
-                <Card>
-                  <Statistic
-                    title="Idle"
-                    value={9.3}
-                    precision={2}
-                    valueStyle={{ color: '#cf1322' }}
-                    prefix={<Icon type="arrow-down" />}
-                    suffix="%"
-                  />
-                </Card>
-              </Col>
-            </Row>
-          </div>
+            <div className="logo" />
+            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+              <Menu.Item key="1">
+                <Icon type="pie-chart" />
+                <span>Option 1</span>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Icon type="desktop" />
+                <span>Option 2</span>
+              </Menu.Item>
+              <SubMenu
+                key="sub1"
+                title={
+                  <span>
+                    <Icon type="user" />
+                    <span>User</span>
+                  </span>
+                }
+              >
+                <Menu.Item key="3">Tom</Menu.Item>
+                <Menu.Item key="4">Bill</Menu.Item>
+                <Menu.Item key="5">Alex</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="sub2"
+                title={
+                  <span>
+                    <Icon type="team" />
+                    <span>Team</span>
+                  </span>
+                }
+              >
+                <Menu.Item key="6">Team 1</Menu.Item>
+                <Menu.Item key="8">Team 2</Menu.Item>
+              </SubMenu>
+              <Menu.Item key="9">
+                <Icon type="file" />
+                <span>File</span>
+              </Menu.Item>
+            </Menu>
+          </Sider>
+          <Layout>
+            <Header style={{ background: '#fff', padding: 0 }} />
+            <Content style={{ margin: '0 16px' }}>
+              <Breadcrumb style={{ margin: '16px 0' }}>
+                <Breadcrumb.Item>Ticker</Breadcrumb.Item>
+                <Breadcrumb.Item>AAPL</Breadcrumb.Item>
+              </Breadcrumb>
+              <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                {' '}
+                <Row gutter={16}>
+                  <Col span={12}>
+                    <Statistic title="Active Users" value={112893} />
+                  </Col>
+                  <Col span={12}>
+                    <Statistic
+                      title="Account Balance (CNY)"
+                      value={112893}
+                      precision={2}
+                    />
+                  </Col>
+                </Row>
+                <Row gutter={16}>
+                  <Col span={12}>
+                    <Statistic
+                      title="Feedback"
+                      value={1128}
+                      prefix={<Icon type="like" />}
+                    />
+                  </Col>
+                  <Col span={12}>
+                    <Statistic title="Unmerged" value={93} suffix="/ 100" />
+                  </Col>
+                </Row>
+                <div style={{ background: '#ECECEC', padding: '30px' }}>
+                  <Row gutter={16}>
+                    <Col span={12}>
+                      <Card>
+                        <Statistic
+                          title="Active"
+                          value={11.28}
+                          precision={2}
+                          valueStyle={{ color: '#3f8600' }}
+                          prefix={<Icon type="arrow-up" />}
+                          suffix="%"
+                        />
+                      </Card>
+                    </Col>
+                    <Col span={12}>
+                      <Card>
+                        <Statistic
+                          title="Idle"
+                          value={9.3}
+                          precision={2}
+                          valueStyle={{ color: '#cf1322' }}
+                          prefix={<Icon type="arrow-down" />}
+                          suffix="%"
+                        />
+                      </Card>
+                    </Col>
+                  </Row>
 
-          <TradingViewWidget
-            className="trading-widget-react"
-            symbol={'NASDAQ:'.concat(this.state.ticker)}
-            theme={Themes.LIGHT}
-            interval={IntervalTypes.W}
-            style={BarStyles.HOLLOW_CANDLES}
-            width="1000"
-            height="500"
-            news={['headlines']}
-            studies={['BB@tv-basicstudies']}
-          />
-        </div>
+                  <Row gutter={16}>
+                    <Col span={12}>
+                      <Card>
+                        <div className="donut">
+                          <Doughnut data={data} />
+                        </div>
+                      </Card>
+                    </Col>
+                    <Col span={12}>
+                      <Card>
+                        <Statistic
+                          title="Idle"
+                          value={9.3}
+                          precision={2}
+                          valueStyle={{ color: '#cf1322' }}
+                          prefix={<Icon type="arrow-down" />}
+                          suffix="%"
+                        />
+                      </Card>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>
+              Deutsche Bank ©2019 Created by Richard Scherrer
+            </Footer>
+          </Layout>
+        </Layout>
       )
     }
     return (

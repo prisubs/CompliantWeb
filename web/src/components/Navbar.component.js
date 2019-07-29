@@ -36,6 +36,7 @@ class Navbar extends PureComponent {
             <div className="dropdown-content">
               <Link to={ROUTES.INDEX}>Account Info</Link>
               <Link to={ROUTES.BUY}>Settings</Link>
+              https://www.tradingview.com/ideas/graph/
               <Link to={ROUTES.INDEX} onClick={() => this.props.logout()}>
                 {' '}
                 Logout
@@ -107,93 +108,6 @@ class Navbar extends PureComponent {
           </Link>
         </div>
       </div>
-    )
-
-    var sidebar = (
-      <ul className="side-bar-class">
-        <li>
-          <span className="lakeview">Cook County</span>
-          <br />
-          <span className="ACTIVE-FILING-PERIOD">ACTIVE FILING PERIOD</span>
-        </li>
-        <li className="days-left-li">
-          <span className="days-left">12 Days Left</span>
-          <br />
-          <span className="to-submit-an-appeal">to submit an appeal</span>
-        </li>
-        <li
-          className={
-            this.props.location.pathname === ROUTES.INDEX
-              ? 'sidebar-button-white'
-              : 'sidebar-button'
-          }
-        >
-          <Link
-            to={ROUTES.INDEX}
-            className={
-              this.props.location.pathname === ROUTES.INDEX
-                ? 'HOME-white'
-                : 'HOME'
-            }
-          >
-            HOME
-          </Link>
-        </li>
-        <li
-          className={
-            this.props.location.pathname === ROUTES.INDEX
-              ? 'sidebar-button-two-white'
-              : 'sidebar-button-two'
-          }
-        >
-          <Link
-            to={ROUTES.INDEX}
-            className={
-              this.props.location.pathname === ROUTES.INDEX
-                ? 'HOME-white'
-                : 'HOME'
-            }
-          >
-            GUARANTEE PORTAL
-          </Link>
-        </li>
-        <li
-          className={
-            this.props.location.pathname === ROUTES.INDEX
-              ? 'sidebar-button-two-white'
-              : 'sidebar-button-two'
-          }
-        >
-          <Link
-            to={ROUTES.INDEX}
-            className={
-              this.props.location.pathname === ROUTES.INDEX
-                ? 'HOME-white'
-                : 'HOME'
-            }
-          >
-            FAQ
-          </Link>
-        </li>
-        <li
-          className={
-            this.props.location.pathname === ROUTES.INDEX
-              ? 'sidebar-button-two-white'
-              : 'sidebar-button-two'
-          }
-        >
-          <Link
-            to={ROUTES.INDEX}
-            className={
-              this.props.location.pathname === ROUTES.INDEX
-                ? 'HOME-white'
-                : 'HOME'
-            }
-          >
-            CONTACT US
-          </Link>
-        </li>
-      </ul>
     )
 
     {
