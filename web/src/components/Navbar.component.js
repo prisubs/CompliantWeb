@@ -6,47 +6,6 @@ import { Flag, Icon } from 'tabler-react'
 
 class Navbar extends PureComponent {
   render() {
-    var navbar = (
-      <div className="navbar">
-        <Link to={ROUTES.INDEX}>
-          <img
-            className="imgnav"
-            alt="logo in white"
-            src="images/white-logo.png"
-          />
-        </Link>
-        {
-          // {!this.props.isLoggedIn && (
-          //   <Link to={ROUTES.LOGIN} className="itemr">
-          //     Sign In
-          //   </Link>
-          // )}
-        }
-
-        {this.props.isLoggedIn && (
-          <div className="dropdown">
-            <button className="dropbtn">
-              <img
-                src="images/account.svg"
-                alt="account"
-                className="user"
-                id="1"
-              />
-            </button>
-            <div className="dropdown-content">
-              <Link to={ROUTES.INDEX}>Account Info</Link>
-              <Link to={ROUTES.BUY}>Settings</Link>
-              https://www.tradingview.com/ideas/graph/
-              <Link to={ROUTES.INDEX} onClick={() => this.props.logout()}>
-                {' '}
-                Logout
-              </Link>
-            </div>
-          </div>
-        )}
-      </div>
-    )
-
     var loginNavbar = (
       <div className="login-navbar">
         <a href="http://localhost:3000/">

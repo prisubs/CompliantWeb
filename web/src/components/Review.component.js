@@ -6,7 +6,7 @@ import Calendar from 'react-calendar'
 import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
-import { Input, AutoComplete } from 'antd'
+import { AutoComplete } from 'antd'
 import { Helmet } from 'react-helmet'
 import { Doughnut } from 'react-chartjs-2'
 /*
@@ -30,7 +30,17 @@ import {
 } from 'tabler-react'
 */
 import { Button } from 'tabler-react'
-import { Statistic, Card, Row, Col, Icon, Menu, Layout, Breadcrumb } from 'antd'
+import {
+  Statistic,
+  Card,
+  Row,
+  Col,
+  Icon,
+  Menu,
+  Layout,
+  Breadcrumb,
+  Input
+} from 'antd'
 import * as d3 from 'd3'
 import 'tabler-react/dist/Tabler.css'
 import C3Chart from 'react-c3js'
@@ -60,6 +70,7 @@ const dataSource = [
   'V',
   'TSLA'
 ]
+const { Search } = Input
 
 export default class Review extends Component {
   state = {
@@ -481,190 +492,197 @@ export default class Review extends Component {
         </div>
       ) */
       form = (
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sider
-            className="lets-try-to-edit-antd"
-            collapsible
-            collapsed={this.state.collapsed}
-            onCollapse={this.onCollapse}
-            style={{ background: '#fff' }}
-            theme="light"
-          >
-            <div className="logo" />
-            <Menu defaultSelectedKeys={['1']} mode="inline">
-              <Menu.Item key="1">
-                <Icon type="search" />
-                <span>Search for Stock</span>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Icon type="eye" />
-                <span>News</span>
-              </Menu.Item>
-              <SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <Icon type="fire" />
-                    <span>Popular Stocks</span>
-                  </span>
-                }
-              >
-                <Menu.Item key="3" onClick={this.applclick}>
-                  {' '}
-                  <Icon type="apple" />
-                  <span>AAPL</span>
+        <div className="scrunching-layout">
+          <Layout style={{ minHeight: '100vh' }}>
+            <Sider
+              className="lets-try-to-edit-antd"
+              collapsible
+              collapsed={this.state.collapsed}
+              onCollapse={this.onCollapse}
+              style={{ background: '#fff' }}
+              theme="light"
+            >
+              <div className="logo" />
+              <Menu defaultSelectedKeys={['1']} mode="inline">
+                <Menu.Item key="1">
+                  <Search
+                    placeholder="input search text"
+                    onSearch={value => console.log(value)}
+                    style={{ width: 180 }}
+                  />
                 </Menu.Item>
-                <Menu.Item key="4" onClick={this.msftclick}>
-                  {' '}
-                  <Icon type="windows" />
-                  <span>MSFT</span>
+                <Menu.Item key="2">
+                  <Icon type="eye" />
+                  <span>News</span>
                 </Menu.Item>
-                <Menu.Item key="5" onClick={this.fbclick}>
-                  {' '}
-                  <Icon type="facebook" />
-                  <span>FB</span>
+                <SubMenu
+                  key="sub1"
+                  title={
+                    <span>
+                      <Icon type="fire" />
+                      <span>Popular Stocks</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="3" onClick={this.applclick}>
+                    {' '}
+                    <Icon type="apple" />
+                    <span>AAPL</span>
+                  </Menu.Item>
+                  <Menu.Item key="4" onClick={this.msftclick}>
+                    {' '}
+                    <Icon type="windows" />
+                    <span>MSFT</span>
+                  </Menu.Item>
+                  <Menu.Item key="5" onClick={this.fbclick}>
+                    {' '}
+                    <Icon type="facebook" />
+                    <span>FB</span>
+                  </Menu.Item>
+                  <Menu.Item key="6" onClick={this.workclick}>
+                    {' '}
+                    <Icon type="slack" />
+                    <span>WORK</span>
+                  </Menu.Item>
+                  <Menu.Item key="7" onClick={this.googlclick}>
+                    {' '}
+                    <Icon type="google" />
+                    <span>GOOGL</span>
+                  </Menu.Item>
+                  <Menu.Item key="8" onClick={this.twtrclick}>
+                    {' '}
+                    <Icon type="twitter" />
+                    <span>TWTR</span>
+                  </Menu.Item>
+                </SubMenu>
+                <SubMenu
+                  key="sub2"
+                  title={
+                    <span>
+                      <Icon type="team" />
+                      <span>Recent Stocks</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="9">{this.state.recenterStock}</Menu.Item>
+                  <Menu.Item key="10">{this.state.recentStock}</Menu.Item>
+                </SubMenu>
+                <Menu.Item key="9">
+                  <Icon type="file" />
+                  <span>EXIT</span>
                 </Menu.Item>
-                <Menu.Item key="6" onClick={this.workclick}>
+              </Menu>
+            </Sider>
+            <Layout>
+              <Header style={{ background: '#fff', padding: 0 }} />
+              <Content style={{ margin: '0 16px' }}>
+                <Breadcrumb style={{ margin: '20px 0' }}>
+                  <Breadcrumb.Item>Ticker</Breadcrumb.Item>
+                  <Breadcrumb.Item>{this.state.ticker}</Breadcrumb.Item>
+                </Breadcrumb>
+                <div
+                  style={{ padding: 24, background: '#fff', minHeight: 360 }}
+                >
                   {' '}
-                  <Icon type="slack" />
-                  <span>WORK</span>
-                </Menu.Item>
-                <Menu.Item key="7" onClick={this.googlclick}>
-                  {' '}
-                  <Icon type="google" />
-                  <span>GOOGL</span>
-                </Menu.Item>
-                <Menu.Item key="8" onClick={this.twtrclick}>
-                  {' '}
-                  <Icon type="twitter" />
-                  <span>TWTR</span>
-                </Menu.Item>
-              </SubMenu>
-              <SubMenu
-                key="sub2"
-                title={
-                  <span>
-                    <Icon type="team" />
-                    <span>Recent Stocks</span>
-                  </span>
-                }
-              >
-                <Menu.Item key="9">{this.state.recenterStock}</Menu.Item>
-                <Menu.Item key="10">{this.state.recentStock}</Menu.Item>
-              </SubMenu>
-              <Menu.Item key="9">
-                <Icon type="file" />
-                <span>EXIT</span>
-              </Menu.Item>
-            </Menu>
-          </Sider>
-          <Layout>
-            <Header style={{ background: '#fff', padding: 0 }} />
-            <Content style={{ margin: '0 16px' }}>
-              <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>Ticker</Breadcrumb.Item>
-                <Breadcrumb.Item>{this.state.ticker}</Breadcrumb.Item>
-              </Breadcrumb>
-              <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-                {' '}
-                <Row gutter={16}>
-                  <Col span={12}>
-                    <Statistic title="Active Users" value={112893} />
-                  </Col>
-                  <Col span={12}>
-                    <Statistic
-                      title="Account Balance (CNY)"
-                      value={112893}
-                      precision={2}
-                    />
-                  </Col>
-                </Row>
-                <Row gutter={16}>
-                  <Col span={12}>
-                    <Statistic
-                      title="Good Articles"
-                      value={this.state.goodcount}
-                      prefix={<Icon type="like" />}
-                    />
-                  </Col>
-                  <Col span={12}>
-                    <Statistic title="Unmerged" value={93} suffix="/ 100" />
-                  </Col>
-                </Row>
-                <div style={{ background: '#ECECEC', padding: '30px' }}>
                   <Row gutter={16}>
                     <Col span={12}>
-                      <Card>
-                        <Statistic
-                          title="Active"
-                          value={11.28}
-                          precision={2}
-                          valueStyle={{ color: '#3f8600' }}
-                          prefix={<Icon type="arrow-up" />}
-                          suffix="%"
-                        />
-                      </Card>
+                      <Statistic title="Active Users" value={112893} />
                     </Col>
                     <Col span={12}>
-                      <Card>
-                        <Statistic
-                          title="Idle"
-                          value={9.3}
-                          precision={2}
-                          valueStyle={{ color: '#cf1322' }}
-                          prefix={<Icon type="arrow-down" />}
-                          suffix="%"
-                        />
-                      </Card>
+                      <Statistic
+                        title="Account Balance (CNY)"
+                        value={112893}
+                        precision={2}
+                      />
                     </Col>
                   </Row>
-
                   <Row gutter={16}>
                     <Col span={12}>
-                      <Card>
-                        <div className="donut">
-                          <Doughnut
-                            data={{
-                              labels: ['Bad Articles', 'Good Articles'],
-                              datasets: [
-                                {
-                                  data: [
-                                    this.state.badcount,
-                                    this.state.goodcount
-                                  ],
-                                  backgroundColor: ['#FF6384', '#36A2EB'],
-                                  hoverBackgroundColor: ['#FF6384', '#36A2EB']
-                                }
-                              ]
-                            }}
+                      <Statistic
+                        title="Good Articles"
+                        value={this.state.goodcount}
+                        prefix={<Icon type="like" />}
+                      />
+                    </Col>
+                    <Col span={12}>
+                      <Statistic title="Unmerged" value={93} suffix="/ 100" />
+                    </Col>
+                  </Row>
+                  <div style={{ background: '#ECECEC', padding: '30px' }}>
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Card>
+                          <Statistic
+                            title="Active"
+                            value={11.28}
+                            precision={2}
+                            valueStyle={{ color: '#3f8600' }}
+                            prefix={<Icon type="arrow-up" />}
+                            suffix="%"
                           />
-                        </div>
-                      </Card>
-                    </Col>
-                    <Col span={12}>
-                      <Card>
-                        <TradingViewWidget
-                          className="trading-widget-react"
-                          symbol={'NASDAQ:'.concat(this.state.ticker)}
-                          theme={Themes.LIGHT}
-                          interval={IntervalTypes.W}
-                          style={BarStyles.HOLLOW_CANDLES}
-                          width="500"
-                          height="300"
-                          news={['headlines']}
-                          studies={['BB@tv-basicstudies']}
-                        />
-                      </Card>
-                    </Col>
-                  </Row>
+                        </Card>
+                      </Col>
+                      <Col span={12}>
+                        <Card>
+                          <Statistic
+                            title="Idle"
+                            value={9.3}
+                            precision={2}
+                            valueStyle={{ color: '#cf1322' }}
+                            prefix={<Icon type="arrow-down" />}
+                            suffix="%"
+                          />
+                        </Card>
+                      </Col>
+                    </Row>
+
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Card>
+                          <div className="donut">
+                            <Doughnut
+                              data={{
+                                labels: ['Bad Articles', 'Good Articles'],
+                                datasets: [
+                                  {
+                                    data: [
+                                      this.state.badcount,
+                                      this.state.goodcount
+                                    ],
+                                    backgroundColor: ['#FF6384', '#36A2EB'],
+                                    hoverBackgroundColor: ['#FF6384', '#36A2EB']
+                                  }
+                                ]
+                              }}
+                            />
+                          </div>
+                        </Card>
+                      </Col>
+                      <Col span={12}>
+                        <Card>
+                          <TradingViewWidget
+                            className="trading-widget-react"
+                            symbol={'NASDAQ:'.concat(this.state.ticker)}
+                            theme={Themes.LIGHT}
+                            interval={IntervalTypes.W}
+                            style={BarStyles.HOLLOW_CANDLES}
+                            width="600"
+                            height="350"
+                            news={['headlines']}
+                            studies={['BB@tv-basicstudies']}
+                          />
+                        </Card>
+                      </Col>
+                    </Row>
+                  </div>
                 </div>
-              </div>
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>
-              Deutsche Bank ©2019 Created by Richard Scherrer
-            </Footer>
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>
+                Deutsche Bank ©2019 Created by Richard Scherrer
+              </Footer>
+            </Layout>
           </Layout>
-        </Layout>
+        </div>
       )
     }
     return (
