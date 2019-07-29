@@ -131,6 +131,7 @@ class App extends Component<void> {
                 A <b>Bold</b> New Take on Sentiment
               </p>
             </div>
+            {/*
             <TradingViewWidget
               className="trading-widget-react"
               symbol="NASDAQ:AAPL"
@@ -141,7 +142,9 @@ class App extends Component<void> {
               height="800"
               news={['headlines']}
               studies={['BB@tv-basicstudies']}
-            />
+            /> */}
+
+            <img src="images/giphy.gif" className="animated-background" />
 
             <div class="tradingview-widget-copyright">
               <a

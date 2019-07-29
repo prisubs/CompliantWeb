@@ -68,3 +68,8 @@ body {
   height: 100% !important;
   z-index: 1000 !important;
 }
+
+.animated-background {
+  max-width: 1500px;
+  height: 800px;
+}

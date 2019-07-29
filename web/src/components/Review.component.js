@@ -60,16 +60,6 @@ const dataSource = [
   'V',
   'TSLA'
 ]
-const data = {
-  labels: ['Red', 'Green', 'Yellow'],
-  datasets: [
-    {
-      data: [300, 50, 100],
-      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-    }
-  ]
-}
 
 export default class Review extends Component {
   state = {
@@ -84,7 +74,9 @@ export default class Review extends Component {
     delta: 0.0,
     companyMeta: [],
     dataSource: [],
-    collapsed: false
+    collapsed: false,
+    recentStock: 'AAPL',
+    recenterStock: 'FB'
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -101,6 +93,48 @@ export default class Review extends Component {
 
   onChange = e => {
     this.setState({ ticker: e })
+  }
+
+  applclick = () => {
+    this.setState({
+      ticker: 'AAPL'
+    })
+    this.onSubmit
+  }
+
+  msftclick = () => {
+    this.setState({
+      ticker: 'MSFT'
+    })
+    this.onSubmit
+  }
+
+  fbclick = () => {
+    this.setState({
+      ticker: 'FB'
+    })
+    this.onSubmit
+  }
+
+  workclick = () => {
+    this.setState({
+      ticker: 'WORK'
+    })
+    this.onSubmit
+  }
+
+  googlclick = () => {
+    this.setState({
+      ticker: 'GOOGL'
+    })
+    this.onSubmit
+  }
+
+  twtrclick = () => {
+    this.setState({
+      ticker: 'TWTR'
+    })
+    this.onSubmit
   }
 
   onSubmit = event => {
@@ -121,7 +155,9 @@ export default class Review extends Component {
       delta,
       companyMeta,
       dataSource,
-      collapsed
+      collapsed,
+      recentStock,
+      recenterStock
     } = this.state
     const tickerObject = { date: date, ticker: ticker }
     let all_json
@@ -134,6 +170,14 @@ export default class Review extends Component {
         console.log('this is gonna be all json')
         console.log(all_json)
         console.log('THIS IS THE END OF ALL JSON!!!')
+        this.setState({
+          recentStock: recenterStock
+        })
+
+        this.setState({
+          recenterStock: tickerObject.ticker
+        })
+
         this.setState({
           rating: all_json['rating']
         })
@@ -443,9 +487,11 @@ export default class Review extends Component {
             collapsible
             collapsed={this.state.collapsed}
             onCollapse={this.onCollapse}
+            style={{ background: '#fff' }}
+            theme="light"
           >
             <div className="logo" />
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+            <Menu defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1">
                 <Icon type="search" />
                 <span>Search for Stock</span>
@@ -463,32 +509,32 @@ export default class Review extends Component {
                   </span>
                 }
               >
-                <Menu.Item key="3">
+                <Menu.Item key="3" onClick={this.applclick}>
                   {' '}
                   <Icon type="apple" />
                   <span>AAPL</span>
                 </Menu.Item>
-                <Menu.Item key="4">
+                <Menu.Item key="4" onClick={this.msftclick}>
                   {' '}
                   <Icon type="windows" />
                   <span>MSFT</span>
                 </Menu.Item>
-                <Menu.Item key="5">
+                <Menu.Item key="5" onClick={this.fbclick}>
                   {' '}
                   <Icon type="facebook" />
                   <span>FB</span>
                 </Menu.Item>
-                <Menu.Item key="6">
+                <Menu.Item key="6" onClick={this.workclick}>
                   {' '}
                   <Icon type="slack" />
                   <span>WORK</span>
                 </Menu.Item>
-                <Menu.Item key="7">
+                <Menu.Item key="7" onClick={this.googlclick}>
                   {' '}
                   <Icon type="google" />
                   <span>GOOGL</span>
                 </Menu.Item>
-                <Menu.Item key="8">
+                <Menu.Item key="8" onClick={this.twtrclick}>
                   {' '}
                   <Icon type="twitter" />
                   <span>TWTR</span>
@@ -503,8 +549,8 @@ export default class Review extends Component {
                   </span>
                 }
               >
-                <Menu.Item key="6">NVDA</Menu.Item>
-                <Menu.Item key="8">TAOBAO</Menu.Item>
+                <Menu.Item key="9">{this.state.recenterStock}</Menu.Item>
+                <Menu.Item key="10">{this.state.recentStock}</Menu.Item>
               </SubMenu>
               <Menu.Item key="9">
                 <Icon type="file" />
@@ -517,7 +563,7 @@ export default class Review extends Component {
             <Content style={{ margin: '0 16px' }}>
               <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>Ticker</Breadcrumb.Item>
-                <Breadcrumb.Item>AAPL</Breadcrumb.Item>
+                <Breadcrumb.Item>{this.state.ticker}</Breadcrumb.Item>
               </Breadcrumb>
               <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
                 {' '}
@@ -536,8 +582,8 @@ export default class Review extends Component {
                 <Row gutter={16}>
                   <Col span={12}>
                     <Statistic
-                      title="Feedback"
-                      value={1128}
+                      title="Good Articles"
+                      value={this.state.goodcount}
                       prefix={<Icon type="like" />}
                     />
                   </Col>
@@ -577,7 +623,21 @@ export default class Review extends Component {
                     <Col span={12}>
                       <Card>
                         <div className="donut">
-                          <Doughnut data={data} />
+                          <Doughnut
+                            data={{
+                              labels: ['Bad Articles', 'Good Articles'],
+                              datasets: [
+                                {
+                                  data: [
+                                    this.state.badcount,
+                                    this.state.goodcount
+                                  ],
+                                  backgroundColor: ['#FF6384', '#36A2EB'],
+                                  hoverBackgroundColor: ['#FF6384', '#36A2EB']
+                                }
+                              ]
+                            }}
+                          />
                         </div>
                       </Card>
                     </Col>
@@ -585,11 +645,11 @@ export default class Review extends Component {
                       <Card>
                         <TradingViewWidget
                           className="trading-widget-react"
-                          symbol="NASDAQ:AAPL"
+                          symbol={'NASDAQ:'.concat(this.state.ticker)}
                           theme={Themes.LIGHT}
                           interval={IntervalTypes.W}
                           style={BarStyles.HOLLOW_CANDLES}
-                          width="300"
+                          width="500"
                           height="300"
                           news={['headlines']}
                           studies={['BB@tv-basicstudies']}
