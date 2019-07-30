@@ -59,7 +59,8 @@ def past_runner(ticker, date):
         metadata = make_alias(ticker)
     except IndexError:
         metadata = ["None found"] * 3
-    return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category, metadata
+    related = related_tickers(ticker)
+    return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category, metadata, related
 
 '''
 **************** UTILITY FUNCTIONS ****************
