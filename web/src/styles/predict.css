@@ -21,3 +21,20 @@
 .big-numbers {
   margin-top: 10px;
 }
+
+#components-layout-demo-side .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.lets-try-to-edit-antd {
+  padding-top: 68px;
+}
+
+.donut {
+  width: 500px;
+  max-height: 500px;
+  text-align: center !important;
+  margin: auto !important;
+}

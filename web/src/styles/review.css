@@ -1,4 +1,26 @@
 @import '~antd/dist/antd.css';
+
+#components-layout-demo-side .logo {
+  height: 32px;
+  background: #ffffff;
+  margin: 16px;
+}
+
+.lets-try-to-edit-antd {
+  padding-top: 68px;
+}
+
+.donut {
+  width: 600px;
+  max-height: 600px;
+  text-align: center !important;
+  margin: auto !important;
+}
+
+.scrunching-layout {
+  max-width: 1831spx;
+}
+
 .certain-category-search.ant-select-auto-complete
   .ant-input-affix-wrapper
   .ant-input-suffix {
@@ -104,7 +126,9 @@ body {
 
 .n-o-ta {
   color: #000000 !important;
-  font-family: Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   padding-top: 10px;
   padding-bottom: 10px;
   width: 250px;
@@ -120,7 +144,9 @@ body {
   text-align: center !important;
   margin-bottom: 50px;
   margin-top: 50px;
-  font-family: Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   margin: auto !important;
   padding-top: 10px;
   padding-bottom: 5px;
@@ -181,19 +207,25 @@ body {
 
 .you-should-probably-green {
   font-size: 36px;
-  font-family: Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   color: green;
 }
 
 .you-should-probably-red {
   font-size: 36px;
-  font-family: Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   color: red;
 }
 
 .you-should-probably {
   font-size: 36px;
-  font-family: Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 .pie-div {
@@ -278,7 +310,9 @@ body {
 
 .c3 text {
   font-size: 15px !important;
-  font-family: Helvetica, Arial, sans-serif !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   margin-left: 100px !important;
   margin-right: 100px !important;
   fill: #505050 !important;
