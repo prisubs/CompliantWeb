@@ -19,7 +19,7 @@ class Navbar extends PureComponent {
         <img src="images/white-logo.png" />
         <div className="lir-div">
           <Link to={ROUTES.INDEX} className="login-itemr sign-in-box">
-            Sign In
+            API
           </Link>
 
           <Link
@@ -124,7 +124,7 @@ class Navbar extends PureComponent {
         </Link>
         <div className="lir-div">
           <Link to={ROUTES.INDEX} className="sign-in-box">
-            Sign In
+            API
           </Link>
 
           <Link to={ROUTES.INDEX} className="login-itemr">
