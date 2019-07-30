@@ -37,7 +37,18 @@ const TITLE = 'Review Ticker'
 const { Option, OptGroup } = AutoComplete
 const { SubMenu } = Menu
 const { Header, Content, Footer, Sider } = Layout
-const dataSource = ['AMD', 'INTC', 'FB', 'TXN', 'MSFT', 'AAPL', 'V', 'TSLA']
+const dataSource = [
+  'AAPL',
+  'AMD',
+  'F',
+  'FB',
+  'DB',
+  'INTC',
+  'MSFT',
+  'TSLA',
+  'TXN',
+  'V'
+]
 const { Search } = Input
 const sleep = milliseconds => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -177,7 +188,7 @@ export default class Review extends Component {
       //do stuff
 
       this.setState({
-        ticker: 'AAPL'
+        ticker: popTicker
       })
     })
   }
@@ -269,7 +280,7 @@ export default class Review extends Component {
         })
       })
 
-    sleep(500).then(() => {
+    sleep(700).then(() => {
       //do stuff
 
       this.setState({
@@ -277,7 +288,7 @@ export default class Review extends Component {
       })
     })
 
-    sleep(500).then(() => {
+    sleep(700).then(() => {
       //do stuff
 
       this.setState({
@@ -297,28 +308,28 @@ export default class Review extends Component {
     this.setState({
       ticker: 'FB'
     })
-    this.onSubmiteventless()
+    this.popclick('FB')
   }
 
   workclick = () => {
     this.setState({
-      ticker: 'WORK'
+      ticker: 'BABA'
     })
-    this.onSubmiteventless()
+    this.popclick('BABA')
   }
 
   googlclick = () => {
     this.setState({
-      ticker: 'GOOGL'
+      ticker: 'GOOG'
     })
-    this.onSubmiteventless()
+    this.popclick('GOOG')
   }
 
   twtrclick = () => {
     this.setState({
       ticker: 'TWTR'
     })
-    this.onSubmiteventless()
+    this.popclick('TWTR')
   }
 
   onSubmit = event => {
@@ -756,8 +767,8 @@ export default class Review extends Component {
               datasets: [
                 {
                   data: [this.state.badcount, this.state.goodcount],
-                  backgroundColor: ['#FF6384', '#36A2EB'],
-                  hoverBackgroundColor: ['#FF6384', '#36A2EB']
+                  backgroundColor: ['red', 'green'],
+                  hoverBackgroundColor: ['red', 'green']
                 }
               ]
             }}
@@ -795,11 +806,11 @@ export default class Review extends Component {
     if (!tstvw) {
       tvw = (
         <TradingViewWidget
-          symbol={'NASDAQ:'.concat(this.state.ticker)}
+          symbol={this.state.ticker}
           theme={Themes.LIGHT}
           interval={IntervalTypes.W}
           style={BarStyles.HOLLOW_CANDLES}
-          width="600"
+          width="650"
           height="300"
           news={['headlines']}
           studies={['BB@tv-basicstudies']}
@@ -989,8 +1000,8 @@ export default class Review extends Component {
                   </Menu.Item>
                   <Menu.Item key="6" onClick={this.workclick}>
                     {' '}
-                    <Icon type="slack" />
-                    <span>WORK</span>
+                    <Icon type="alibaba" />
+                    <span>BABA</span>
                   </Menu.Item>
                   <Menu.Item key="7" onClick={this.googlclick}>
                     {' '}
@@ -1012,8 +1023,12 @@ export default class Review extends Component {
                     </span>
                   }
                 >
-                  <Menu.Item key="9">{this.state.recenterStock}</Menu.Item>
-                  <Menu.Item key="10">{this.state.recentStock}</Menu.Item>
+                  <Menu.Item key="9" onClick={this.twtrclick}>
+                    {this.state.recenterStock}
+                  </Menu.Item>
+                  <Menu.Item key="10" onClick={this.twtrclick}>
+                    {this.state.recentStock}
+                  </Menu.Item>
                 </SubMenu>
                 <Menu.Item key="9">
                   <Icon type="file" />
@@ -1086,11 +1101,6 @@ export default class Review extends Component {
                           style={{ overflow: 'scroll' }}
                         >
                           <p>{this.state.badheadlines[0]}</p>
-                          <p>
-                            {this.state.fetchInProgress
-                              .toString()
-                              .concat('FETCH')}
-                          </p>
                         </Card>
                       </Col>
                     </Row>
