@@ -6,6 +6,20 @@
   margin: 16px;
 }
 
+.footer {
+  padding-left: 75px;
+  padding-right: 75px;
+}
+
+.example {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  margin: 20px 0;
+}
+
 .lets-try-to-edit-antd {
   padding-top: 68px;
 }
@@ -18,7 +32,7 @@
 }
 
 .scrunching-layout {
-  max-width: 1831spx;
+  width: 1831px;
 }
 
 .certain-category-search.ant-select-auto-complete
@@ -247,6 +261,10 @@ body {
   clear: both;
 }
 
+.cc {
+  height: 120px;
+}
+
 .thermo {
   margin: auto !important;
   align-items: center !important;
@@ -328,4 +346,8 @@ body {
 
 .gutter-row {
   margin-bottom: 1% !important;
+}
+
+.bc-style {
+  padding-bottom: 10px;
 }

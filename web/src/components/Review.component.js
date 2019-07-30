@@ -9,26 +9,6 @@ import Thermometer from 'react-thermometer-component'
 import { AutoComplete } from 'antd'
 import { Helmet } from 'react-helmet'
 import { Doughnut } from 'react-chartjs-2'
-/*
-import {
-  Page,
-  Avatar,
-  Grid,
-  Card,
-  Text,
-  Table,
-  Alert,
-  Progress,
-  colors,
-  Dropdown,
-  Button,
-  StampCard,
-  StatsCard,
-  ProgressCard,
-  Badge,
-  AccountDropdown
-} from 'tabler-react'
-*/
 import { Button } from 'tabler-react'
 import {
   Statistic,
@@ -39,16 +19,14 @@ import {
   Menu,
   Layout,
   Breadcrumb,
-  Input
+  Input,
+  Spin
 } from 'antd'
 import * as d3 from 'd3'
 import 'tabler-react/dist/Tabler.css'
 import C3Chart from 'react-c3js'
 import './../styles/predict.css'
 import 'antd/dist/antd.css'
-// import StripeCheckout from 'react-stripe-checkout'
-// import { CardElement } from 'react-stripe-elements'
-// import { StripeProvider } from 'react-stripe-elements'
 import './../styles/review.css'
 import TradingViewWidget, {
   Themes,
@@ -59,20 +37,18 @@ const TITLE = 'Review Ticker'
 const { Option, OptGroup } = AutoComplete
 const { SubMenu } = Menu
 const { Header, Content, Footer, Sider } = Layout
-const dataSource = [
-  'AMD',
-  'QQQ',
-  'INTC',
-  'FB',
-  'TXN',
-  'MSFT',
-  'AAPL',
-  'V',
-  'TSLA'
-]
+const dataSource = ['AMD', 'INTC', 'FB', 'TXN', 'MSFT', 'AAPL', 'V', 'TSLA']
 const { Search } = Input
-
+const sleep = milliseconds => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
 export default class Review extends Component {
+  constructor() {
+    super()
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onSubmiteventless = this.onSubmiteventless.bind(this)
+  }
+
   state = {
     date: new Date(),
     ticker: '',
@@ -87,16 +63,12 @@ export default class Review extends Component {
     dataSource: [],
     collapsed: false,
     recentStock: 'AAPL',
-    recenterStock: 'FB'
+    recenterStock: 'FB',
+    fetchInProgress: false
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
-  /*
-  onChangeTicker = inputTicker => {
-    this.setState({
-      ticker: inputTicker.target.value
-    })
-  } */
+
   onCollapse = collapsed => {
     console.log(collapsed)
     this.setState({ collapsed })
@@ -106,52 +78,363 @@ export default class Review extends Component {
     this.setState({ ticker: e })
   }
 
+  popclick = popTicker => {
+    this.setState({
+      fetchInProgress: true
+    })
+    const {
+      date,
+      ticker,
+      rating,
+      arrayvar,
+      badheadlines,
+      goodcount,
+      badcount,
+      submitted,
+      delta,
+      companyMeta,
+      dataSource,
+      collapsed,
+      recentStock,
+      recenterStock,
+      fetchInProgress
+    } = this.state
+    const tickerObject = { date: date, ticker: popTicker }
+    let all_json
+    var x = this.props
+      .getTicker(tickerObject, this.handleRedirect, this.handleFailure)
+      .then(responseJSON => {
+        // do stuff with responseJSON here...
+        all_json = responseJSON
+        this.setState({
+          recentStock: recenterStock
+        })
+
+        this.setState({
+          recenterStock: tickerObject.ticker
+        })
+
+        this.setState({
+          rating: all_json['rating']
+        })
+
+        this.setState({
+          arrayvar: [...this.state.arrayvar, ...all_json['good_headlines']]
+        })
+
+        this.setState(
+          {
+            companyMeta: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              companyMeta: [
+                ...this.state.companyMeta,
+                ...all_json['company_meta']
+              ]
+            })
+          }
+        )
+
+        this.setState(
+          {
+            badheadlines: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              badheadlines: [
+                ...this.state.badheadlines,
+                ...all_json['bad_headlines']
+              ]
+            })
+          }
+        )
+
+        this.setState({
+          goodcount: all_json['good_count']
+        })
+
+        this.setState({
+          badcount: all_json['bad_count']
+        })
+
+        this.setState({
+          delta: all_json['delta']
+        })
+      })
+
+    sleep(500).then(() => {
+      //do stuff
+
+      this.setState({
+        fetchInProgress: false
+      })
+    })
+
+    sleep(500).then(() => {
+      //do stuff
+
+      this.setState({
+        ticker: 'AAPL'
+      })
+    })
+  }
+
   applclick = () => {
     this.setState({
-      ticker: 'AAPL'
+      fetchInProgress: true
     })
-    this.onSubmit
+    const {
+      date,
+      ticker,
+      rating,
+      arrayvar,
+      badheadlines,
+      goodcount,
+      badcount,
+      submitted,
+      delta,
+      companyMeta,
+      dataSource,
+      collapsed,
+      recentStock,
+      recenterStock,
+      fetchInProgress
+    } = this.state
+    const tickerObject = { date: date, ticker: 'AAPL' }
+    let all_json
+    var x = this.props
+      .getTicker(tickerObject, this.handleRedirect, this.handleFailure)
+      .then(responseJSON => {
+        // do stuff with responseJSON here...
+        all_json = responseJSON
+        this.setState({
+          recentStock: recenterStock
+        })
+
+        this.setState({
+          recenterStock: tickerObject.ticker
+        })
+
+        this.setState({
+          rating: all_json['rating']
+        })
+
+        this.setState({
+          arrayvar: [...this.state.arrayvar, ...all_json['good_headlines']]
+        })
+
+        this.setState(
+          {
+            companyMeta: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              companyMeta: [
+                ...this.state.companyMeta,
+                ...all_json['company_meta']
+              ]
+            })
+          }
+        )
+
+        this.setState(
+          {
+            badheadlines: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              badheadlines: [
+                ...this.state.badheadlines,
+                ...all_json['bad_headlines']
+              ]
+            })
+          }
+        )
+
+        this.setState({
+          goodcount: all_json['good_count']
+        })
+
+        this.setState({
+          badcount: all_json['bad_count']
+        })
+
+        this.setState({
+          delta: all_json['delta']
+        })
+      })
+
+    sleep(500).then(() => {
+      //do stuff
+
+      this.setState({
+        fetchInProgress: false
+      })
+    })
+
+    sleep(500).then(() => {
+      //do stuff
+
+      this.setState({
+        ticker: 'AAPL'
+      })
+    })
   }
 
   msftclick = () => {
     this.setState({
       ticker: 'MSFT'
     })
-    this.onSubmit
+    this.popclick('MSFT')
   }
 
   fbclick = () => {
     this.setState({
       ticker: 'FB'
     })
-    this.onSubmit
+    this.onSubmiteventless()
   }
 
   workclick = () => {
     this.setState({
       ticker: 'WORK'
     })
-    this.onSubmit
+    this.onSubmiteventless()
   }
 
   googlclick = () => {
     this.setState({
       ticker: 'GOOGL'
     })
-    this.onSubmit
+    this.onSubmiteventless()
   }
 
   twtrclick = () => {
     this.setState({
       ticker: 'TWTR'
     })
-    this.onSubmit
+    this.onSubmiteventless()
   }
 
   onSubmit = event => {
     event.preventDefault()
     this.setState({
       submitted: true
+    })
+    this.setState({
+      fetchInProgress: true
+    })
+    const {
+      date,
+      ticker,
+      rating,
+      arrayvar,
+      badheadlines,
+      goodcount,
+      badcount,
+      submitted,
+      delta,
+      companyMeta,
+      dataSource,
+      collapsed,
+      recentStock,
+      recenterStock,
+      fetchInProgress
+    } = this.state
+    const tickerObject = { date: date, ticker: ticker.toUpperCase() }
+    let all_json
+    var x = this.props
+      .getTicker(tickerObject, this.handleRedirect, this.handleFailure)
+      .then(responseJSON => {
+        // do stuff with responseJSON here...
+        all_json = responseJSON
+        this.setState({
+          recentStock: recenterStock
+        })
+
+        this.setState({
+          recenterStock: tickerObject.ticker
+        })
+
+        this.setState({
+          rating: all_json['rating']
+        })
+
+        this.setState(
+          {
+            arrayvar: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              arrayvar: [...this.state.arrayvar, ...all_json['good_headlines']]
+            })
+          }
+        )
+
+        this.setState(
+          {
+            companyMeta: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              companyMeta: [
+                ...this.state.companyMeta,
+                ...all_json['company_meta']
+              ]
+            })
+          }
+        )
+
+        this.setState(
+          {
+            badheadlines: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              badheadlines: [
+                ...this.state.badheadlines,
+                ...all_json['bad_headlines']
+              ]
+            })
+          }
+        )
+
+        this.setState({
+          goodcount: all_json['good_count']
+        })
+
+        this.setState({
+          badcount: all_json['bad_count']
+        })
+
+        this.setState({
+          delta: all_json['delta']
+        })
+
+        sleep(500).then(() => {
+          //do stuff
+
+          this.setState({
+            fetchInProgress: false
+          })
+        })
+      })
+  }
+
+  onSubmiteventless = () => {
+    this.setState({
+      submitted: true
+    })
+    this.setState({
+      fetchInProgress: true
     })
     console.log('SUBMIT TAKING TOO LONG')
     const {
@@ -197,16 +480,35 @@ export default class Review extends Component {
           arrayvar: [...this.state.arrayvar, ...all_json['good_headlines']]
         })
 
-        this.setState({
-          companyMeta: [...this.state.companyMeta, ...all_json['company_meta']]
-        })
+        this.setState(
+          {
+            companyMeta: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              companyMeta: [
+                ...this.state.companyMeta,
+                ...all_json['company_meta']
+              ]
+            })
+          }
+        )
 
-        this.setState({
-          badheadlines: [
-            ...this.state.badheadlines,
-            ...all_json['bad_headlines']
-          ]
-        })
+        this.setState(
+          {
+            badheadlines: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              badheadlines: [
+                ...this.state.badheadlines,
+                ...all_json['bad_headlines']
+              ]
+            })
+          }
+        )
 
         this.setState({
           goodcount: all_json['good_count']
@@ -227,49 +529,126 @@ export default class Review extends Component {
         console.log(this.state.badheadlines.length)
 
         console.log('TESTING OUT THIS GOOGLE STOCKS API STUFF RIGHT NOWWWWW')
+        this.setState({
+          fetchInProgress: false
+        })
       })
 
     console.log(x)
-
-    /*
-      console.error("yaaaaaaaaaaaaaaaaaaaaaaaah boi1")
-    event.preventDefault()
-    const { date, ticker, rating} = this.state
-    const tickerObject = { date: date, ticker: ticker }
-    let json_rating = [];
-    json_rating = this.props.getTicker(tickerObject, this.handleRedirect, this.handleFailure)
-    setTimeout( function(){
-
-
-            console.error("yaaaaaaaaaaaaaaaaaaaaaaaah boi2")
-    console.error(json_rating)
-    let json_rating_two;
-    json_rating.then(result => json_rating_two)
-    console.error("JSON RATING TWO")
-    while(typeof json_rating_two == 'undefined') {
-        console.error("waiting for a response")
-    }
-    console.error("final json value:")
-    console.error(json_rating_two)
-     this.setState({
-      rating: json_rating_two['rating']
-    })
-    console.log("THIS IS THE RATING BOIII")
-    console.log(this.state.rating)
-
-
-     }.bind(this), 5000);
-    */
-    //this.props.postTicker()
   }
 
   handleRedirect = () => {}
 
   handleFailure = () => {}
 
-  handleClick = e => {
-    console.log('click ', e)
+  onSearch = value => {
+    this.setState({ ticker: value })
+    this.setState({
+      submitted: true
+    })
+    this.setState({
+      fetchInProgress: true
+    })
+    const {
+      date,
+      ticker,
+      rating,
+      arrayvar,
+      badheadlines,
+      goodcount,
+      badcount,
+      submitted,
+      delta,
+      companyMeta,
+      dataSource,
+      collapsed,
+      recentStock,
+      recenterStock,
+      fetchInProgress
+    } = this.state
+    const tickerObject = { date: date, ticker: value.toUpperCase() }
+    let all_json
+    var x = this.props
+      .getTicker(tickerObject, this.handleRedirect, this.handleFailure)
+      .then(responseJSON => {
+        // do stuff with responseJSON here...
+        all_json = responseJSON
+        this.setState({
+          recentStock: recenterStock
+        })
+
+        this.setState({
+          recenterStock: tickerObject.ticker
+        })
+
+        this.setState({
+          rating: all_json['rating']
+        })
+
+        this.setState(
+          {
+            arrayvar: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              arrayvar: [...this.state.arrayvar, ...all_json['good_headlines']]
+            })
+          }
+        )
+
+        this.setState(
+          {
+            companyMeta: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              companyMeta: [
+                ...this.state.companyMeta,
+                ...all_json['company_meta']
+              ]
+            })
+          }
+        )
+
+        this.setState(
+          {
+            badheadlines: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              badheadlines: [
+                ...this.state.badheadlines,
+                ...all_json['bad_headlines']
+              ]
+            })
+          }
+        )
+
+        this.setState({
+          goodcount: all_json['good_count']
+        })
+
+        this.setState({
+          badcount: all_json['bad_count']
+        })
+
+        this.setState({
+          delta: all_json['delta']
+        })
+
+        sleep(500).then(() => {
+          //do stuff
+
+          this.setState({
+            fetchInProgress: false
+          })
+        })
+      })
   }
+
   createTable = () => {
     let table = []
     table.push(
@@ -366,6 +745,74 @@ export default class Review extends Component {
       pie = <hr />
     }
 
+    const thissubmittedaapl = this.state.fetchInProgress
+    let donut
+    if (!thissubmittedaapl) {
+      donut = (
+        <div className="donut">
+          <Doughnut
+            data={{
+              labels: ['Bad Articles', 'Good Articles'],
+              datasets: [
+                {
+                  data: [this.state.badcount, this.state.goodcount],
+                  backgroundColor: ['#FF6384', '#36A2EB'],
+                  hoverBackgroundColor: ['#FF6384', '#36A2EB']
+                }
+              ]
+            }}
+          />
+        </div>
+      )
+    } else {
+      donut = (
+        <div className="example">
+          <Spin />
+        </div>
+      )
+    }
+
+    const thissubmittedmetadata = this.state.fetchInProgress
+    let mt
+    if (!thissubmittedmetadata) {
+      mt = (
+        <Card size="small" title="Information" className="cc" hoverable="true">
+          <p>{'Company Name: '.concat(this.state.companyMeta[0])}</p>
+          <p>{'Sector: '.concat(this.state.companyMeta[1])}</p>
+          <p>{'Industry: '.concat(this.state.companyMeta[2])}</p>
+        </Card>
+      )
+    } else {
+      mt = (
+        <div className="example">
+          <Spin />
+        </div>
+      )
+    }
+
+    const tstvw = this.state.fetchInProgress
+    let tvw
+    if (!tstvw) {
+      tvw = (
+        <TradingViewWidget
+          symbol={'NASDAQ:'.concat(this.state.ticker)}
+          theme={Themes.LIGHT}
+          interval={IntervalTypes.W}
+          style={BarStyles.HOLLOW_CANDLES}
+          width="600"
+          height="300"
+          news={['headlines']}
+          studies={['BB@tv-basicstudies']}
+        />
+      )
+    } else {
+      tvw = (
+        <div className="example">
+          <Spin />
+        </div>
+      )
+    }
+
     const thissubmitted = this.state.submitted
     let button
     if (!thissubmitted) {
@@ -390,6 +837,7 @@ export default class Review extends Component {
 
     let form
     const ratinglocal = this.state.rating
+    const fetchInProgresss = this.state.fetchInProgress
     if (ratinglocal === 'NULL') {
       form = (
         <div className="center-review-div-one">
@@ -397,8 +845,8 @@ export default class Review extends Component {
             className="calendar"
             onChange={this.onChangeDate}
             value={this.state.date}
-            maxDate={new Date(2019, 6, 11)}
-            minDate={new Date(2019, 0, 11)}
+            maxDate={new Date(2019, 8, 2)}
+            minDate={new Date(2019, 2, 2)}
           />
 
           <form className="input-field-form">
@@ -506,9 +954,9 @@ export default class Review extends Component {
               <Menu defaultSelectedKeys={['1']} mode="inline">
                 <Menu.Item key="1">
                   <Search
-                    placeholder="input search text"
-                    onSearch={value => console.log(value)}
-                    style={{ width: 180 }}
+                    placeholder="Input Ticker"
+                    onSearch={this.onSearch}
+                    style={{ width: 150 }}
                   />
                 </Menu.Item>
                 <Menu.Item key="2">
@@ -576,8 +1024,15 @@ export default class Review extends Component {
             <Layout>
               <Header style={{ background: '#fff', padding: 0 }} />
               <Content style={{ margin: '0 16px' }}>
-                <Breadcrumb style={{ margin: '20px 0' }}>
-                  <Breadcrumb.Item>Ticker</Breadcrumb.Item>
+                <Breadcrumb
+                  style={{ margin: '16px 0px 0px 16px' }}
+                  className="bc-style"
+                >
+                  <Breadcrumb.Item>
+                    {' '}
+                    <Icon type="stock" />
+                    Ticker
+                  </Breadcrumb.Item>
                   <Breadcrumb.Item>{this.state.ticker}</Breadcrumb.Item>
                 </Breadcrumb>
                 <div
@@ -586,13 +1041,17 @@ export default class Review extends Component {
                   {' '}
                   <Row gutter={16}>
                     <Col span={12}>
-                      <Statistic title="Active Users" value={112893} />
+                      <Statistic
+                        title="Rating"
+                        value={this.state.rating}
+                        hoverable="true"
+                      />
                     </Col>
                     <Col span={12}>
                       <Statistic
-                        title="Account Balance (CNY)"
-                        value={112893}
-                        precision={2}
+                        title="Delta"
+                        value={this.state.delta}
+                        hoverable="true"
                       />
                     </Col>
                   </Row>
@@ -602,83 +1061,56 @@ export default class Review extends Component {
                         title="Good Articles"
                         value={this.state.goodcount}
                         prefix={<Icon type="like" />}
+                        hoverable="true"
                       />
                     </Col>
                     <Col span={12}>
-                      <Statistic title="Unmerged" value={93} suffix="/ 100" />
+                      <Statistic
+                        title="Bad Article Ratio"
+                        value={this.state.badcount}
+                        suffix={'/'.concat(
+                          this.state.goodcount + this.state.badcount
+                        )}
+                      />
                     </Col>
                   </Row>
                   <div style={{ background: '#ECECEC', padding: '30px' }}>
                     <Row gutter={16}>
+                      <Col span={12}>{mt}</Col>
                       <Col span={12}>
-                        <Card>
-                          <Statistic
-                            title="Active"
-                            value={11.28}
-                            precision={2}
-                            valueStyle={{ color: '#3f8600' }}
-                            prefix={<Icon type="arrow-up" />}
-                            suffix="%"
-                          />
-                        </Card>
-                      </Col>
-                      <Col span={12}>
-                        <Card>
-                          <Statistic
-                            title="Idle"
-                            value={9.3}
-                            precision={2}
-                            valueStyle={{ color: '#cf1322' }}
-                            prefix={<Icon type="arrow-down" />}
-                            suffix="%"
-                          />
+                        <Card
+                          hoverable="true"
+                          size="small"
+                          title="Sample Bad Headline"
+                          className="cc"
+                          style={{ overflow: 'scroll' }}
+                        >
+                          <p>{this.state.badheadlines[0]}</p>
+                          <p>
+                            {this.state.fetchInProgress
+                              .toString()
+                              .concat('FETCH')}
+                          </p>
                         </Card>
                       </Col>
                     </Row>
 
                     <Row gutter={16}>
                       <Col span={12}>
-                        <Card>
-                          <div className="donut">
-                            <Doughnut
-                              data={{
-                                labels: ['Bad Articles', 'Good Articles'],
-                                datasets: [
-                                  {
-                                    data: [
-                                      this.state.badcount,
-                                      this.state.goodcount
-                                    ],
-                                    backgroundColor: ['#FF6384', '#36A2EB'],
-                                    hoverBackgroundColor: ['#FF6384', '#36A2EB']
-                                  }
-                                ]
-                              }}
-                            />
-                          </div>
-                        </Card>
+                        <Card hoverable="true">{donut}</Card>
                       </Col>
                       <Col span={12}>
-                        <Card>
-                          <TradingViewWidget
-                            className="trading-widget-react"
-                            symbol={'NASDAQ:'.concat(this.state.ticker)}
-                            theme={Themes.LIGHT}
-                            interval={IntervalTypes.W}
-                            style={BarStyles.HOLLOW_CANDLES}
-                            width="600"
-                            height="350"
-                            news={['headlines']}
-                            studies={['BB@tv-basicstudies']}
-                          />
-                        </Card>
+                        <Card hoverable="true">{tvw}</Card>
                       </Col>
                     </Row>
                   </div>
                 </div>
               </Content>
-              <Footer style={{ textAlign: 'center' }}>
-                Deutsche Bank ©2019 Created by Richard Scherrer
+              <Footer style={{ textAlign: 'center' }} className="footer">
+                © 2019 Deutsche Bank AG By accessing and using this page you
+                agree to the Terms and Conditions. Corporate Headquarters:
+                Taunusanlage 12 60325 FRANKFURT AM MAIN (for letters and
+                postcards: 60262)
               </Footer>
             </Layout>
           </Layout>

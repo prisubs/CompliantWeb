@@ -95,7 +95,7 @@
 .sign-in-box {
   border: 1px solid #979797;
   border-radius: 2px;
-  padding-bottom: 0px;
+  padding-bottom: 2px;
   float: right;
   display: inline;
   font-size: 15px;
@@ -123,7 +123,7 @@
 }
 
 .login-itemr:active {
-  background-color: #0018a8;
+  background-color: #f8f8f8;
   color: white;
 }
 

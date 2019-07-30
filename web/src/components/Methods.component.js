@@ -63,8 +63,17 @@ export default class Methods extends Component {
             <img className="oddsratio" src="images/oddsratio.png" />
           </span>
           The regression in terms of matrices is the following:
-          <img className="log-equation" src="images/LogReg_mle.png" />
-          <img src="images/TameGloomyKakarikis-size_restricted.gif" />
+          <div className="inline-for-image-plus-gif">
+            <img
+              src="images/TameGloomyKakarikis-size_restricted.gif"
+              className="sigmoid"
+            />
+            <img className="log-equation" src="images/LogReg_mle.png" />
+          </div>
+          <span>
+            {' '}
+            ...and here is a visual representation of a sigmoid function!{' '}
+          </span>
           <h6 className="btw-footer">
             &#169; 2019 Deutsche Bank AG
             <br /> By accessing and using this page you agree to the{' '}

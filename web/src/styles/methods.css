@@ -26,24 +26,33 @@
 }
 
 .oddsratio-div {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .oddsratio {
   margin-top: 10px;
-  display: inline-block;
+  display: inline !important;
 }
 
 .log-equation {
-  margin-top: 100px;
-  display: block;
+  margin-bottom: 300px !important;
+  margin-left: 200px !important;
+  display: inline !important;
 }
 
 .btw-footer {
-  margin-top: 500px;
+  margin-top: 130px;
   padding-right: 500px;
   padding-left: 500px;
   color: #757575;
   text-align: center;
   font-weight: normal !important;
+}
+
+.inline-for-image-plus-gif {
+  display: inline !important;
+}
+
+.sigmoid {
+  margin-top: -50px !important;
 }
