@@ -1,25 +1,21 @@
-body {
-  background-color: #ffffff !important;
-}
-
-.trading-widget-react {
-  float: left !important;
-  margin-left: 0px;
-  margin-top: 30% !important;
-  top: 50% !important;
-  z-index: -1000 !important;
+.bobody {
+  background-color: #f8f8f8 !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .img-responsive {
   position: relative;
   top: 50%;
   right: 50%;
+  background-color: #f8f8f8 !important;
 }
 
 .blue-text {
   top: 0% !important;
   justify-content: center;
   left: 50% !important;
+  background-color: #f8f8f8 !important;
 }
 
 * {
@@ -28,7 +24,8 @@ body {
 }
 
 .tradingview-widget-container {
-  margin-top: 5% !important;
+  padding-top: 5% !important;
+  background-color: #f8f8f8 !important;
 }
 
 .bold-new-take {
@@ -37,6 +34,7 @@ body {
     'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   margin-top: -3% !important;
+  background-color: #f8f8f8 !important;
 }
 
 .bold-new-take b {
@@ -44,6 +42,7 @@ body {
     'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   text-shadow: 1px 0.5px #0018a8;
+  background-color: #f8f8f8 !important;
 }
 
 .bnt-div {
@@ -54,10 +53,12 @@ body {
   align-items: center;
   justify-content: center;
   margin-bottom: 10%;
+  background-color: #f8f8f8 !important;
 }
 
 .particles {
   z-index: 100;
+  background-color: #f8f8f8 !important;
 }
 
 .particle-canvas {
@@ -67,9 +68,21 @@ body {
   width: 100% !important;
   height: 100% !important;
   z-index: 1000 !important;
+  background-color: #f8f8f8 !important;
 }
 
 .animated-background {
-  max-width: 1500px;
+  max-width: 1700px;
   height: 800px;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #f8f8f8 !important;
+}
+
+.ab-div {
+  align-items: center !important;
+  justify-content: center !important;
+  margin-left: 300px !important;
+  margin-right: auto !important;
+  background-color: #f8f8f8 !important;
 }

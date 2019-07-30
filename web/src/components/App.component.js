@@ -85,7 +85,7 @@ class App extends Component<void> {
 
   render() {
     return (
-      <div>
+      <div className="bobody">
         <Helmet>
           <title>{TITLE}</title>
         </Helmet>
@@ -143,18 +143,8 @@ class App extends Component<void> {
               news={['headlines']}
               studies={['BB@tv-basicstudies']}
             /> */}
-
-            <img src="images/giphy.gif" className="animated-background" />
-
-            <div class="tradingview-widget-copyright">
-              <a
-                href="https://www.tradingview.com"
-                rel="noopener"
-                target="_blank"
-              >
-                <span class="blue-text">Market Data</span>
-              </a>{' '}
-              by TradingView
+            <div className="ab-div">
+              <img src="images/giphy.gif" className="animated-background" />
             </div>
           </div>
         </body>
