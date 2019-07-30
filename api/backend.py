@@ -83,19 +83,6 @@ run_model_linear: runs logistic regression on tomorrow
 output_graph: saves a weekly sentiment graph to "week_sent.png"
 ****************************************************
 '''
-
-
-def related_tickers(ticker):
-    industry = make_alias(ticker)[2]
-    name = make_alias(ticker)[0]
-    all_ticker_df = pd.read_csv("data/ticker_translate.csv")
-    related_metadata = all_ticker_df.loc[(all_ticker_df["Industry"] == industry) & (all_ticker_df["Name"] != name), "Name"].tolist()[0:5]
-    return {
-        "industry": industry,
-        "related_companies": related_metadata
-    }
-
-
 def create_model_linear(ticker):
     dates = pd.read_csv(r"data/dates.csv")["0"].tolist()
     master_df_set = []
@@ -376,7 +363,7 @@ def perform_visualization(df, ticker):
     fig.set_xticklabels(dates)
     for item in fig.get_xticklabels():
         item.set_rotation(60)
-    plt.savefig("web/testing.png")
+    plt.savefig("testing.png")
     return fig
 
 
