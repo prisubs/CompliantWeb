@@ -119,7 +119,7 @@ def make_alias(ticker):
         result = data.values.tolist()[0]  # name, sector, industry
     except IndexError:
         result = ["None found"] * 3
-        
+
     return result
 
 
