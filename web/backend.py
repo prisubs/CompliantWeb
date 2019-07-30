@@ -29,7 +29,8 @@ def future_runner(ticker):
     today = datetime.date.today()
     testing_df = pipeline_linear(ticker, today, dyn=True)
     model = create_model_linear(ticker)
-    prediction_formatted = run_model_linear(testing_df, model)
+    prediction = run_model_linear(testing_df, model)
+    prediction_formatted = "Our dynamically constructed model predicted ${0} for tomorrow's price.".format(prediction)
     return prediction_formatted
 
 '''
@@ -82,6 +83,19 @@ run_model_linear: runs logistic regression on tomorrow
 output_graph: saves a weekly sentiment graph to "week_sent.png"
 ****************************************************
 '''
+
+
+def related_tickers(ticker):
+    industry = make_alias(ticker)[2]
+    name = make_alias(ticker)[0]
+    all_ticker_df = pd.read_csv("data/ticker_translate.csv")
+    related_metadata = all_ticker_df.loc[(all_ticker_df["Industry"] == industry) & (all_ticker_df["Name"] != name), "Name"].tolist()[0:5]
+    return {
+        "industry": industry,
+        "related_companies": related_metadata
+    }
+
+
 def create_model_linear(ticker):
     dates = pd.read_csv(r"data/dates.csv")["0"].tolist()
     master_df_set = []
@@ -89,7 +103,7 @@ def create_model_linear(ticker):
         row = pipeline_linear(ticker, date, dyn=False)
         master_df_set.append(row)
     training_df = pd.concat(master_df_set)
-    X_train = training_df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek"]]
+    X_train = training_df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek", "absolute_change", "macro_direction"]]
     Y_train = training_df["price"]
     model = LinearRegression().fit(X_train, Y_train)
     return model
@@ -229,6 +243,18 @@ def remove_time(dt):
     return dt[0:10]
 
 
+def featurize_lidar(start, end):
+    lidars = pd.read_csv("data/macros.csv")
+    start_lidar = lidars.loc[lidars["Date"] == start, "Macro"].tolist()[0]
+    end_lidar = lidars.loc[lidars["Date"] == end, "Macro"].tolist()[0]
+    absolute_change = end_lidar - start_lidar
+    if absolute_change < 0:
+        delt = 0
+    else:
+        delt = 1
+    return absolute_change, delt
+
+
 def base_pipeline(ticker, date, dynamic=False):
     # api auth
     indicoio.config.api_key = "04878c9a5bb99aaf8a8ccdd65954442a"
@@ -236,8 +262,11 @@ def base_pipeline(ticker, date, dynamic=False):
 
     # fix dates
     start_date = pd.to_datetime(pd.Series([date]), infer_datetime_format=True)
-    end_date = start_date.apply(six_days).apply(str)[0]
+    end_date = start_date.apply(six_days).apply(str)[0][0:10]
     start_date = start_date.apply(str).apply(remove_time)[0]
+    
+    # add the macro as two features - up down, and absolute change
+    absolute_change, macro_direction = featurize_lidar(start_date, end_date)
 
     # add json
     query_ticker = lambda t, s, e: client.get_news(tickers=[t], startDate=s, endDate=e)
@@ -285,6 +314,8 @@ def base_pipeline(ticker, date, dynamic=False):
             "good_bag": pd.Series([goodbag]),
             "lastweek": pd.Series([lastweek]),
             "headlines": pd.Series([vectorized]),
+            "absolute_change": pd.Series([absolute_change]),
+            "macro_direction": pd.Series([macro_direction])
         }
     )
     return df, open_price, close_price
@@ -298,6 +329,7 @@ def pipeline_linear(ticker, date, dyn):
 
 def pipeline_logistic(ticker, date):
     df, open_price, close_price = base_pipeline(ticker, date)
+    
     # add the delta - up or down
     tri_delt = close_price - open_price
     if tri_delt > 0:
@@ -314,22 +346,22 @@ def multi_row_pipeline(dates, ticker, pipeline_function=pipeline_logistic):
     for date in dates:
         row = pipeline_function(ticker, date)
         rows.append(row)
+        print("finished {0} for {1}".format(date, ticker))
     df = pd.concat(rows)
     return df
 
 
 def run_model_linear(df, model):
-    X_test = df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek"]]
+    X_test = df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek", "absolute_change", "macro_direction"]]
     prediction = model.predict(X_test).tolist()[0]
-    fmted = "Our dynamically constructed model predicted ${0} for tomorrow's price.".format(prediction)
-    return fmted
+    return prediction
 
 
 # returns in the form PREDICTED, ACTUAL =====> two values need to be unpacked
 def run_model_logistic(df, model_path):
     model = pickle_down(model_path)
 
-    X_test = df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag"]]
+    X_test = df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "absolute_change", "macro_direction"]]
     Y_test = df["delta"]
 
     X_test = impute(X_test)
