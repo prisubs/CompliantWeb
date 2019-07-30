@@ -55,10 +55,7 @@ def past_runner(ticker, date):
     headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
     news_category = make_category(good_count, bad_count)
-    try:
-        metadata = make_alias(ticker)
-    except IndexError:
-        metadata = ["None found"] * 3
+    metadata = make_alias(ticker)
     related = related_tickers(ticker)
     return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category, metadata, related
 
@@ -94,6 +91,7 @@ def related_tickers(ticker):
     name = make_alias(ticker)[0]
     all_ticker_df = pd.read_csv("data/ticker_translate.csv")
     related_metadata = all_ticker_df.loc[(all_ticker_df["Industry"] == industry) & (all_ticker_df["Name"] != name), "Name"].tolist()[0:5]
+
     return {
         "industry": industry,
         "related_companies": related_metadata
@@ -117,7 +115,12 @@ def make_alias(ticker):
     tickers = pd.read_csv("data/ticker_translate.csv")
     ticker = ticker.upper()
     data = tickers.loc[tickers["Ticker"] == ticker, ["Name", "Sector", "Industry"]]
-    return data.values.tolist()[0]  # name, sector, industry
+    try:
+        result = data.values.tolist()[0]  # name, sector, industry
+    except IndexError:
+        result = ["None found"] * 3
+        
+    return result
 
 
 def pretty_print(a, b, c, d, e, f, g):

@@ -1,11 +1,20 @@
-import flask
+from flask import Flask, request
+from flask_restful import Resource, Api
+from json import dumps
+from flask.ext.jsonpify import jsonify
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app = Flask(__name__)
+api = Api(app)
 
 
-@app.route('/', methods=['GET'])
-def home():
-    return "result"
+class Employees_Name(Resource):
+    def get(self, employee_id):
+        conn = db_connect.connect()
+        query = conn.execute("select * from employees where EmployeeId =%d " % int(employee_id))
+        result = {'data': [dict(zip(tuple(query.keys()), i)) for i in query.cursor]}
+        return jsonify(result)
 
-app.run()
+
+api.add_resource(Employees, '/employees')  # Route_1
+api.add_resource(Tracks, '/tracks')  # Route_2
+api.add_resource(Employees_Name, '/employees/<employee_id>')  # Route_3
