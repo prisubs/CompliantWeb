@@ -1,2 +1,0 @@
-# sentstockDB API documentation
-

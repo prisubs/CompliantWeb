@@ -9,7 +9,7 @@ api = Api(app)
 
 parser = reqparse.RequestParser()
 parser.add_argument('ticker', type=str, help="NYSE or NASDAQ ticker", required=True)
-parser.add_argument('analysis', type=str, required=False, help='YYYY-DD-MM formatted datestring')
+parser.add_argument('date', type=str, required=False, help='YYYY-DD-MM formatted datestring')
 
 class CompanyPrediction(Resource):
     def get(self):
