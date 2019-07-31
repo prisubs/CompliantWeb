@@ -473,9 +473,6 @@ export default class Review extends Component {
         // do stuff with responseJSON here...
         console.log(responseJSON)
         all_json = responseJSON
-        console.log('this is gonna be all json')
-        console.log(all_json)
-        console.log('THIS IS THE END OF ALL JSON!!!')
         this.setState({
           recentStock: recenterStock
         })
@@ -534,13 +531,6 @@ export default class Review extends Component {
           delta: all_json['delta']
         })
 
-        console.log(this.state.rating)
-        console.log('Number of good headlines is')
-        console.log(this.state.arrayvar.length)
-        console.log('Number of bad headlines is')
-        console.log(this.state.badheadlines.length)
-
-        console.log('TESTING OUT THIS GOOGLE STOCKS API STUFF RIGHT NOWWWWW')
         this.setState({
           fetchInProgress: false
         })
@@ -1065,7 +1055,7 @@ export default class Review extends Component {
                 </SubMenu>
                 <Menu.Item key="9">
                   <Icon type="file" />
-                  <span>EXIT</span>
+                  <span>Related Stocks</span>
                 </Menu.Item>
               </Menu>
             </Sider>
@@ -1090,8 +1080,8 @@ export default class Review extends Component {
                   <Row gutter={16}>
                     <Col span={12}>
                       <Statistic
-                        title="Rating"
-                        value={this.state.rating}
+                        title="Company Name"
+                        value={this.state.companyMeta[0]}
                         hoverable="true"
                       />
                     </Col>
@@ -1114,11 +1104,9 @@ export default class Review extends Component {
                     </Col>
                     <Col span={12}>
                       <Statistic
-                        title="Bad Article Ratio"
-                        value={this.state.badcount}
-                        suffix={'/'.concat(
-                          this.state.goodcount + this.state.badcount
-                        )}
+                        title="Verdict?"
+                        value={this.state.rating}
+                        hoverable="true"
                       />
                     </Col>
                   </Row>
@@ -1140,10 +1128,7 @@ export default class Review extends Component {
                     </Row>
 
                     <Row gutter={16}>
-                      <Col span={6}>
-                        <Card hoverable="true">{donut}</Card>
-                      </Col>
-                      <Col span={18}>
+                      <Col span={24}>
                         <Card hoverable="true">{tvw}</Card>
                       </Col>
                     </Row>

@@ -25,10 +25,12 @@
 }
 
 .donut {
-  width: 450px;
+  clear: both;
+  width: 550px;
   max-height: 600px;
-  height: 350px;
+  height: 300px;
   margin-right: 650px;
+  padding-right: 130px;
 }
 
 .grey-row {
@@ -252,7 +254,7 @@ body {
 }
 
 .donutd {
-  width: 300px !important;
+  padding-right: 50px !important;
 }
 
 .donutchild {
