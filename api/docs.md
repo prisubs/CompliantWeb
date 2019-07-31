@@ -1,1 +1,2 @@
-# SentStockDB API Documentation
+# sentstockDB API documentation
+
