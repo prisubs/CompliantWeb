@@ -25,12 +25,18 @@
 }
 
 .donut {
-  clear: both;
-  width: 550px;
+  width: 300px;
   max-height: 600px;
   height: 300px;
   margin-right: 650px;
   padding-right: 130px;
+}
+
+#b6d6ac82-b56f-4398-8eb4-c7c11dd182ad {
+  position: fixed !important;
+  background-color: red !important;
+  margin-top: 500px !important;
+  margin-left: 700px !important;
 }
 
 .grey-row {
@@ -255,10 +261,6 @@ body {
 
 .donutd {
   padding-right: 50px !important;
-}
-
-.donutchild {
-  margin-right: 200px;
 }
 
 .you-should-probably-green {

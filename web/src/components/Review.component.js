@@ -783,7 +783,6 @@ export default class Review extends Component {
                 }
               ]
             }}
-            className="donutchild"
           />
         </div>
       )
@@ -822,7 +821,7 @@ export default class Review extends Component {
           theme={Themes.LIGHT}
           interval={IntervalTypes.W}
           style={BarStyles.HOLLOW_CANDLES}
-          width="1000"
+          width="1300"
           height="500"
           news={['headlines']}
           studies={['BB@tv-basicstudies']}
@@ -1054,7 +1053,7 @@ export default class Review extends Component {
                   </Menu.Item>
                 </SubMenu>
                 <Menu.Item key="9">
-                  <Icon type="file" />
+                  <Icon type="drag" />
                   <span>Related Stocks</span>
                 </Menu.Item>
               </Menu>
@@ -1085,13 +1084,7 @@ export default class Review extends Component {
                         hoverable="true"
                       />
                     </Col>
-                    <Col span={12}>
-                      <Statistic
-                        title="Delta"
-                        value={this.state.delta}
-                        hoverable="true"
-                      />
-                    </Col>
+                    <Col span={12}>{donut}</Col>
                   </Row>
                   <Row gutter={16} className="grey-row">
                     <Col span={12}>
