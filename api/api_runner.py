@@ -46,7 +46,7 @@ def analytics_sentiments(ticker, date):
 
 def analytics_articles(ticker, date):
     client = TiingoClient({"api_key": "a265fc4a1013923f970d16e7348195074e97fcb0"})
-    query_ticker = lambda t, s, e: client.get_news(tickers=[t], startDate=s)
+    query_ticker = lambda t, s: client.get_news(tickers=[t], startDate=s)
     jsons = query_ticker(ticker, date)
 
     result, i = {}, 0
