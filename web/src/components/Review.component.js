@@ -822,8 +822,8 @@ export default class Review extends Component {
           theme={Themes.LIGHT}
           interval={IntervalTypes.W}
           style={BarStyles.HOLLOW_CANDLES}
-          width="800"
-          height="300"
+          width="1000"
+          height="500"
           news={['headlines']}
           studies={['BB@tv-basicstudies']}
         />
