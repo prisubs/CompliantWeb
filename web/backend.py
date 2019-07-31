@@ -105,7 +105,7 @@ def create_model_linear(ticker):
         row = pipeline_linear(ticker, date, dyn=False)
         master_df_set.append(row)
     training_df = pd.concat(master_df_set)
-    X_train = training_df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek", "absolute_change", "macro_direction"]]
+    X_train = training_df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek"]]
     Y_train = training_df["price"]
     model = LinearRegression().fit(X_train, Y_train)
     return model
