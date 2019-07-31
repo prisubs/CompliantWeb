@@ -25,10 +25,16 @@
 }
 
 .donut {
-  width: 400px;
+  clear: both;
+  width: 550px;
   max-height: 600px;
-  height: 350px;
+  height: 300px;
   margin-right: 650px;
+  padding-right: 130px;
+}
+
+.grey-row {
+  margin-top: 10px;
 }
 
 .predict-a-stock {
@@ -248,7 +254,7 @@ body {
 }
 
 .donutd {
-  width: 300px !important;
+  padding-right: 50px !important;
 }
 
 .donutchild {
