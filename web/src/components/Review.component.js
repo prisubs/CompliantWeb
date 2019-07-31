@@ -1103,7 +1103,7 @@ export default class Review extends Component {
                       />
                     </Col>
                   </Row>
-                  <Row gutter={16}>
+                  <Row gutter={16} className="grey-row">
                     <Col span={12}>
                       <Statistic
                         title="Good Articles"

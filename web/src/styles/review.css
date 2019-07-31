@@ -25,10 +25,14 @@
 }
 
 .donut {
-  width: 400px;
+  width: 450px;
   max-height: 600px;
   height: 350px;
   margin-right: 650px;
+}
+
+.grey-row {
+  margin-top: 10px;
 }
 
 .predict-a-stock {
