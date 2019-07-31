@@ -263,7 +263,7 @@ def featurize_lidar(start, end):
             delt = 1
         return absolute_change, delt
     except IndexError:
-        return 2.2, 0
+        return 0, 0
 
 
 def base_pipeline(ticker, date, dynamic=False):
@@ -363,7 +363,7 @@ def multi_row_pipeline(dates, ticker, pipeline_function=pipeline_logistic):
 
 
 def run_model_linear(df, model):
-    X_test = df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek", "absolute_change", "macro_direction"]]
+    X_test = df[["indico_sentiment", "sentiment", "sentiment_test", "bad_bag", "good_bag", "lastweek"]]
     prediction = model.predict(X_test).tolist()[0]
     return prediction
 
