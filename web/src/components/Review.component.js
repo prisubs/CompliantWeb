@@ -860,23 +860,17 @@ export default class Review extends Component {
             maxDate={new Date(2019, 8, 2)}
             minDate={new Date(2019, 2, 2)}
           /> */}
-
-          <div
-            className="c2"
-            style={{
-              width: 1000,
-              height: 500,
-              border: '2px solid #d9d9d9',
-              borderRadius: 4
-            }}
-          >
-            <Calendar
-              className="c3"
-              fullscreen={false}
-              onPanelChange={this.onChangeDate}
-            />{' '}
+          <div className="shrink-master">
+            <div
+              className="shrink"
+              style={{
+                border: '2px solid #d9d9d9',
+                borderRadius: 4
+              }}
+            >
+              <Calendar fullscreen={true} onPanelChange={this.onChangeDate} />{' '}
+            </div>
           </div>
-
           <form className="input-field-form">
             <div className="smalltext-signup">
               <h4 className="n-o-ta"> Name of Ticker </h4>

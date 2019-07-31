@@ -27,8 +27,19 @@
 .donut {
   width: 600px;
   max-height: 600px;
+  margin-right: 20px;
+}
+
+.predict-a-stock {
+  margin: auto;
+  padding-top: 200px;
   text-align: center !important;
-  margin: auto !important;
+}
+
+.ptspfd {
+  color: #000000;
+  font-size: 36px;
+  margin: auto;
 }
 
 .scrunching-layout {
@@ -106,10 +117,8 @@
 .center-review-div-one {
   height: 100%;
   width: 100%;
-  margin-top: 10%;
+  margin-top: -1%;
   position: fixed;
-  align-items: center;
-  justify-content: center;
 }
 
 .calendar {
@@ -125,9 +134,23 @@
 }
 
 .c3 {
-  max-height: 500px;
-  height: 500px;
-  width: 1000px;
+  max-height: 330px;
+  height: 330px;
+  width: 500px;
+}
+
+.shrink-master {
+  height: 75%;
+  width: 75%;
+  margin-top: 3%;
+  margin-left: 12%;
+}
+
+.shrink {
+  -webkit-transform: scale(0.75);
+  -moz-transform: scale(0.75);
+  -ms-transform: scale(0.75);
+  transform: scale(0.75);
 }
 
 /*change back to normal */
@@ -137,14 +160,14 @@ body {
 
 .input-field-login {
   text-align: center !important;
-  margin: auto !important;
+  margin: 40px auto 0px auto !important;
   width: 100px;
   align-items: center !important;
   justify-content: center !important;
 }
 
 .input-field-form {
-  background-color: 'red';
+  margin: 12px auto 0px auto !important;
 }
 
 .n-o-ta {
@@ -152,8 +175,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
     'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  padding-top: 10px;
-  padding-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 25px;
   width: 250px;
   align-items: center !important;
   margin: auto !important;

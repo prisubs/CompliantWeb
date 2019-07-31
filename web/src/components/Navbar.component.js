@@ -6,113 +6,6 @@ import { Flag, Icon } from 'tabler-react'
 
 class Navbar extends PureComponent {
   render() {
-    var loginNavbar = (
-      <div className="login-navbar">
-        <a href="http://localhost:3000/">
-          <img
-            src="images/white-logo.png"
-            alt="priyanka install the frickin driver smh"
-            className="login-imgnav"
-          />
-        </a>
-        <div> "Sentimental Stocks" </div>
-        <img src="images/white-logo.png" />
-        <div className="lir-div">
-          <Link to={ROUTES.INDEX} className="login-itemr sign-in-box">
-            API
-          </Link>
-
-          <Link
-            to={ROUTES.INDEX}
-            className={
-              this.props.location.pathname === ROUTES.INDEX
-                ? 'login-itemr login-itemr-selected'
-                : 'login-itemr'
-            }
-          >
-            Predict
-          </Link>
-
-          <Link
-            to={ROUTES.REVIEW}
-            className={
-              this.props.location.pathname === ROUTES.INDEX
-                ? 'login-itemr login-itemr-selected'
-                : 'login-itemr'
-            }
-          >
-            Review
-          </Link>
-
-          <Link
-            to={ROUTES.INDEX}
-            className={
-              this.props.location.pathname === ROUTES.INDEX
-                ? 'login-itemr login-itemr-selected'
-                : 'login-itemr'
-            }
-          >
-            Home
-          </Link>
-
-          <Link
-            to={ROUTES.INDEX}
-            className={
-              this.props.location.pathname === ROUTES.INDEX
-                ? 'login-itemr login-itemr-selected'
-                : 'login-itemr'
-            }
-          >
-            How it Works
-          </Link>
-        </div>
-      </div>
-    )
-
-    {
-      /*    <div>
-        <nav class="navbar">
-          <img
-            className="logo-ssdb"
-            src="images/white-logo.png"
-            alt="logo"
-          />
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon" />
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <Link class="nav-link" to={ROUTES.INDEX}>
-                  Home
-                </Link>
-              </li>
-              <li class="nav-item active">
-                <Link class="nav-link" to={ROUTES.BUY}>
-                  Review <span class="sr-only">(current)</span>
-                </Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to={ROUTES.BUY}>
-                  Predict <span class="sr-only">(current)</span>
-                </Link>
-              </li>
-            </ul>
-
-          </div>
-        </nav>
-      </div> */
-    }
-
     return (
       <div className="login-navbar">
         <Link to={ROUTES.INDEX}>
@@ -127,8 +20,8 @@ class Navbar extends PureComponent {
             API
           </Link>
 
-          <Link to={ROUTES.INDEX} className="login-itemr">
-            Home
+          <Link to={ROUTES.METHODS} className="login-itemr">
+            Methods
           </Link>
 
           <Link to={ROUTES.REVIEW} className="login-itemr">
@@ -137,10 +30,6 @@ class Navbar extends PureComponent {
 
           <Link to={ROUTES.PREDICT} className="login-itemr">
             Predict
-          </Link>
-
-          <Link to={ROUTES.METHODS} className="login-itemr">
-            Methods
           </Link>
         </div>
       </div>
