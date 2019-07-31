@@ -13,6 +13,7 @@ class CompanyPrediction(Resource):
         result = company_prediction(ticker)
         return jsonify(result)
 
+
 api.add_resource(CompanyPrediction, '/companies/get-prediction/<ticker>')
 
 
@@ -20,6 +21,7 @@ class CompanyMetadata(Resource):
     def get(self, ticker):
         result = company_metadata(ticker)
         return jsonify(result)
+
 
 api.add_resource(CompanyMetadata, '/companies/metadata/<ticker>')
 
@@ -29,6 +31,7 @@ class CompanyRelated(Resource):
         result = company_related(ticker)
         return jsonify(result)
 
+
 api.add_resource(CompanyRelated, '/companies/related/<ticker>')
 
 
@@ -37,6 +40,7 @@ class AnalyticsSentiments(Resource):
         result = analytics_sentiments(ticker, date)
         return jsonify(result)
 
+
 api.add_resource(AnalyticsSentiments, '/analytics/sentiments/<ticker><date>')
 
 
@@ -44,5 +48,6 @@ class AnalyticsArticles(Resource):
     def get(self, ticker, date):
         result = analytics_articles(ticker, date)
         return jsonify(result)
+
 
 api.add_resource(AnalyticsArticles, '/analytics/articles/<ticker><date>')
