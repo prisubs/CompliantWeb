@@ -142,8 +142,6 @@ class Navbar extends PureComponent {
           <Link to={ROUTES.METHODS} className="login-itemr">
             Methods
           </Link>
-          <Icon flag name="de" className="german-flag" />
-          <Icon flag name="us" />
         </div>
       </div>
     )

@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { ROUTES } from './../'
 import { SecondaryNavbar } from './'
-import Calendar from 'react-calendar'
-import { FieldGroup } from './'
+//import Calendar from 'react-calendar'
+//import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
-import { AutoComplete } from 'antd'
+import { AutoComplete, Calendar } from 'antd'
 import { Helmet } from 'react-helmet'
 import { Doughnut } from 'react-chartjs-2'
 import { Button } from 'tabler-react'
@@ -108,7 +108,8 @@ export default class Review extends Component {
       collapsed,
       recentStock,
       recenterStock,
-      fetchInProgress
+      fetchInProgress,
+      related
     } = this.state
     const tickerObject = { date: date, ticker: popTicker }
     let all_json
@@ -767,8 +768,8 @@ export default class Review extends Component {
               datasets: [
                 {
                   data: [this.state.badcount, this.state.goodcount],
-                  backgroundColor: ['red', 'green'],
-                  hoverBackgroundColor: ['red', 'green']
+                  backgroundColor: ['#ff6347', ' #47ff63'],
+                  hoverBackgroundColor: ['#e5593f', '#3fe559']
                 }
               ]
             }}
@@ -810,7 +811,7 @@ export default class Review extends Component {
           theme={Themes.LIGHT}
           interval={IntervalTypes.W}
           style={BarStyles.HOLLOW_CANDLES}
-          width="650"
+          width="550"
           height="300"
           news={['headlines']}
           studies={['BB@tv-basicstudies']}
@@ -852,13 +853,29 @@ export default class Review extends Component {
     if (ratinglocal === 'NULL') {
       form = (
         <div className="center-review-div-one">
-          <Calendar
+          {/*     <Calendar
             className="calendar"
             onChange={this.onChangeDate}
             value={this.state.date}
             maxDate={new Date(2019, 8, 2)}
             minDate={new Date(2019, 2, 2)}
-          />
+          /> */}
+
+          <div
+            className="c2"
+            style={{
+              width: 1000,
+              height: 500,
+              border: '2px solid #d9d9d9',
+              borderRadius: 4
+            }}
+          >
+            <Calendar
+              className="c3"
+              fullscreen={false}
+              onPanelChange={this.onChangeDate}
+            />{' '}
+          </div>
 
           <form className="input-field-form">
             <div className="smalltext-signup">
@@ -888,9 +905,7 @@ export default class Review extends Component {
               className="input-field-login"
               onChange={this.onChangeTicker}
             /> */}
-            <h3 className="n-o-t">
-              By using our product you agree to our terms and services
-            </h3>
+
             <div className="hr-div"></div>
 
             <div className="button-div">
@@ -906,6 +921,9 @@ export default class Review extends Component {
               {button}
             </div>
           </form>
+          <h3 className="n-o-t">
+            By using our product you agree to our terms and services
+          </h3>
         </div>
       )
     } else {
@@ -1106,10 +1124,10 @@ export default class Review extends Component {
                     </Row>
 
                     <Row gutter={16}>
-                      <Col span={12}>
+                      <Col span={6}>
                         <Card hoverable="true">{donut}</Card>
                       </Col>
-                      <Col span={12}>
+                      <Col span={18}>
                         <Card hoverable="true">{tvw}</Card>
                       </Col>
                     </Row>
@@ -1120,7 +1138,8 @@ export default class Review extends Component {
                 © 2019 Deutsche Bank AG By accessing and using this page you
                 agree to the Terms and Conditions. Corporate Headquarters:
                 Taunusanlage 12 60325 FRANKFURT AM MAIN (for letters and
-                postcards: 60262)
+                postcards: 60262){' '}
+                <Icon flag name="de" className="german-flag" />
               </Footer>
             </Layout>
           </Layout>

@@ -82,9 +82,8 @@
 .certain-category-search-wrapper {
   align-items: center !important;
   justify-content: center !important;
-  position: fixed;
   margin-left: 46% !important;
-  margin-top: 6%;
+  margin-top: 0%;
   margin-bottom: 5%;
 }
 
@@ -117,6 +116,20 @@
   text-align: center !important;
   margin: auto !important;
 }
+
+.c2 {
+  align-items: center;
+  justify-content: center;
+  text-align: center !important;
+  margin: auto !important;
+}
+
+.c3 {
+  max-height: 500px;
+  height: 500px;
+  width: 1000px;
+}
+
 /*change back to normal */
 body {
   background-color: #ffffff !important;
@@ -134,17 +147,13 @@ body {
   background-color: 'red';
 }
 
-.smalltext-signup {
-  font-color: 'white' !important;
-}
-
 .n-o-ta {
   color: #000000 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
     'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   width: 250px;
   align-items: center !important;
   margin: auto !important;
@@ -153,16 +162,17 @@ body {
 }
 
 .n-o-t {
-  color: #000000 !important;
+  color: #808080 !important;
   font-weight: normal !important;
   text-align: center !important;
   margin-bottom: 50px;
-  margin-top: 50px;
+  margin-top: 100px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
     'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 12px;
   margin: auto !important;
-  padding-top: 10px;
+  padding-top: 100px;
   padding-bottom: 5px;
   width: 250px;
   align-items: center !important;
@@ -200,10 +210,6 @@ body {
   font-size: 20px;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
-  margin: auto !important;
-  text-align: center !important;
-  align-items: center !important;
-  justify-content: center !important;
 }
 
 .submit-button:hover {
@@ -215,8 +221,7 @@ body {
 
 .button-div {
   text-align: center !important;
-  margin-top: 3% !important;
-  justify-content: center !important;
+  margin-top: 1% !important;
 }
 
 .you-should-probably-green {
