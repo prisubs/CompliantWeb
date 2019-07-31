@@ -1,6 +1,8 @@
 import requests
 
-payload = {"ticker": "fb"}
+payload = {
+    "ticker": "fb"
+}
 
 r = requests.get("localhost:5002/companies/get-prediction", params=payload)
 print(r.text)

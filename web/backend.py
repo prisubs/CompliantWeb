@@ -252,14 +252,18 @@ def remove_time(dt):
 
 def featurize_lidar(start, end):
     lidars = pd.read_csv("data/macros.csv")
-    start_lidar = lidars.loc[lidars["Date"] == start, "Macro"].tolist()[0]
-    end_lidar = lidars.loc[lidars["Date"] == end, "Macro"].tolist()[0]
-    absolute_change = end_lidar - start_lidar
-    if absolute_change < 0:
-        delt = 0
-    else:
-        delt = 1
-    return absolute_change, delt
+
+    try:
+        start_lidar = lidars.loc[lidars["Date"] == start, "Macro"].tolist()[0]
+        end_lidar = lidars.loc[lidars["Date"] == end, "Macro"].tolist()[0]
+        absolute_change = end_lidar - start_lidar
+        if absolute_change < 0:
+            delt = 0
+        else:
+            delt = 1
+        return absolute_change, delt
+    except IndexError:
+        return 2.2, 0
 
 
 def base_pipeline(ticker, date, dynamic=False):
