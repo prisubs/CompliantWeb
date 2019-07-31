@@ -24,12 +24,14 @@
   padding-top: 68px;
 }
 
+.ant-select-dropdown-palcement-bottomLeft {
+  padding-left: 300px !important;
+}
+
 .donut {
-  width: 300px;
-  max-height: 600px;
-  height: 300px;
-  margin-right: 650px;
-  padding-right: 130px;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
 }
 
 #b6d6ac82-b56f-4398-8eb4-c7c11dd182ad {
@@ -164,6 +166,10 @@
   -moz-transform: scale(0.75);
   -ms-transform: scale(0.75);
   transform: scale(0.75);
+}
+
+.o-cal {
+  margin-top: 100px;
 }
 
 body {

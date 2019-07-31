@@ -870,6 +870,7 @@ export default class Review extends Component {
             maxDate={new Date(2019, 8, 2)}
             minDate={new Date(2019, 2, 2)}
           /> */}
+          {/*
           <div className="shrink-master">
             <div
               className="shrink"
@@ -878,9 +879,16 @@ export default class Review extends Component {
                 borderRadius: 4
               }}
             >
-              <Calendar fullscreen={true} onPanelChange={this.onChangeDate} />{' '}
+            */}
+          <Calendar
+            className="o-cal"
+            fullscreen={false}
+            onSelect={this.onChangeDate}
+          />{' '}
+          {/*
             </div>
           </div>
+          */}
           <form className="input-field-form">
             <div className="smalltext-signup">
               <h4 className="n-o-ta"> Name of Ticker </h4>
