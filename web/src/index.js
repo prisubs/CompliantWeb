@@ -31,9 +31,6 @@ ReactDOM.render(
         <Route exact path={ROUTES.REVIEW} component={Review} />
         <Route exact path={ROUTES.METHODS} component={Methods} />
         <Route exact path={ROUTES.PREDICT} component={Predict} />
-        {
-          //<Route exact path={ROUTES.HOME} component={Home} />
-        }
       </div>
     </ConnectedRouter>
   </Provider>,
