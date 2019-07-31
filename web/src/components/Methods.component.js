@@ -62,13 +62,15 @@ export default class Methods extends Component {
             function is:
             <img className="oddsratio" src="images/oddsratio.png" />
           </span>
-          The regression in terms of matrices is the following:
+          <span className="oddsratio-div">
+            The regression in terms of matrices is the following:
+            <img className="log-equation" src="images/LogReg_mle.png" />
+          </span>
           <div className="inline-for-image-plus-gif">
             <img
               src="images/TameGloomyKakarikis-size_restricted.gif"
               className="sigmoid"
             />
-            <img className="log-equation" src="images/LogReg_mle.png" />
           </div>
           <span>
             {' '}

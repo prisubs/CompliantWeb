@@ -25,9 +25,10 @@
 }
 
 .donut {
-  width: 600px;
+  width: 400px;
   max-height: 600px;
-  margin-right: 20px;
+  height: 350px;
+  margin-right: 650px;
 }
 
 .predict-a-stock {
@@ -153,7 +154,6 @@
   transform: scale(0.75);
 }
 
-/*change back to normal */
 body {
   background-color: #ffffff !important;
 }
@@ -244,7 +244,15 @@ body {
 
 .button-div {
   text-align: center !important;
-  margin-top: 1% !important;
+  margin-top: -4% !important;
+}
+
+.donutd {
+  width: 300px !important;
+}
+
+.donutchild {
+  margin-right: 200px;
 }
 
 .you-should-probably-green {

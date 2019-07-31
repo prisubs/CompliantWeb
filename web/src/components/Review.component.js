@@ -757,12 +757,32 @@ export default class Review extends Component {
       pie = <hr />
     }
 
+    const chartOptions = {
+      layout: {
+        responsive: true,
+        maintainAspectRatio: true
+      },
+      margin: {
+        left: 0,
+        right: 300,
+        top: 0,
+        bottom: 0
+      },
+      padding: {
+        left: 0,
+        right: 300,
+        top: 0,
+        bottom: 0
+      }
+    }
+
     const thissubmittedaapl = this.state.fetchInProgress
     let donut
     if (!thissubmittedaapl) {
       donut = (
         <div className="donut">
           <Doughnut
+            options={chartOptions}
             data={{
               labels: ['Bad Articles', 'Good Articles'],
               datasets: [
@@ -773,6 +793,7 @@ export default class Review extends Component {
                 }
               ]
             }}
+            className="donutchild"
           />
         </div>
       )
@@ -811,7 +832,7 @@ export default class Review extends Component {
           theme={Themes.LIGHT}
           interval={IntervalTypes.W}
           style={BarStyles.HOLLOW_CANDLES}
-          width="550"
+          width="800"
           height="300"
           news={['headlines']}
           studies={['BB@tv-basicstudies']}
@@ -1111,6 +1132,7 @@ export default class Review extends Component {
                           title="Sample Bad Headline"
                           className="cc"
                           style={{ overflow: 'scroll' }}
+                          extra={<a href="#">More</a>}
                         >
                           <p>{this.state.badheadlines[0]}</p>
                         </Card>
