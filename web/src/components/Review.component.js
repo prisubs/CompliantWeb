@@ -4,6 +4,7 @@ import { ROUTES } from './../'
 import { SecondaryNavbar } from './'
 //import Calendar from 'react-calendar'
 //import { FieldGroup } from './'
+import moment from 'moment'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
 import { AutoComplete, Calendar, Modal } from 'antd'
@@ -965,6 +966,10 @@ export default class Review extends Component {
             */}
           <Calendar
             className="o-cal"
+            validRange={[
+              moment('2019-02-01', 'YYYY-MM-DD'),
+              moment('2019-08-01', 'YYYY-MM-DD')
+            ]}
             fullscreen={false}
             onSelect={this.onChangeDate}
           />{' '}

@@ -891,7 +891,11 @@ export default class Predict extends Component {
       form = (
         <div>
           {' '}
-          <Spin />
+          <div>
+            <table class="table table-striped table-bordered personaltable">
+              {this.createTable()}
+            </table>
+          </div>
         </div>
       )
     }
