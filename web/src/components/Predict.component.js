@@ -160,7 +160,7 @@ export default class Predict extends Component {
             this.setState({
               badheadlines: [
                 ...this.state.badheadlines,
-                ...all_json['bad_headlines']
+                ...all_json['bad_list']
               ]
             })
           }
@@ -792,7 +792,6 @@ export default class Predict extends Component {
           width="550"
           height="300"
           news={['headlines']}
-          studies={['BB@tv-basicsdtudies']}
         />
       )
     } else {
@@ -1019,6 +1018,23 @@ export default class Predict extends Component {
                       <Statistic
                         title="Industry"
                         value={this.state.industry}
+                        hoverable="true"
+                      />
+                    </Col>
+                  </Row>
+                  <Row gutter={16}>
+                    <Col span={12}>
+                      <Statistic
+                        title="Prediction"
+                        value={this.state.rating}
+                        hoverable="true"
+                      />
+                    </Col>
+                    <Col span={12}>
+                      {' '}
+                      <Statistic
+                        title="Number of Bad Articles"
+                        value={this.state.badheadlines}
                         hoverable="true"
                       />
                     </Col>
