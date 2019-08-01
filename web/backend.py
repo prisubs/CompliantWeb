@@ -55,7 +55,7 @@ def past_runner(ticker, date):
     df = pipeline_logistic(ticker, date)
     predicted_delta, actual_delta = run_model_logistic(df, "data/logistic.pkl")
     rating, delta = translate_delta(predicted_delta), find_delta(df["Start"][0], df["End"][0], ticker)
-    headlines = df["headlines"]
+    headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
     news_category = make_category(good_count, bad_count)
     metadata = make_alias(ticker)
