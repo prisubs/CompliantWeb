@@ -757,6 +757,7 @@ export default class Review extends Component {
     return Modal.info({
       title: 'News',
       width: 700,
+      centered: true,
       content: (
         <div>
           <table class="table table-striped table-bordered personaltable">
