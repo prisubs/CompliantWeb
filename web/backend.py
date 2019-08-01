@@ -28,10 +28,13 @@ predicted_price: our prediction on tomorrow's price [FLOAT]
 def future_runner(ticker):
     today = datetime.date.today()
     testing_df = pipeline_linear(ticker, today, dyn=True)
+    good_list, bad_list = prepare_headlines(testing_df["headlines"])
+    industry = make_alias(ticker)[2]
+    name = make_alias(ticker)[0]
     model = create_model_linear(ticker)
     prediction = run_model_linear(testing_df, model)
     prediction_formatted = "Our dynamically constructed model predicted ${0} for tomorrow's price.".format(prediction)
-    return prediction_formatted
+    return prediction_formatted, name, industry, good_list, bad_list
 
 '''
 [INPUT]
@@ -52,7 +55,7 @@ def past_runner(ticker, date):
     df = pipeline_logistic(ticker, date)
     predicted_delta, actual_delta = run_model_logistic(df, "data/logistic.pkl")
     rating, delta = translate_delta(predicted_delta), find_delta(df["Start"][0], df["End"][0], ticker)
-    headlines = df["headlines"][0]
+    headlines = df["headlines"]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
     news_category = make_category(good_count, bad_count)
     metadata = make_alias(ticker)
@@ -84,6 +87,9 @@ run_model_linear: runs logistic regression on tomorrow
 output_graph: saves a weekly sentiment graph to "week_sent.png"
 ****************************************************
 '''
+def prepare_headlines(headlines):
+    a, b, c, d = classify_headlines(headlines)
+    return a, b
 
 
 def related_tickers(ticker):
@@ -92,10 +98,7 @@ def related_tickers(ticker):
     all_ticker_df = pd.read_csv("data/ticker_translate.csv")
     related_metadata = all_ticker_df.loc[(all_ticker_df["Industry"] == industry) & (all_ticker_df["Name"] != name), "Name"].tolist()[0:5]
 
-    return {
-        "industry": industry,
-        "related_companies": related_metadata
-    }
+    return industry, related_metadata
 
 
 def create_model_linear(ticker):
