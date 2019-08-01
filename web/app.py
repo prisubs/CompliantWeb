@@ -36,6 +36,8 @@ def ticker_get():
         goodcount = good_countone
         badcount = bad_countone
         backy.pretty_print(ratingone, delta, good_countone, good_headlinesone, bad_countone, bad_headlinesone, news_category)
+        print("relatedstokx")
+        print(related)
         return jsonify(rating=ratingvar, good_headlines=goodheadlines, bad_headlines=badheadlines, good_count=goodcount,bad_count=badcount, delta=delta, company_meta=metadata, related_stocks = related)
 
 @app.route('/ticker-get-future', methods=['GET', 'POST'])

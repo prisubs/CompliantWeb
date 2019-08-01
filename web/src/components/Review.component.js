@@ -77,7 +77,8 @@ export default class Review extends Component {
     recentStock: 'AAPL',
     recenterStock: 'FB',
     fetchInProgress: false,
-    visible: false
+    visible: false,
+    related: []
   }
 
   showModal = () => {
@@ -378,7 +379,8 @@ export default class Review extends Component {
       collapsed,
       recentStock,
       recenterStock,
-      fetchInProgress
+      fetchInProgress,
+      related
     } = this.state
     const tickerObject = { date: date, ticker: ticker.toUpperCase() }
     let all_json
@@ -437,6 +439,18 @@ export default class Review extends Component {
                 ...this.state.badheadlines,
                 ...all_json['bad_headlines']
               ]
+            })
+          }
+        )
+
+        this.setState(
+          {
+            related: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              related: [...this.state.related, ...all_json['related_stocks']]
             })
           }
         )
@@ -708,6 +722,36 @@ export default class Review extends Component {
     table.push(<tbody>{table_subroutine}</tbody>)
     return table
   }
+
+  createRelated = () => {
+    let related_stocks = []
+    for (let i = 0; i < this.state.related.length; i++) {
+      related_stocks.push(
+        <Menu.Item key={i + 1000} onClick={this.applclick}>
+          {' '}
+          <Icon type="apple" />
+          <span>{this.state.related[i]}</span>
+        </Menu.Item>
+      )
+      return related_stocks
+    }
+  }
+
+  info = () => {
+    return Modal.info({
+      title: 'News',
+      width: 700,
+      content: (
+        <div>
+          <table class="table table-striped table-bordered personaltable">
+            {this.createTable()}
+          </table>
+        </div>
+      ),
+      onOk() {}
+    })
+  }
+
   createUShould = () => {
     let ushould
     if (this.state.rating === 'BUY') {
@@ -884,20 +928,6 @@ export default class Review extends Component {
     const fetchInProgresss = this.state.fetchInProgress
     const { Meta } = Card
 
-    function info() {
-      Modal.info({
-        title: 'News',
-        content: (
-          <div>
-            <table class="table table-striped table-bordered personaltable">
-              {this.createTable()}
-            </table>
-          </div>
-        ),
-        onOk() {}
-      })
-    }
-
     if (ratinglocal === 'NULL') {
       form = (
         <div className="center-review-div-one">
@@ -1039,7 +1069,7 @@ export default class Review extends Component {
                   />
                 </Menu.Item>
 
-                <Menu.Item key="2" onClick={info}>
+                <Menu.Item key="2" onClick={this.info}>
                   <Icon type="eye" />
                   <span>News</span>
                 </Menu.Item>
@@ -1112,10 +1142,18 @@ export default class Review extends Component {
                     {this.state.recentStock}
                   </Menu.Item>
                 </SubMenu>
-                <Menu.Item key="9">
-                  <Icon type="drag" />
-                  <span>Related Stocks</span>
-                </Menu.Item>
+
+                <SubMenu
+                  key="sub124"
+                  title={
+                    <span>
+                      <Icon type="drag" />
+                      <span>Related Stocks</span>
+                    </span>
+                  }
+                >
+                  {this.createRelated}
+                </SubMenu>
               </Menu>
             </Sider>
             <Layout>
