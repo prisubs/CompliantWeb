@@ -1,3 +1,3 @@
-import { getTicker, postTicker } from './login.action'
+import { getTicker, postTicker, getTickerFuture } from './login.action'
 
-export { getTicker, postTicker }
+export { getTicker, postTicker, getTickerFuture }

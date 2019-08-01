@@ -4,6 +4,7 @@ import { ROUTES } from './../'
 import { SecondaryNavbar } from './'
 //import Calendar from 'react-calendar'
 //import { FieldGroup } from './'
+import moment from 'moment'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
 import { AutoComplete, Calendar, Modal } from 'antd'
@@ -724,17 +725,32 @@ export default class Review extends Component {
   }
 
   createRelated = () => {
+    let rs = []
     let related_stocks = []
     for (let i = 0; i < this.state.related.length; i++) {
       related_stocks.push(
         <Menu.Item key={i + 1000} onClick={this.applclick}>
           {' '}
-          <Icon type="apple" />
+          <Icon type="radar-chart" />
           <span>{this.state.related[i]}</span>
         </Menu.Item>
       )
-      return related_stocks
     }
+    console.log(related_stocks)
+    rs.push(
+      <SubMenu
+        key="sub124"
+        title={
+          <span>
+            <Icon type="drag" />
+            <span>Related Stocks</span>
+          </span>
+        }
+      >
+        {related_stocks}
+      </SubMenu>
+    )
+    return rs
   }
 
   info = () => {
@@ -950,6 +966,10 @@ export default class Review extends Component {
             */}
           <Calendar
             className="o-cal"
+            validRange={[
+              moment('2019-02-01', 'YYYY-MM-DD'),
+              moment('2019-08-01', 'YYYY-MM-DD')
+            ]}
             fullscreen={false}
             onSelect={this.onChangeDate}
           />{' '}
@@ -1143,17 +1163,7 @@ export default class Review extends Component {
                   </Menu.Item>
                 </SubMenu>
 
-                <SubMenu
-                  key="sub124"
-                  title={
-                    <span>
-                      <Icon type="drag" />
-                      <span>Related Stocks</span>
-                    </span>
-                  }
-                >
-                  {this.createRelated}
-                </SubMenu>
+                {this.createRelated()}
               </Menu>
             </Sider>
             <Layout>
@@ -1247,7 +1257,11 @@ export default class Review extends Component {
                           title="Sample Bad Headline"
                           className="cc"
                           style={{ overflow: 'scroll' }}
-                          extra={<a href="#">More</a>}
+                          extra={
+                            <a href="#" onClick={this.info}>
+                              More
+                            </a>
+                          }
                         >
                           <p className="cc-sizing">
                             {this.state.badheadlines[0]}
@@ -1268,7 +1282,7 @@ export default class Review extends Component {
                 © 2019 Deutsche Bank AG By accessing and using this page you
                 agree to the Terms and Conditions. Corporate Headquarters:
                 Taunusanlage 12 60325 FRANKFURT AM MAIN (for letters and
-                postcards: 60262){' '}
+                postcards: 60262) {this.state.related}
                 <Icon flag name="de" className="german-flag" />
               </Footer>
             </Layout>

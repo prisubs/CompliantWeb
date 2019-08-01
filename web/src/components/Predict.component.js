@@ -75,7 +75,9 @@ export default class Predict extends Component {
     collapsed: false,
     recentStock: 'AAPL',
     recenterStock: 'FB',
-    fetchInProgress: false
+    fetchInProgress: false,
+    name: '',
+    industry: ''
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -356,53 +358,17 @@ export default class Predict extends Component {
       collapsed,
       recentStock,
       recenterStock,
-      fetchInProgress
+      fetchInProgress,
+      name,
+      industry
     } = this.state
     const tickerObject = { date: date, ticker: ticker.toUpperCase() }
     let all_json
     var x = this.props
-      .getTicker(tickerObject, this.handleRedirect, this.handleFailure)
+      .getTickerFuture(tickerObject, this.handleRedirect, this.handleFailure)
       .then(responseJSON => {
         // do stuff with responseJSON here...
         all_json = responseJSON
-        this.setState({
-          recentStock: recenterStock
-        })
-
-        this.setState({
-          recenterStock: tickerObject.ticker
-        })
-
-        this.setState({
-          rating: all_json['rating']
-        })
-
-        this.setState(
-          {
-            arrayvar: []
-          },
-          function() {
-            // called by React after the state is updated
-            this.setState({
-              arrayvar: [...this.state.arrayvar, ...all_json['good_headlines']]
-            })
-          }
-        )
-
-        this.setState(
-          {
-            companyMeta: []
-          },
-          function() {
-            // called by React after the state is updated
-            this.setState({
-              companyMeta: [
-                ...this.state.companyMeta,
-                ...all_json['company_meta']
-              ]
-            })
-          }
-        )
 
         this.setState(
           {
@@ -413,30 +379,34 @@ export default class Predict extends Component {
             this.setState({
               badheadlines: [
                 ...this.state.badheadlines,
-                ...all_json['bad_headlines']
+                ...all_json['bad_list']
               ]
             })
           }
         )
 
+        this.setState(
+          {
+            arrayvar: []
+          },
+          function() {
+            // called by React after the state is updated
+            this.setState({
+              arrayvar: [...this.state.arrayvar, ...all_json['good_list']]
+            })
+          }
+        )
+
         this.setState({
-          goodcount: all_json['good_count']
+          rating: all_json['prediction_formatted']
         })
 
         this.setState({
-          badcount: all_json['bad_count']
+          name: all_json['name']
         })
 
         this.setState({
-          delta: all_json['delta']
-        })
-
-        sleep(500).then(() => {
-          //do stuff
-
-          this.setState({
-            fetchInProgress: false
-          })
+          industry: all_json['industry']
         })
       })
   }
@@ -918,222 +888,14 @@ export default class Predict extends Component {
         </div>
       )
     } else {
-      /*
       form = (
-        <div class="div-sq-master">
-          <div class="divSquare">
-            <div className="align-sq-pie">
-              {this.createUShould()}
-              <div>{pie}</div>
-            </div>
+        <div>
+          {' '}
+          <div>
+            <table class="table table-striped table-bordered personaltable">
+              {this.createTable()}
+            </table>
           </div>
-
-          <div class="divSquare">{this.createCountGoodBad()}</div>
-
-          <div className="simple-clear"></div>
-
-          <div class="divSquare">
-            <div className="align-sq">
-              <table class="table table-striped table-bordered personaltable">
-                {this.createTable()}
-              </table>
-            </div>
-          </div>
-
-          <div class="divSquare">
-            <div className="align-sq">
-              <Thermometer
-                theme="light"
-                value={
-                  100 *
-                  (this.state.goodcount /
-                    (this.state.goodcount + this.state.badcount))
-                }
-                max="100"
-                format="°"
-                size="large"
-                height="450"
-                className="thermo"
-              />
-            </div>
-          </div>
-        </div>
-      ) */
-      form = (
-        <div className="scrunching-layout">
-          <Layout style={{ minHeight: '100vh' }}>
-            <Sider
-              className="lets-try-to-edit-antd"
-              collapsible
-              collapsed={this.state.collapsed}
-              onCollapse={this.onCollapse}
-              style={{ background: '#fff' }}
-              theme="light"
-            >
-              <div className="logo" />
-              <Menu defaultSelectedKeys={['1']} mode="inline">
-                <Menu.Item key="1">
-                  <Search
-                    placeholder="Input Ticker"
-                    onSearch={this.onSearch}
-                    style={{ width: 150 }}
-                  />
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Icon type="eye" />
-                  <span>News</span>
-                </Menu.Item>
-                <SubMenu
-                  key="sub1"
-                  title={
-                    <span>
-                      <Icon type="fire" />
-                      <span>Popular Stocks</span>
-                    </span>
-                  }
-                >
-                  <Menu.Item key="3" onClick={this.applclick}>
-                    {' '}
-                    <Icon type="apple" />
-                    <span>AAPL</span>
-                  </Menu.Item>
-                  <Menu.Item key="4" onClick={this.msftclick}>
-                    {' '}
-                    <Icon type="windows" />
-                    <span>MSFT</span>
-                  </Menu.Item>
-                  <Menu.Item key="5" onClick={this.fbclick}>
-                    {' '}
-                    <Icon type="facebook" />
-                    <span>FB</span>
-                  </Menu.Item>
-                  <Menu.Item key="6" onClick={this.workclick}>
-                    {' '}
-                    <Icon type="alibaba" />
-                    <span>BABA</span>
-                  </Menu.Item>
-                  <Menu.Item key="7" onClick={this.googlclick}>
-                    {' '}
-                    <Icon type="google" />
-                    <span>GOOGL</span>
-                  </Menu.Item>
-                  <Menu.Item key="8" onClick={this.twtrclick}>
-                    {' '}
-                    <Icon type="twitter" />
-                    <span>TWTR</span>
-                  </Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub2"
-                  title={
-                    <span>
-                      <Icon type="team" />
-                      <span>Recent Stocks</span>
-                    </span>
-                  }
-                >
-                  <Menu.Item key="9" onClick={this.twtrclick}>
-                    {this.state.recenterStock}
-                  </Menu.Item>
-                  <Menu.Item key="10" onClick={this.twtrclick}>
-                    {this.state.recentStock}
-                  </Menu.Item>
-                </SubMenu>
-                <Menu.Item key="9">
-                  <Icon type="file" />
-                  <span>EXIT</span>
-                </Menu.Item>
-              </Menu>
-            </Sider>
-            <Layout>
-              <Header style={{ background: '#fff', padding: 0 }} />
-              <Content style={{ margin: '0 16px' }}>
-                <Breadcrumb
-                  style={{ margin: '16px 0px 0px 16px' }}
-                  className="bc-style"
-                >
-                  <Breadcrumb.Item>
-                    {' '}
-                    <Icon type="stock" />
-                    Ticker
-                  </Breadcrumb.Item>
-                  <Breadcrumb.Item>{this.state.ticker}</Breadcrumb.Item>
-                </Breadcrumb>
-                <div
-                  style={{ padding: 24, background: '#fff', minHeight: 360 }}
-                >
-                  {' '}
-                  <Row gutter={16}>
-                    <Col span={12}>
-                      <Statistic
-                        title="Rating"
-                        value={this.state.rating}
-                        hoverable="true"
-                      />
-                    </Col>
-                    <Col span={12}>
-                      <Statistic
-                        title="Delta"
-                        value={this.state.delta}
-                        hoverable="true"
-                      />
-                    </Col>
-                  </Row>
-                  <Row gutter={16}>
-                    <Col span={12}>
-                      <Statistic
-                        title="Good Articles"
-                        value={this.state.goodcount}
-                        prefix={<Icon type="like" />}
-                        hoverable="true"
-                      />
-                    </Col>
-                    <Col span={12}>
-                      <Statistic
-                        title="Bad Article Ratio"
-                        value={this.state.badcount}
-                        suffix={'/'.concat(
-                          this.state.goodcount + this.state.badcount
-                        )}
-                      />
-                    </Col>
-                  </Row>
-                  <div style={{ background: '#ECECEC', padding: '30px' }}>
-                    <Row gutter={16}>
-                      <Col span={12}>{mt}</Col>
-                      <Col span={12}>
-                        <Card
-                          hoverable="true"
-                          size="small"
-                          title="Sample Bad Headline"
-                          className="cc"
-                          style={{ overflow: 'scroll' }}
-                        >
-                          <p>{this.state.badheadlines[0]}</p>
-                        </Card>
-                      </Col>
-                    </Row>
-
-                    <Row gutter={16}>
-                      <Col span={6}>
-                        <Card hoverable="true">{donut}</Card>
-                      </Col>
-                      <Col span={18}>
-                        <Card hoverable="true">{tvw}</Card>
-                      </Col>
-                    </Row>
-                  </div>
-                </div>
-              </Content>
-              <Footer style={{ textAlign: 'center' }} className="footer">
-                © 2019 Deutsche Bank AG By accessing and using this page you
-                agree to the Terms and Conditions. Corporate Headquarters:
-                Taunusanlage 12 60325 FRANKFURT AM MAIN (for letters and
-                postcards: 60262){' '}
-                <Icon flag name="de" className="german-flag" />
-              </Footer>
-            </Layout>
-          </Layout>
         </div>
       )
     }
