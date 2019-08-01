@@ -408,6 +408,10 @@ export default class Predict extends Component {
         this.setState({
           industry: all_json['industry']
         })
+
+        this.setState({
+          fetchInProgress: false
+        })
       })
   }
 
@@ -647,7 +651,11 @@ export default class Predict extends Component {
     let table_subroutine = []
     for (
       let i = 0;
-      i < Math.max(this.state.arrayvar.length, this.state.badheadlines.length);
+      i <
+      Math.max(
+        10,
+        Math.max(this.state.arrayvar.length, this.state.badheadlines.length)
+      );
       i++
     ) {
       let children = []
@@ -784,7 +792,7 @@ export default class Predict extends Component {
           width="550"
           height="300"
           news={['headlines']}
-          studies={['BB@tv-basicstudies']}
+          studies={['BB@tv-basicsdtudies']}
         />
       )
     } else {
@@ -889,13 +897,156 @@ export default class Predict extends Component {
       )
     } else {
       form = (
-        <div>
-          {' '}
-          <div>
-            <table class="table table-striped table-bordered personaltable">
-              {this.createTable()}
-            </table>
-          </div>
+        <div className="scrunching-layout">
+          <Layout style={{ minHeight: '100vh' }}>
+            <Sider
+              className="lets-try-to-edit-antd"
+              collapsible
+              collapsed={this.state.collapsed}
+              onCollapse={this.onCollapse}
+              style={{ background: '#fff' }}
+              theme="light"
+            >
+              <div className="logo" />
+              <Menu defaultSelectedKeys={['1']} mode="inline">
+                <Menu.Item key="1">
+                  <Search
+                    placeholder="Input Ticker"
+                    onSearch={this.onSearch}
+                    style={{ width: 140 }}
+                  />
+                </Menu.Item>
+
+                <Menu.Item key="2" onClick={this.info}>
+                  <Icon type="eye" />
+                  <span>News</span>
+                </Menu.Item>
+
+                {/*
+                     <Modal
+                    title={"News Headlines for ".concat(this.state.ticker)}
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    >
+              <table class="table table-striped table-bordered personaltable">
+                {this.createTable()}
+              </table>
+
+                    </Modal> */}
+                <SubMenu
+                  key="sub1"
+                  title={
+                    <span>
+                      <Icon type="fire" />
+                      <span>Popular Stocks</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="3">
+                    {' '}
+                    <Icon type="apple" />
+                    <span>AAPL</span>
+                  </Menu.Item>
+                  <Menu.Item key="4">
+                    {' '}
+                    <Icon type="windows" />
+                    <span>MSFT</span>
+                  </Menu.Item>
+                  <Menu.Item key="5">
+                    {' '}
+                    <Icon type="facebook" />
+                    <span>FB</span>
+                  </Menu.Item>
+                  <Menu.Item key="6">
+                    {' '}
+                    <Icon type="alibaba" />
+                    <span>BABA</span>
+                  </Menu.Item>
+                  <Menu.Item key="7">
+                    {' '}
+                    <Icon type="google" />
+                    <span>GOOGL</span>
+                  </Menu.Item>
+                  <Menu.Item key="8">
+                    {' '}
+                    <Icon type="twitter" />
+                    <span>TWTR</span>
+                  </Menu.Item>
+                </SubMenu>
+                <SubMenu
+                  key="sub2"
+                  title={
+                    <span>
+                      <Icon type="team" />
+                      <span>Recent Stocks</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="9">asdf</Menu.Item>
+                  <Menu.Item key="10">asdf</Menu.Item>
+                </SubMenu>
+              </Menu>
+            </Sider>
+            <Layout>
+              <Header style={{ background: '#fff', padding: 0 }} />
+              <Content style={{ margin: '0 16px' }}>
+                <Breadcrumb
+                  style={{ margin: '16px 0px 0px 16px' }}
+                  className="bc-style"
+                >
+                  <Breadcrumb.Item>
+                    {' '}
+                    <Icon type="stock" />
+                    Ticker
+                  </Breadcrumb.Item>
+                  <Breadcrumb.Item>{this.state.ticker}</Breadcrumb.Item>
+                </Breadcrumb>
+                <div
+                  style={{ padding: 24, background: '#fff', minHeight: 360 }}
+                >
+                  {' '}
+                  <Row gutter={16}>
+                    <Col span={12}>
+                      <Statistic
+                        title="Company Name"
+                        value={this.state.name}
+                        hoverable="true"
+                      />
+                    </Col>
+                    <Col span={12}>
+                      {' '}
+                      <Statistic
+                        title="Industry"
+                        value={this.state.industry}
+                        hoverable="true"
+                      />
+                    </Col>
+                  </Row>
+                  <div
+                    className="gr2"
+                    style={{ background: '#ECECEC', padding: '30px' }}
+                  >
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <Card hoverable="true">{tvw}</Card>
+                      </Col>
+                      <Col span={12}>
+                        <Card hoverable="true"> {this.createTable()}</Card>
+                      </Col>
+                    </Row>
+                  </div>
+                </div>
+              </Content>
+              <Footer style={{ textAlign: 'center' }} className="footer">
+                © 2019 Deutsche Bank AG By accessing and using this page you
+                agree to the Terms and Conditions. Corporate Headquarters:
+                Taunusanlage 12 60325 FRANKFURT AM MAIN (for letters and
+                postcards: 60262) {this.state.related}
+                <Icon flag name="de" className="german-flag" />
+              </Footer>
+            </Layout>
+          </Layout>
         </div>
       )
     }
