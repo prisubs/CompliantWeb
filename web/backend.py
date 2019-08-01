@@ -277,7 +277,7 @@ def featurize_lidar(start, end):
 
 def base_pipeline(ticker, date, dynamic=False):
     # api auth
-    indicoio.config.api_key = "04878c9a5bb99aaf8a8ccdd65954442a"
+    indicoio.config.api_key = "cf26d2d9cc2f3f003a338283d03a6f91"
     client = TiingoClient({"api_key": "a265fc4a1013923f970d16e7348195074e97fcb0"})
 
     # fix dates
