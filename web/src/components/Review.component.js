@@ -6,7 +6,7 @@ import { SecondaryNavbar } from './'
 //import { FieldGroup } from './'
 import { VictoryPie } from 'victory'
 import Thermometer from 'react-thermometer-component'
-import { AutoComplete, Calendar } from 'antd'
+import { AutoComplete, Calendar, Modal } from 'antd'
 import { Helmet } from 'react-helmet'
 import { Doughnut } from 'react-chartjs-2'
 import { Button } from 'tabler-react'
@@ -58,6 +58,7 @@ export default class Review extends Component {
     super()
     this.onSubmit = this.onSubmit.bind(this)
     this.onSubmiteventless = this.onSubmiteventless.bind(this)
+    this.createTable = this.createTable.bind(this)
   }
 
   state = {
@@ -75,7 +76,28 @@ export default class Review extends Component {
     collapsed: false,
     recentStock: 'AAPL',
     recenterStock: 'FB',
-    fetchInProgress: false
+    fetchInProgress: false,
+    visible: false
+  }
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    })
+  }
+
+  handleOk = e => {
+    console.log(e)
+    this.setState({
+      visible: false
+    })
+  }
+
+  handleCancel = e => {
+    console.log(e)
+    this.setState({
+      visible: false
+    })
   }
 
   onChangeDate = inputDate => this.setState({ date: inputDate })
@@ -754,13 +776,13 @@ export default class Review extends Component {
       },
       margin: {
         left: 0,
-        right: 300,
+        right: 0,
         top: 0,
         bottom: 0
       },
       padding: {
         left: 0,
-        right: 300,
+        right: 0,
         top: 0,
         bottom: 0
       }
@@ -860,6 +882,22 @@ export default class Review extends Component {
     let form
     const ratinglocal = this.state.rating
     const fetchInProgresss = this.state.fetchInProgress
+    const { Meta } = Card
+
+    function info() {
+      Modal.info({
+        title: 'News',
+        content: (
+          <div>
+            <table class="table table-striped table-bordered personaltable">
+              {this.createTable()}
+            </table>
+          </div>
+        ),
+        onOk() {}
+      })
+    }
+
     if (ratinglocal === 'NULL') {
       form = (
         <div className="center-review-div-one">
@@ -997,13 +1035,27 @@ export default class Review extends Component {
                   <Search
                     placeholder="Input Ticker"
                     onSearch={this.onSearch}
-                    style={{ width: 150 }}
+                    style={{ width: 140 }}
                   />
                 </Menu.Item>
-                <Menu.Item key="2">
+
+                <Menu.Item key="2" onClick={info}>
                   <Icon type="eye" />
                   <span>News</span>
                 </Menu.Item>
+
+                {/*
+                     <Modal
+                    title={"News Headlines for ".concat(this.state.ticker)}
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    >
+              <table class="table table-striped table-bordered personaltable">
+                {this.createTable()}
+              </table>
+
+                    </Modal> */}
                 <SubMenu
                   key="sub1"
                   title={
@@ -1092,7 +1144,14 @@ export default class Review extends Component {
                         hoverable="true"
                       />
                     </Col>
-                    <Col span={12}>{donut}</Col>
+                    <Col span={12}>
+                      {' '}
+                      <Statistic
+                        title="Sector"
+                        value={this.state.companyMeta[1]}
+                        hoverable="true"
+                      />
+                    </Col>
                   </Row>
                   <Row gutter={16} className="grey-row">
                     <Col span={12}>
@@ -1105,15 +1164,44 @@ export default class Review extends Component {
                     </Col>
                     <Col span={12}>
                       <Statistic
+                        title="Bad Articles"
+                        value={this.state.badcount}
+                        prefix={<Icon type="dislike" />}
+                        hoverable="true"
+                      />
+                    </Col>
+                  </Row>
+                  <Row gutter={16} className="grey-row">
+                    <Col span={12}>
+                      <Statistic
+                        title="Industry"
+                        value={this.state.companyMeta[2]}
+                        hoverable="true"
+                      />
+                    </Col>
+
+                    <Col span={12}>
+                      <Statistic
                         title="Verdict?"
                         value={this.state.rating}
                         hoverable="true"
                       />
                     </Col>
                   </Row>
-                  <div style={{ background: '#ECECEC', padding: '30px' }}>
+                  <div
+                    className="gr2"
+                    style={{ background: '#ECECEC', padding: '30px' }}
+                  >
                     <Row gutter={16}>
-                      <Col span={12}>{mt}</Col>
+                      <Col span={12} className="donut-gal">
+                        <Card hoverable className="metacard" cover={donut}>
+                          <Meta
+                            title="Good/Bad Donut"
+                            description="generated using react-chartjs-2"
+                            className="top-border"
+                          />
+                        </Card>
+                      </Col>
                       <Col span={12}>
                         <Card
                           hoverable="true"
@@ -1123,7 +1211,9 @@ export default class Review extends Component {
                           style={{ overflow: 'scroll' }}
                           extra={<a href="#">More</a>}
                         >
-                          <p>{this.state.badheadlines[0]}</p>
+                          <p className="cc-sizing">
+                            {this.state.badheadlines[0]}
+                          </p>
                         </Card>
                       </Col>
                     </Row>

@@ -16,9 +16,13 @@ class Navbar extends PureComponent {
           />
         </Link>
         <div className="lir-div">
-          <Link to={ROUTES.INDEX} className="sign-in-box">
+          <a
+            target="_blank"
+            href="https://documenter.getpostman.com/view/8309272/SVYnSgEo?version=latest&fbclid=IwAR3EAU-sL3GChFDZ_eLB6mvqDbMhrdyDaNIITBYDLIbA9K5zUP7qilpTOu4"
+            className="sign-in-box"
+          >
             API
-          </Link>
+          </a>
 
           <Link to={ROUTES.METHODS} className="login-itemr">
             Methods
