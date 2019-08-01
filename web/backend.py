@@ -124,7 +124,7 @@ def create_model_linear(ticker):
 def make_alias(ticker):
     tickers = pd.read_csv("data/ticker_translate.csv")
     ticker = ticker.upper()
-    data = tickers.loc[tickers["Ticker"] == ticker, ["Name", "Sector", "Industry"]]
+    data = tickers.loc[tickers["Ticker"] == ticker, ["Name", "Sector", "industry"]]
     try:
         result = data.values.tolist()[0]  # name, sector, industry
     except IndexError:
