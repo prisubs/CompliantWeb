@@ -208,13 +208,8 @@ export default class Review extends Component {
         fetchInProgress: false
       })
     })
-
-    sleep(500).then(() => {
-      //do stuff
-
-      this.setState({
-        ticker: popTicker
-      })
+    this.setState({
+      ticker: popTicker
     })
   }
 
@@ -323,38 +318,31 @@ export default class Review extends Component {
   }
 
   msftclick = () => {
-    this.setState({
-      ticker: 'MSFT'
-    })
     this.popclick('MSFT')
   }
 
   fbclick = () => {
-    this.setState({
-      ticker: 'FB'
-    })
     this.popclick('FB')
   }
 
   workclick = () => {
-    this.setState({
-      ticker: 'BABA'
-    })
     this.popclick('BABA')
   }
 
   googlclick = () => {
-    this.setState({
-      ticker: 'GOOG'
-    })
     this.popclick('GOOG')
   }
 
   twtrclick = () => {
-    this.setState({
-      ticker: 'TWTR'
-    })
     this.popclick('TWTR')
+  }
+
+  rcClick = () => {
+    this.popclick(this.state.recentStock)
+  }
+
+  rctClick = () => {
+    this.popclick(this.state.recenterStock)
   }
 
   onSubmit = event => {
@@ -731,7 +719,7 @@ export default class Review extends Component {
       related_stocks.push(
         <Menu.Item key={i + 1000} onClick={this.applclick}>
           {' '}
-          <Icon type="radar-chart" />
+          <Icon type="sliders" />
           <span>{this.state.related[i]}</span>
         </Menu.Item>
       )
@@ -756,7 +744,7 @@ export default class Review extends Component {
   info = () => {
     return Modal.info({
       title: 'News',
-      width: 700,
+      width: 1000,
       centered: true,
       content: (
         <div>
@@ -907,7 +895,6 @@ export default class Review extends Component {
           width="1300"
           height="500"
           news={['headlines']}
-          studies={['BB@tv-basicstudies']}
         />
       )
     } else {
@@ -1119,32 +1106,32 @@ export default class Review extends Component {
                   <Menu.Item key="3" onClick={this.applclick}>
                     {' '}
                     <Icon type="apple" />
-                    <span>AAPL</span>
+                    <span>Apple</span>
                   </Menu.Item>
                   <Menu.Item key="4" onClick={this.msftclick}>
                     {' '}
                     <Icon type="windows" />
-                    <span>MSFT</span>
+                    <span>Microsoft</span>
                   </Menu.Item>
                   <Menu.Item key="5" onClick={this.fbclick}>
                     {' '}
                     <Icon type="facebook" />
-                    <span>FB</span>
+                    <span>Facebook</span>
                   </Menu.Item>
                   <Menu.Item key="6" onClick={this.workclick}>
                     {' '}
                     <Icon type="alibaba" />
-                    <span>BABA</span>
+                    <span>Alibaba</span>
                   </Menu.Item>
                   <Menu.Item key="7" onClick={this.googlclick}>
                     {' '}
                     <Icon type="google" />
-                    <span>GOOGL</span>
+                    <span>Google</span>
                   </Menu.Item>
                   <Menu.Item key="8" onClick={this.twtrclick}>
                     {' '}
                     <Icon type="twitter" />
-                    <span>TWTR</span>
+                    <span>Twitter</span>
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
@@ -1156,10 +1143,10 @@ export default class Review extends Component {
                     </span>
                   }
                 >
-                  <Menu.Item key="9" onClick={this.twtrclick}>
+                  <Menu.Item key="9" onClick={this.rctClick}>
                     {this.state.recenterStock}
                   </Menu.Item>
-                  <Menu.Item key="10" onClick={this.twtrclick}>
+                  <Menu.Item key="10" onClick={this.rcClick}>
                     {this.state.recentStock}
                   </Menu.Item>
                 </SubMenu>

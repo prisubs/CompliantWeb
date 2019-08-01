@@ -652,7 +652,7 @@ export default class Predict extends Component {
     for (
       let i = 0;
       i <
-      Math.max(
+      Math.min(
         10,
         Math.max(this.state.arrayvar.length, this.state.badheadlines.length)
       );
@@ -1034,7 +1034,7 @@ export default class Predict extends Component {
                       {' '}
                       <Statistic
                         title="Number of Bad Articles"
-                        value={this.state.badheadlines}
+                        value={this.state.badheadlines.length}
                         hoverable="true"
                       />
                     </Col>
@@ -1048,7 +1048,11 @@ export default class Predict extends Component {
                         <Card hoverable="true">{tvw}</Card>
                       </Col>
                       <Col span={12}>
-                        <Card hoverable="true"> {this.createTable()}</Card>
+                        <div>
+                          <table class="table table-striped table-bordered personaltable">
+                            {this.createTable()}
+                          </table>
+                        </div>
                       </Col>
                     </Row>
                   </div>
