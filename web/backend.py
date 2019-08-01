@@ -104,7 +104,7 @@ def related_tickers(ticker):
     all_ticker_df = pd.read_csv("data/ticker_translate.csv")
     related_metadata = all_ticker_df.loc[(all_ticker_df["Industry"] == industry) & (all_ticker_df["Name"] != name), "Name"].tolist()[0:5]
 
-    return industry, related_metadata
+    return related_metadata
 
 
 def create_model_linear(ticker):
