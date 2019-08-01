@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import datetime
+from datetime import datetime, timedelta
 from tiingo import TiingoClient
 
 from sklearn.impute import SimpleImputer
@@ -26,9 +26,9 @@ week: whether prediction is for the next week [BOOLEAN]
 predicted_price: our prediction on tomorrow's price [FLOAT]
 '''
 def future_runner(ticker):
-    today = datetime.date.today()
+    today = datetime.strftime(datetime.now(), '%Y-%m-%d')
     testing_df = pipeline_linear(ticker, today, dyn=True)
-    good_list, bad_list = prepare_headlines(testing_df["headlines"])
+    good_list, bad_list = prepare_headlines(testing_df["headlines"][0])
     industry = make_alias(ticker)[2]
     name = make_alias(ticker)[0]
     model = create_model_linear(ticker)
@@ -88,8 +88,14 @@ output_graph: saves a weekly sentiment graph to "week_sent.png"
 ****************************************************
 '''
 def prepare_headlines(headlines):
-    a, b, c, d = classify_headlines(headlines)
-    return a, b
+    good, bad = [], []
+    for headline in headlines:
+        p = single_headlines(headline)
+        if p > 0:
+            good.append(headline)
+        else:
+            bad.append(headline)
+    return good, bad
 
 
 def related_tickers(ticker):
@@ -246,7 +252,7 @@ def pickle_down(filepath):
 
 
 def six_days(start_date):
-    return start_date + datetime.timedelta(days=6)
+    return start_date + timedelta(days=6)
 
 
 def remove_time(dt):
@@ -304,18 +310,22 @@ def base_pipeline(ticker, date, dynamic=False):
 
     # add last week's data
     start_last = pd.to_datetime(pd.Series([start_date])).apply(
-        lambda start_date: start_date - datetime.timedelta(days=6))
+        lambda start_date: start_date - timedelta(days=6))
     start_last = remove_time(str(start_last.values[0]))
     end_last = start_date
     lastweek = client.get_ticker_price(ticker, fmt='object', startDate=start_last, endDate=end_last, frequency='daily')
     lastweek = lastweek[0].close
 
     # get prices for return
-    open_price, close_price = 0.0, 0.0
+    open_price, close_price, prices = 0.0, 0.0, []
     if not dynamic:
         prices = client.get_ticker_price(ticker, fmt='object', startDate=start_date, endDate=end_date, frequency='daily')
-        open_price = prices[0].open
-        close_price = prices[-1].close
+    elif dynamic:
+        yesterday = datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
+        today = datetime.strftime(datetime.now(), '%Y-%m-%d')
+        prices = client.get_ticker_price(ticker, fmt='object', startDate=yesterday, endDate=today,frequency='daily')
+
+    open_price, close_price = prices[0].open, prices[0].close
 
     df = pd.DataFrame(
         {
@@ -416,13 +426,13 @@ def perform_visualization(df, ticker):
 def weekly_data_gather(ticker, start_date):
     r, dates, prices = [], [], []
     client = TiingoClient({"api_key": "a265fc4a1013923f970d16e7348195074e97fcb0"})
-    dt_obj = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    dt_obj = datetime.strptime(start_date, "%Y-%m-%d")
     query_ticker = lambda t, s, e: client.get_news(tickers=[t], startDate=d1, endDate=d2)
     get_price = lambda t, s, e: client.get_ticker_price(ticker, fmt='object',
                                                         startDate=s, endDate=e, frequency='daily')
     for i in range(7):
-        d1 = dt_obj + datetime.timedelta(days=i)
-        d2 = dt_obj + datetime.timedelta(days=i + 1)
+        d1 = dt_obj + timedelta(days=i)
+        d2 = dt_obj + timedelta(days=i + 1)
         d1, d2 = str(d1.strftime("%Y-%m-%d")), str(d2.strftime("%Y-%m-%d"))
         json = query_ticker(ticker, d1, d2)
         price = get_price(ticker, d1, d2)
