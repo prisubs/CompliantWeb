@@ -44,10 +44,10 @@ def ticker_get():
 def ticker_get_future():
     if request.method == 'POST':
         data = request.get_json()
-        print("some sort of error?????")
-        print(date)
-        prediction = backy.future_runner(ticker)
-        return jsonify(prediction_json=prediction)
+        a, b, c, d, e = backy.future_runner(data["ticker"])
+        return jsonify(prediction_formatted = a, name = b, industry = c, good_list = d, bad_list = e)
+
+
 
     '''
     elif request.method == 'GET':

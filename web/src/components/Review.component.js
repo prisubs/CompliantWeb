@@ -730,7 +730,7 @@ export default class Review extends Component {
       related_stocks.push(
         <Menu.Item key={i + 1000} onClick={this.applclick}>
           {' '}
-          <Icon type="apple" />
+          <Icon type="radar-chart" />
           <span>{this.state.related[i]}</span>
         </Menu.Item>
       )
@@ -1252,7 +1252,11 @@ export default class Review extends Component {
                           title="Sample Bad Headline"
                           className="cc"
                           style={{ overflow: 'scroll' }}
-                          extra={<a href="#">More</a>}
+                          extra={
+                            <a href="#" onClick={this.info}>
+                              More
+                            </a>
+                          }
                         >
                           <p className="cc-sizing">
                             {this.state.badheadlines[0]}

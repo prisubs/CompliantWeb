@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getTicker, postTicker } from './../actions'
+import { getTicker, postTicker, getTickerFuture } from './../actions'
 import Predict from './Predict.component'
 
 function mapStateToProps(state) {
@@ -13,7 +13,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       getTicker,
-      postTicker
+      postTicker,
+      getTickerFuture
     },
     dispatch
   )

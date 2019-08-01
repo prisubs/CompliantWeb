@@ -4,7 +4,7 @@ const REQUEST_METHODS = {
 }
 
 const TICKER_URL = 'ticker-get'
-
+const FUTURE_URL = 'ticker-get-future'
 /*
  * Helper function that calls the endpoint on the backend
  * @param {string} method : get/post/put/deletereactreact
@@ -32,6 +32,17 @@ export function getTicker(tickerObject) {
     TICKER_URL,
     JSON.stringify({
       date: tickerObject.date,
+      ticker: tickerObject.ticker
+    })
+  )
+}
+
+export function getTickerFuture(tickerObject) {
+  console.log(tickerObject)
+  return createRequestSentStock(
+    REQUEST_METHODS.POST,
+    FUTURE_URL,
+    JSON.stringify({
       ticker: tickerObject.ticker
     })
   )
