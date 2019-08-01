@@ -102,7 +102,8 @@ def related_tickers(ticker):
     industry = make_alias(ticker)[2]
     name = make_alias(ticker)[0]
     all_ticker_df = pd.read_csv("data/ticker_translate.csv")
-    related_metadata = all_ticker_df.loc[(all_ticker_df["Industry"] == industry) & (all_ticker_df["Name"] != name), "Name"].tolist()[0:5]
+    print(all_ticker_df.head())
+    related_metadata = all_ticker_df.loc[(all_ticker_df["industry"] == industry) & (all_ticker_df["Name"] != name), "Name"].tolist()[0:5]
 
     return related_metadata
 
