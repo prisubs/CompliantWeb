@@ -724,6 +724,7 @@ export default class Review extends Component {
   }
 
   createRelated = () => {
+    let rs = []
     let related_stocks = []
     for (let i = 0; i < this.state.related.length; i++) {
       related_stocks.push(
@@ -733,8 +734,22 @@ export default class Review extends Component {
           <span>{this.state.related[i]}</span>
         </Menu.Item>
       )
-      return related_stocks
     }
+    console.log(related_stocks)
+    rs.push(
+      <SubMenu
+        key="sub124"
+        title={
+          <span>
+            <Icon type="drag" />
+            <span>Related Stocks</span>
+          </span>
+        }
+      >
+        {related_stocks}
+      </SubMenu>
+    )
+    return rs
   }
 
   info = () => {
@@ -1143,17 +1158,7 @@ export default class Review extends Component {
                   </Menu.Item>
                 </SubMenu>
 
-                <SubMenu
-                  key="sub124"
-                  title={
-                    <span>
-                      <Icon type="drag" />
-                      <span>Related Stocks</span>
-                    </span>
-                  }
-                >
-                  {this.createRelated}
-                </SubMenu>
+                {this.createRelated()}
               </Menu>
             </Sider>
             <Layout>
@@ -1268,7 +1273,7 @@ export default class Review extends Component {
                 © 2019 Deutsche Bank AG By accessing and using this page you
                 agree to the Terms and Conditions. Corporate Headquarters:
                 Taunusanlage 12 60325 FRANKFURT AM MAIN (for letters and
-                postcards: 60262){' '}
+                postcards: 60262) {this.state.related}
                 <Icon flag name="de" className="german-flag" />
               </Footer>
             </Layout>
