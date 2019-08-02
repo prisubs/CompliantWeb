@@ -58,6 +58,7 @@ def past_runner(ticker, date):
     headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
     news_category = make_category(good_count, bad_count)
+    output_graph(ticker, date)
     metadata = make_alias(ticker)
     related = related_tickers(ticker)
     return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category, metadata, related
