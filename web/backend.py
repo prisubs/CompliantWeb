@@ -404,6 +404,28 @@ def output_graph(ticker, start_date):
     df = fix_visualize(dates, prices, sentiments)
     perform_visualization(df, ticker)
     plt.clf()
+    output_graph2(ticker, dates)
+    plt.clf()
+    return
+
+
+def output_graph2(ticker, dates):
+    x = dates
+    libor_df = pd.read_csv("data/macros.csv")
+    y = libor_df.loc[libor_df["Date"].isin(x), "Macro"].tolist()
+    fig = sns.scatterplot(x, y)
+    for item in fig.get_xticklabels():
+        item.set_rotation(60)
+    fig.set_xlabel("date")
+    fig.set_ylabel("libor")
+    fig.set_title("LIBOR by date for {0}".format(ticker.upper()))
+    try:
+        import os
+        os.remove("public/images/testing2.png")
+    except:
+        pass
+
+    plt.savefig("public/images/testing2.png")
     return
 
 
@@ -424,9 +446,13 @@ def perform_visualization(df, ticker):
     for item in fig.get_xticklabels():
         item.set_rotation(60)
 
-    import os
-    os.remove("testing.png")
-    plt.savefig("testing.png")
+    try:
+        import os
+        os.remove("public/images/testing.png")
+    except:
+        pass
+
+    plt.savefig("public/images/testing.png")
     return fig
 
 
