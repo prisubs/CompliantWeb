@@ -419,8 +419,12 @@ def output_graph2(ticker, dates):
     fig.set_xlabel("date")
     fig.set_ylabel("libor")
     fig.set_title("LIBOR by date for {0}".format(ticker.upper()))
-    import os
-    os.remove("testing2.png")
+    try:
+        import os
+        os.remove("testing2.png")
+    except:
+        pass
+    
     plt.savefig("testing2.png")
     return
 
@@ -441,8 +445,13 @@ def perform_visualization(df, ticker):
     fig.set_xticklabels(dates)
     for item in fig.get_xticklabels():
         item.set_rotation(60)
-    import os
-    os.remove("testing.png")
+
+    try:
+        import os
+        os.remove("testing.png")
+    except:
+        pass
+
     plt.savefig("testing.png")
     return fig
 
