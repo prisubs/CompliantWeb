@@ -421,11 +421,11 @@ def output_graph2(ticker, dates):
     fig.set_title("LIBOR by date for {0}".format(ticker.upper()))
     try:
         import os
-        os.remove("testing2.png")
+        os.remove("public/images/testing2.png")
     except:
         pass
-    
-    plt.savefig("testing2.png")
+
+    plt.savefig("public/images/testing2.png")
     return
 
 
@@ -448,11 +448,11 @@ def perform_visualization(df, ticker):
 
     try:
         import os
-        os.remove("testing.png")
+        os.remove("public/images/testing.png")
     except:
         pass
 
-    plt.savefig("testing.png")
+    plt.savefig("public/images/testing.png")
     return fig
 
 
