@@ -403,7 +403,7 @@ def output_graph(ticker, start_date):
     sentiments = weekly_doc_aggregator(docs)
     df = fix_visualize(dates, prices, sentiments)
     perform_visualization(df, ticker)
-    plt.cla()
+    plt.clf()
     return
 
 
