@@ -417,6 +417,7 @@ def perform_visualization(df, ticker):
     fig = sns.lineplot(dates, sentiments, color='black')
     ax2 = plt.twinx()
     sns.lineplot(dates, prices, ax=ax2, color='green')
+    ticker = ticker.upper()
     fig.set_title("sentiment of {0} from {1} to {2}".format(ticker, dates[0], dates[len(dates)-1]))
     fig.set_xticklabels(dates)
     for item in fig.get_xticklabels():
