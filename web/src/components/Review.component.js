@@ -1263,6 +1263,14 @@ export default class Review extends Component {
                         <Card hoverable="true">{tvw}</Card>
                       </Col>
                     </Row>
+                    <Row gutter={16}>
+                      <Col span={12}>
+                        <img src="images/testing.png" />
+                      </Col>
+                      <Col span={12}>
+                        <img src="images/testing2.png" />
+                      </Col>
+                    </Row>
                   </div>
                 </div>
               </Content>
