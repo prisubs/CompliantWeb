@@ -1049,7 +1049,7 @@ export default class Predict extends Component {
                       </Col>
                       <Col span={12}>
                         <div>
-                          <table class="table table-striped table-bordered personaltable">
+                          <table class="table table-bordered personaltable">
                             {this.createTable()}
                           </table>
                         </div>
