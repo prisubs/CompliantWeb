@@ -58,6 +58,7 @@ def past_runner(ticker, date):
     headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
     news_category = make_category(good_count, bad_count)
+    output_graph(ticker, date)
     metadata = make_alias(ticker)
     related = related_tickers(ticker)
     return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category, metadata, related
@@ -416,6 +417,7 @@ def perform_visualization(df, ticker):
     fig = sns.lineplot(dates, sentiments, color='black')
     ax2 = plt.twinx()
     sns.lineplot(dates, prices, ax=ax2, color='green')
+    ticker = ticker.upper()
     fig.set_title("sentiment of {0} from {1} to {2}".format(ticker, dates[0], dates[len(dates)-1]))
     fig.set_xticklabels(dates)
     for item in fig.get_xticklabels():
