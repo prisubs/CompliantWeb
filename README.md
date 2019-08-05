@@ -1,3 +1,6 @@
+![logo](web/public/images/white-logo.png)
+
+
 # Usage
 Clone or download the repo to run the app locally.
 ``` bash
