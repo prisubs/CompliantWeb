@@ -58,7 +58,7 @@ def past_runner(ticker, date):
     headlines = df["headlines"][0]
     good_headlines, bad_headlines, good_count, bad_count = classify_headlines(headlines)
     news_category = make_category(good_count, bad_count)
-    output_graph(ticker, date)
+    #output_graph(ticker, date)
     metadata = make_alias(ticker)
     related = related_tickers(ticker)
     return rating, delta, good_count, good_headlines, bad_count, bad_headlines, news_category, metadata, related
@@ -402,7 +402,7 @@ def output_graph(ticker, start_date):
     docs, dates, prices = weekly_data_gather(ticker, start_date)
     sentiments = weekly_doc_aggregator(docs)
     df = fix_visualize(dates, prices, sentiments)
-    perform_visualization(df, ticker)
+    #perform_visualization(df, ticker)
     plt.clf()
     output_graph2(ticker, dates)
     plt.clf()
