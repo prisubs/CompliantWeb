@@ -50,3 +50,7 @@ Example Response
 <br>
 ## Predict Page
 ![pred](demo_imgs/predict_input.gif)
+<br>
+<br>
+<br>
+![pred](demo_imgs/predict_result.png)
