@@ -1,3 +1,12 @@
+# Usage
+Clone or download the repo to run the app locally.
+``` bash
+cd CompliantBois/web
+npm install
+npm start
+python3 app.py
+```
+
 # API
 The analytics from this project are available as a standalone REST API service. 
 
