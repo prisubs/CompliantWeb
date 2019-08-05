@@ -24,5 +24,29 @@ Example Response
 
 # Web UI
 
+## Homepage
+![Home](demo_imgs/homepage.gif)
 
-
+## Review Page
+![rev](demo_imgs/review_input.gif)
+<br>
+<br>
+<br>
+![rev](demo_imgs/review_result1.gif)
+<br>
+<br>
+<br>
+![rev](demo_imgs/review_result2.gif)
+<br>
+<br>
+<br>
+![rev](demo_imgs/review_result3.gif)
+<br>
+<br>
+<br>
+![rev](demo_imgs/review_result5.gif)
+<br>
+<br>
+<br>
+## Predict Page
+![pred](demo_imgs/predict_input.gif)
